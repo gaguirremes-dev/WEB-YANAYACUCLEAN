@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YanaYacu Clean | Limpieza Premium con Aroma Duradero</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Productos de limpieza de alta concentración con fragancia prolongada. Seguros para bebés y mascotas. Línea hogar y línea industrial. Envíos a Lima, Chiclayo y todo el Perú." />
+  <meta name="keywords" content="productos de limpieza peru, lavavajillas concentrado lima, limpiador multiusos aroma, desinfectante libre de cloro bebe, distribuidor limpieza chiclayo, yanayacu clean" />
+  <meta name="author" content="YanaYacu Clean" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.yanayacuclean.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://www.yanayacuclean.com/" />
+  <meta property="og:title"       content="YanaYacu Clean | Limpieza Premium con Aroma Duradero" />
+  <meta property="og:description" content="Alta concentración, aroma duradero y seguros para tu familia. Línea hogar y línea industrial. Todo el Perú." />
+  <meta property="og:image"       content="https://www.yanayacuclean.com/assets/img/og-image.jpg" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  '#0D1B3E',
+            brand: '#4DA6D6',
+            sky:   '#7EC8E3',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.4/swiper-bundle.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.svg" />
+</head>
+
+<body class="font-sans bg-white text-navy">
+
+<!-- ====================================================
+     NAVBAR
+===================================================== -->
+<nav id="navbar"
+     x-data="{ menuOpen: false }"
+     class="fixed top-0 left-0 right-0 z-50 bg-navy py-4 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#inicio" class="flex items-center gap-2 shrink-0">
+      <div class="bg-white rounded-xl px-3 py-1.5 shadow-md shadow-black/30">
+        <img src="LOGO - YANA YACU CLEAN.jpg"
+             alt="YanaYacu Clean Logo"
+             class="h-9 w-auto object-contain" />
+      </div>
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li><a href="#productos"     class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Productos</a></li>
+      <li><a href="#industrial"    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Industrial</a></li>
+      <li><a href="#distribuidores"class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Distribuidores</a></li>
+      <li><a href="#legal"         class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Legal</a></li>
+      <li><a href="#contacto"      class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Contacto</a></li>
+    </ul>
+
+    <!-- CTA desktop -->
+    <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
+       target="_blank" rel="noopener"
+       class="hidden md:inline-flex items-center gap-2 bg-brand hover:bg-sky text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Comprar por WhatsApp
+    </a>
+
+    <!-- Hamburger mobile -->
+    <button @click="menuOpen = !menuOpen"
+            class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Abrir menú">
+      <svg x-show="!menuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg x-show="menuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div x-show="menuOpen"
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0 -translate-y-2"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="md:hidden bg-navy border-t border-white/10 px-4 pb-6 pt-4 space-y-1">
+    <a href="#productos"      @click="menuOpen=false" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Productos</a>
+    <a href="#industrial"     @click="menuOpen=false" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Industrial</a>
+    <a href="#distribuidores" @click="menuOpen=false" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Distribuidores</a>
+    <a href="#legal"          @click="menuOpen=false" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Legal</a>
+    <a href="#contacto"       @click="menuOpen=false" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Contacto</a>
+    <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
+       target="_blank" rel="noopener"
+       class="mt-4 flex items-center justify-center gap-2 bg-brand text-white font-semibold py-3 rounded-full transition-colors hover:bg-sky">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Comprar por WhatsApp
+    </a>
+  </div>
+</nav>
+
+
+<!-- ====================================================
+     HERO
+===================================================== -->
+<section id="inicio"
+         class="relative min-h-screen flex items-center bg-navy overflow-hidden pt-20">
+
+  <!-- Partículas -->
+  <div id="tsparticles" class="absolute inset-0 z-0"></div>
+
+  <!-- Gradiente decorativo -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-brand/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-80 h-80 bg-sky/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+
+    <!-- Texto -->
+    <div>
+      <div class="hero-badge mb-6">
+        <span class="badge">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 9-14 9V3z"/>
+          </svg>
+          Estándar Premium de Limpieza · Perú
+        </span>
+      </div>
+
+      <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+        El Brillo y Aroma<br/>
+        <span class="gradient-text">que Atrapan</span>
+      </h1>
+
+      <p class="hero-subtitle text-white/70 text-lg sm:text-xl leading-relaxed mb-8 max-w-lg">
+        Alta concentración, fragancia prolongada y libre de cloro.
+        Una vez que lo usas, tu estándar de limpieza cambia para siempre.
+      </p>
+
+      <div class="hero-ctas flex flex-col sm:flex-row gap-4 mb-12">
+        <a href="#productos"
+           class="inline-flex items-center justify-center gap-2 bg-brand hover:bg-sky text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand/40 text-base">
+          Ver Productos
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
+           target="_blank" rel="noopener"
+           class="inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:border-brand text-white hover:text-sky font-bold px-8 py-4 rounded-full transition-all duration-300 text-base">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero-stats grid grid-cols-3 gap-4">
+        <div class="text-center">
+          <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
+          <p class="text-white/50 text-xs mt-1">Clientes satisfechos</p>
+        </div>
+        <div class="text-center border-x border-white/10">
+          <div class="stat-number"><span class="counter" data-target="3">0</span></div>
+          <p class="text-white/50 text-xs mt-1">Líneas de producto</p>
+        </div>
+        <div class="text-center">
+          <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
+          <p class="text-white/50 text-xs mt-1">Garantía de calidad</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto visual -->
+    <div class="hero-product flex justify-center items-center">
+      <div class="relative">
+        <!-- Anillos decorativos -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-72 h-72 rounded-full border border-brand/20 animate-pulse"></div>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-56 h-56 rounded-full border border-sky/15"></div>
+        </div>
+
+        <!-- Botella placeholder (reemplazar con img real) -->
+        <div class="bottle-placeholder mx-auto">
+          <div class="bottle-glow"></div>
+          <div class="bottle-cap"></div>
+          <div class="bottle-neck"></div>
+          <div class="bottle-body">
+            <div class="bottle-label">
+              <img src="LOGO - YANA YACU CLEAN.jpg" alt="YanaYacu Clean" class="w-16 h-auto object-contain rounded opacity-90" />
+              <p class="text-white/70 text-xs mt-2 font-semibold">Alta Concentración</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badge flotante -->
+        <div class="absolute -top-4 -right-4 bg-brand text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+          ✨ Aroma Duradero
+        </div>
+        <div class="absolute -bottom-4 -left-4 bg-navy border border-sky/40 text-sky text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+          🛡️ Libre de Cloro
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     BENEFICIOS
+===================================================== -->
+<section id="beneficios" class="py-20 bg-white reveal-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-14 reveal-item">
+      <span class="badge text-navy border-navy/20 bg-navy/5">Nuestros Pilares</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-navy mt-4 mb-4">
+        ¿Por qué elegir <span class="gradient-text">YanaYacu Clean?</span>
+      </h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">
+        Formulados con tecnología de alta concentración para que tu hogar o negocio
+        experimente la diferencia que no se puede ignorar.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Card 1 -->
+      <div class="reveal-item card-hover bg-white border border-gray-100 rounded-2xl p-8 text-center shadow-sm">
+        <div class="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-navy text-lg mb-2">Alta Concentración</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Rinde hasta 3 veces más que los productos convencionales. Ahorras más en cada compra.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="reveal-item card-hover bg-white border border-gray-100 rounded-2xl p-8 text-center shadow-sm">
+        <div class="w-16 h-16 bg-sky/15 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-sky" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-navy text-lg mb-2">Aroma Duradero</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Fijadores de fragancia de larga duración. El aroma permanece horas después de limpiar.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="reveal-item card-hover bg-white border border-gray-100 rounded-2xl p-8 text-center shadow-sm">
+        <div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-navy text-lg mb-2">Libre de Cloro</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Seguro para bebés, mascotas y entornos sensibles. Desinfección sin riesgos químicos agresivos.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="reveal-item card-hover bg-white border border-gray-100 rounded-2xl p-8 text-center shadow-sm">
+        <div class="w-16 h-16 bg-navy/8 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-navy text-lg mb-2">Estándar Industrial</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">La misma fórmula que usan restaurantes, hoteles y lavanderías top del Perú.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     CATÁLOGO B2C
+===================================================== -->
+<section id="productos" class="py-20 bg-gray-50 reveal-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-12 reveal-item">
+      <span class="badge">Línea Hogar</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-navy mt-4 mb-4">
+        Productos para tu <span class="gradient-text">Hogar</span>
+      </h2>
+      <p class="text-gray-500 max-w-xl mx-auto">
+        Selecciona la categoría que necesitas. Cada producto está formulado
+        para superar tu estándar anterior.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div x-data="{ tab: 'cocina' }" class="reveal-item">
+
+      <!-- Tab buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <button @click="tab='cocina'; $nextTick(() => window.initSwiper('swiper-cocina'))"
+                :class="tab==='cocina' ? 'bg-brand text-white shadow-lg shadow-brand/30' : 'bg-white text-navy border border-gray-200 hover:border-brand'"
+                class="px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300">
+          🍳 Cocina y Grasa
+        </button>
+        <button @click="tab='pisos'; $nextTick(() => window.initSwiper('swiper-pisos'))"
+                :class="tab==='pisos' ? 'bg-brand text-white shadow-lg shadow-brand/30' : 'bg-white text-navy border border-gray-200 hover:border-brand'"
+                class="px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300">
+          ✨ Pisos y Superficies
+        </button>
+        <button @click="tab='ropa'; $nextTick(() => window.initSwiper('swiper-ropa'))"
+                :class="tab==='ropa' ? 'bg-brand text-white shadow-lg shadow-brand/30' : 'bg-white text-navy border border-gray-200 hover:border-brand'"
+                class="px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300">
+          👕 Ropa y Textiles
+        </button>
+      </div>
+
+      <!-- Tab: Cocina -->
+      <div x-show="tab==='cocina'" x-cloak>
+        <div class="swiper" id="swiper-cocina" x-init="$nextTick(() => window.initSwiper('swiper-cocina'))">
+          <div class="swiper-wrapper pb-12">
+
+            <!-- Producto 1 -->
+            <div class="swiper-slide">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover h-full">
+                <div class="product-placeholder h-52 flex items-center justify-center">
+                  <!-- REEMPLAZAR con: <img src="assets/img/productos/lavavajillas-liquido.jpg" alt="..." class="w-full h-full object-cover"> -->
+                  <div class="text-center px-4">
+                    <div class="text-5xl mb-2">🧴</div>
+                    <p class="text-white/60 text-xs">Foto del producto próximamente</p>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <span class="text-xs font-bold text-brand uppercase tracking-wide">Alta Concentración</span>
+                  <h3 class="font-bold text-navy text-lg mt-1 mb-2">Lavavajillas Líquido</h3>
+                  <p class="text-gray-500 text-sm mb-4 leading-relaxed">Triple acción desengrasante. Elimina grasa sin dañar tus manos. Aroma duradero.</p>
+                  <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Lavavajillas%20L%C3%ADquido%20YanaYacu%20Clean"
+                     target="_blank" rel="noopener"
+                     class="flex items-center justify-center gap-2 w-full bg-brand hover:bg-sky text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="swiper-slide">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover h-full">
+                <div class="product-placeholder h-52 flex items-center justify-center">
+                  <div class="text-center px-4">
+                    <div class="text-5xl mb-2">🫙</div>
+                    <p class="text-white/60 text-xs">Foto del producto próximamente</p>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <span class="text-xs font-bold text-brand uppercase tracking-wide">Alta Concentración</span>
+                  <h3 class="font-bold text-navy text-lg mt-1 mb-2">Lavavajillas en Pasta</h3>
+                  <p class="text-gray-500 text-sm mb-4 leading-relaxed">Fórmula en pasta de alto poder. Ideal para grasa difícil y utensilios de cocina industrial.</p>
+                  <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Lavavajillas%20en%20Pasta%20YanaYacu%20Clean"
+                     target="_blank" rel="noopener"
+                     class="flex items-center justify-center gap-2 w-full bg-brand hover:bg-sky text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <!-- Tab: Pisos -->
+      <div x-show="tab==='pisos'" x-cloak>
+        <div class="swiper" id="swiper-pisos">
+          <div class="swiper-wrapper pb-12">
+            <div class="swiper-slide">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover h-full">
+                <div class="product-placeholder h-52 flex items-center justify-center">
+                  <div class="text-center px-4">
+                    <div class="text-5xl mb-2">✨</div>
+                    <p class="text-white/60 text-xs">Foto del producto próximamente</p>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <span class="text-xs font-bold text-brand uppercase tracking-wide">Fragancia Prolongada</span>
+                  <h3 class="font-bold text-navy text-lg mt-1 mb-2">Limpiador Multiusos</h3>
+                  <p class="text-gray-500 text-sm mb-4 leading-relaxed">Limpia, desinfecta y deja un aroma que dura horas. Para todo tipo de piso y superficie.</p>
+                  <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Limpiador%20Multiusos%20YanaYacu%20Clean"
+                     target="_blank" rel="noopener"
+                     class="flex items-center justify-center gap-2 w-full bg-brand hover:bg-sky text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <!-- Tab: Ropa -->
+      <div x-show="tab==='ropa'" x-cloak>
+        <div class="swiper" id="swiper-ropa">
+          <div class="swiper-wrapper pb-12">
+
+            <div class="swiper-slide">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover h-full">
+                <div class="product-placeholder h-52 flex items-center justify-center">
+                  <div class="text-center px-4">
+                    <div class="text-5xl mb-2">👕</div>
+                    <p class="text-white/60 text-xs">Foto del producto próximamente</p>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <span class="text-xs font-bold text-brand uppercase tracking-wide">Protección de Fibras</span>
+                  <h3 class="font-bold text-navy text-lg mt-1 mb-2">Detergente Líquido Concentrado</h3>
+                  <p class="text-gray-500 text-sm mb-4 leading-relaxed">Limpieza profunda con tecnología de protección de fibras. Para ropa blanca y de color.</p>
+                  <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Detergente%20L%C3%ADquido%20YanaYacu%20Clean"
+                     target="_blank" rel="noopener"
+                     class="flex items-center justify-center gap-2 w-full bg-brand hover:bg-sky text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm card-hover h-full">
+                <div class="product-placeholder h-52 flex items-center justify-center">
+                  <div class="text-center px-4">
+                    <div class="text-5xl mb-2">🌸</div>
+                    <p class="text-white/60 text-xs">Foto del producto próximamente</p>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <span class="text-xs font-bold text-sky uppercase tracking-wide">Suavidad Extrema</span>
+                  <h3 class="font-bold text-navy text-lg mt-1 mb-2">Suavizante de Ropa</h3>
+                  <p class="text-gray-500 text-sm mb-4 leading-relaxed">Tecnología de protección de fibras. Aroma prolongado y suavidad incomparable en cada lavado.</p>
+                  <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20Suavizante%20de%20Ropa%20YanaYacu%20Clean"
+                     target="_blank" rel="noopener"
+                     class="flex items-center justify-center gap-2 w-full bg-brand hover:bg-sky text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+    </div><!-- end x-data tabs -->
+  </div>
+</section>
+
+
+<!-- ====================================================
+     DESINFECCIÓN ESPECIALIZADA
+===================================================== -->
+<section class="py-20 bg-navy reveal-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-14 reveal-item">
+      <span class="badge">Línea Especializada</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-white mt-4 mb-4">
+        Desinfección <span class="gradient-text">Libre de Cloro</span>
+      </h2>
+      <p class="text-white/60 max-w-xl mx-auto">
+        Formulada para los entornos más sensibles. Protección profunda
+        sin químicos agresivos.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <!-- Bebés -->
+      <div class="reveal-item bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-brand/40 transition-colors card-hover">
+        <div class="flex items-start gap-5">
+          <div class="w-16 h-16 bg-sky/15 rounded-2xl flex items-center justify-center shrink-0 text-3xl">👶</div>
+          <div>
+            <h3 class="text-white font-bold text-xl mb-2">Área de Bebés</h3>
+            <p class="text-white/60 text-sm leading-relaxed mb-4">
+              Elimina el 99.9% de virus y bacterias sin cloro ni componentes agresivos.
+              Seguro para superficies en contacto directo con recién nacidos.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-green-500/15 text-green-400 border border-green-500/20 px-3 py-1 rounded-full font-medium">✓ Sin cloro</span>
+              <span class="text-xs bg-blue-500/15 text-sky border border-sky/20 px-3 py-1 rounded-full font-medium">✓ Dermatológicamente seguro</span>
+              <span class="text-xs bg-white/10 text-white/70 border border-white/10 px-3 py-1 rounded-full font-medium">✓ Hipoalergénico</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20desinfectante%20para%20beb%C3%A9s%20YanaYacu%20Clean"
+           target="_blank" rel="noopener"
+           class="mt-6 flex items-center justify-center gap-2 w-full border border-brand/40 hover:bg-brand text-white font-semibold py-3 rounded-xl transition-all text-sm">
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+      <!-- Mascotas -->
+      <div class="reveal-item bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-brand/40 transition-colors card-hover">
+        <div class="flex items-start gap-5">
+          <div class="w-16 h-16 bg-brand/15 rounded-2xl flex items-center justify-center shrink-0 text-3xl">🐾</div>
+          <div>
+            <h3 class="text-white font-bold text-xl mb-2">Hogares con Mascotas</h3>
+            <p class="text-white/60 text-sm leading-relaxed mb-4">
+              Elimina bacterias, hongos y malos olores asociados a mascotas.
+              No tóxico para perros ni gatos. Seguro al secarse.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs bg-green-500/15 text-green-400 border border-green-500/20 px-3 py-1 rounded-full font-medium">✓ No tóxico</span>
+              <span class="text-xs bg-blue-500/15 text-sky border border-sky/20 px-3 py-1 rounded-full font-medium">✓ Elimina olores</span>
+              <span class="text-xs bg-white/10 text-white/70 border border-white/10 px-3 py-1 rounded-full font-medium">✓ Seguro al secar</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20desinfectante%20para%20mascotas%20YanaYacu%20Clean"
+           target="_blank" rel="noopener"
+           class="mt-6 flex items-center justify-center gap-2 w-full border border-brand/40 hover:bg-brand text-white font-semibold py-3 rounded-xl transition-all text-sm">
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     LÍNEA INDUSTRIAL B2B
+===================================================== -->
+<section id="industrial" class="py-20 bg-white reveal-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Texto -->
+      <div>
+        <div class="reveal-item mb-6">
+          <span class="badge">Línea Industrial</span>
+        </div>
+        <h2 class="reveal-item text-3xl sm:text-4xl font-black text-navy mb-6">
+          Galoneros y Bidones<br/>
+          <span class="gradient-text">para tu Negocio</span>
+        </h2>
+        <p class="reveal-item text-gray-500 leading-relaxed mb-8">
+          La misma fórmula de alta concentración en presentaciones industriales (5L, 10L, 20L).
+          Optimiza costos con mayor rendimiento por litro para operaciones de cualquier tamaño.
+        </p>
+
+        <!-- Sectores -->
+        <div class="reveal-item grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+          <div class="sector-card border border-gray-100 text-navy">
+            <div class="text-2xl mb-2">🍽️</div>
+            <p class="text-sm font-semibold">Restaurantes</p>
+          </div>
+          <div class="sector-card border border-gray-100 text-navy">
+            <div class="text-2xl mb-2">🏨</div>
+            <p class="text-sm font-semibold">Hoteles</p>
+          </div>
+          <div class="sector-card border border-gray-100 text-navy">
+            <div class="text-2xl mb-2">🏢</div>
+            <p class="text-sm font-semibold">Oficinas</p>
+          </div>
+          <div class="sector-card border border-gray-100 text-navy">
+            <div class="text-2xl mb-2">🏫</div>
+            <p class="text-sm font-semibold">Centros Educativos</p>
+          </div>
+          <div class="sector-card border border-gray-100 text-navy">
+            <div class="text-2xl mb-2">👔</div>
+            <p class="text-sm font-semibold">Lavanderías</p>
+          </div>
+          <div class="sector-card border border-gray-100 text-navy">
+            <div class="text-2xl mb-2">🏥</div>
+            <p class="text-sm font-semibold">Clínicas</p>
+          </div>
+        </div>
+
+        <div class="reveal-item">
+          <a href="#distribuidores"
+             class="inline-flex items-center gap-2 bg-navy hover:bg-brand text-white font-bold px-8 py-4 rounded-full transition-all duration-300">
+            Solicitar Cotización Mayorista
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Visual galonero placeholder -->
+      <div class="reveal-item flex justify-center">
+        <div class="relative">
+          <!-- Galonero placeholder -->
+          <div class="w-52 h-72 bg-gradient-to-b from-brand to-navy rounded-2xl shadow-2xl flex flex-col items-center justify-center border border-sky/20 relative overflow-hidden">
+            <!-- Brillo -->
+            <div class="absolute top-0 left-0 w-1/2 h-full bg-white/5 rounded-r-full"></div>
+            <!-- Asa -->
+            <div class="absolute top-6 right-0 w-8 h-12 border-4 border-sky/40 rounded-r-full translate-x-4"></div>
+            <!-- Tapa -->
+            <div class="absolute top-0 w-16 h-6 bg-navy border border-sky/30 rounded-b-lg"></div>
+            <!-- Label -->
+            <div class="mt-8 px-6 text-center">
+              <img src="LOGO - YANA YACU CLEAN.jpg" alt="YanaYacu Clean" class="w-20 h-auto object-contain rounded mb-3 mx-auto opacity-90" />
+              <p class="text-white font-bold text-sm">Línea Industrial</p>
+              <p class="text-sky text-xs mt-1">Alta Concentración</p>
+            </div>
+            <!-- Presentaciones -->
+            <div class="absolute bottom-6 flex gap-2">
+              <span class="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full">5L</span>
+              <span class="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full">10L</span>
+              <span class="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full">20L</span>
+            </div>
+          </div>
+          <!-- Glow -->
+          <div class="absolute inset-0 bg-brand/15 blur-3xl rounded-full -z-10 scale-110"></div>
+          <!-- Badge -->
+          <div class="absolute -top-3 -right-3 bg-brand text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+            Mayor Rendimiento
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     CAPTACIÓN B2B — DISTRIBUIDORES
+===================================================== -->
+<section id="distribuidores" class="py-20 bg-gradient-to-br from-navy via-[#1a2f5e] to-navy reveal-section">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-12 reveal-item">
+      <span class="badge">Socios Comerciales</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-white mt-4 mb-4">
+        ¿Deseas distribuir<br/>
+        <span class="gradient-text">YanaYacu Clean</span>?
+      </h2>
+      <p class="text-white/60 max-w-xl mx-auto">
+        Sé aliado de la marca de limpieza que está transformando hogares y
+        comercios peruanos. Accede a precios de fábrica y condiciones exclusivas.
+      </p>
+    </div>
+
+    <!-- Beneficios -->
+    <div class="reveal-item grid sm:grid-cols-3 gap-4 mb-12">
+      <div class="text-center p-5 bg-white/5 rounded-2xl border border-white/10">
+        <div class="text-2xl mb-2">💰</div>
+        <p class="text-white font-semibold text-sm">Precios de Fábrica</p>
+        <p class="text-white/50 text-xs mt-1">Margen competitivo para tu negocio</p>
+      </div>
+      <div class="text-center p-5 bg-white/5 rounded-2xl border border-white/10">
+        <div class="text-2xl mb-2">📦</div>
+        <p class="text-white font-semibold text-sm">Promociones por Volumen</p>
+        <p class="text-white/50 text-xs mt-1">Mejor precio a mayor cantidad</p>
+      </div>
+      <div class="text-center p-5 bg-white/5 rounded-2xl border border-white/10">
+        <div class="text-2xl mb-2">🚀</div>
+        <p class="text-white font-semibold text-sm">Pack de Inicio</p>
+        <p class="text-white/50 text-xs mt-1">Alta rentabilidad desde el primer pedido</p>
+      </div>
+    </div>
+
+    <!-- Formulario B2B -->
+    <div class="reveal-item bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10"
+         x-data="{ enviado: false, error: false }">
+
+      <h3 class="text-white font-bold text-xl mb-6">Solicitar Catálogo y Condiciones Mayoristas</h3>
+
+      <form x-show="!enviado"
+            action="https://formsubmit.co/info@yanayacuclean.com"
+            method="POST"
+            @submit="enviado = true">
+
+        <!-- FormSubmit config -->
+        <input type="text"   name="_honey"   style="display:none">
+        <input type="hidden" name="_captcha"  value="false">
+        <input type="hidden" name="_subject"  value="[B2B] Solicitud Distribuidor — YanaYacu Clean">
+        <input type="hidden" name="_next"     value="https://www.yanayacuclean.com/#distribuidores">
+        <input type="hidden" name="_template" value="table">
+
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-white/70 text-sm mb-2 font-medium">Nombre completo *</label>
+            <input type="text" name="nombre" required placeholder="Tu nombre"
+                   class="form-input" />
+          </div>
+          <div>
+            <label class="block text-white/70 text-sm mb-2 font-medium">Tipo de negocio *</label>
+            <select name="tipo_negocio" required class="form-input">
+              <option value="" disabled selected>Selecciona...</option>
+              <option value="Bodega">Bodega</option>
+              <option value="Distribuidora">Distribuidora</option>
+              <option value="Empresa de servicios de limpieza">Empresa de limpieza</option>
+              <option value="Restaurante u Hotel">Restaurante / Hotel</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-white/70 text-sm mb-2 font-medium">Ciudad *</label>
+            <input type="text" name="ciudad" required placeholder="Ej: Lima, Chiclayo..."
+                   class="form-input" />
+          </div>
+          <div>
+            <label class="block text-white/70 text-sm mb-2 font-medium">WhatsApp de contacto *</label>
+            <input type="tel" name="whatsapp" required placeholder="9XXXXXXXX"
+                   class="form-input" />
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-white/70 text-sm mb-2 font-medium">Mensaje (opcional)</label>
+          <textarea name="mensaje" rows="3" placeholder="Cuéntanos sobre tu negocio..."
+                    class="form-input resize-none"></textarea>
+        </div>
+
+        <!-- Checkbox Ley 29733 -->
+        <div class="mb-6">
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input type="checkbox" name="acepta_politica" required
+                   class="mt-0.5 w-4 h-4 accent-brand shrink-0" />
+            <span class="text-white/60 text-sm leading-relaxed">
+              He leído y acepto la
+              <a href="privacidad.html" target="_blank" class="text-sky underline hover:text-white">Política de Privacidad</a>
+              y autorizo el tratamiento de mis datos personales conforme a la Ley 29733.
+            </span>
+          </label>
+        </div>
+
+        <button type="submit"
+                class="w-full bg-brand hover:bg-sky text-white font-bold py-4 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-brand/30 text-base">
+          Solicitar Catálogo Mayorista →
+        </button>
+      </form>
+
+      <!-- Confirmación -->
+      <div x-show="enviado" class="text-center py-8">
+        <div class="text-5xl mb-4">✅</div>
+        <h4 class="text-white font-bold text-xl mb-2">¡Solicitud enviada!</h4>
+        <p class="text-white/60">Nos pondremos en contacto contigo en menos de 24 horas.</p>
+        <a href="https://wa.me/51974667498?text=Hola%2C%20acabo%20de%20enviar%20mi%20solicitud%20para%20ser%20distribuidor%20de%20YanaYacu%20Clean"
+           target="_blank" rel="noopener"
+           class="mt-6 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-full transition-colors">
+          También escríbenos por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     TESTIMONIOS
+===================================================== -->
+<section class="py-20 bg-gray-50 reveal-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-12 reveal-item">
+      <span class="badge">Testimonios</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-navy mt-4">
+        Lo que dicen nuestros <span class="gradient-text">clientes</span>
+      </h2>
+    </div>
+
+    <div class="swiper reveal-item" id="swiper-testimonios">
+      <div class="swiper-wrapper pb-12">
+
+        <div class="swiper-slide h-auto">
+          <div class="testimonial-card">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">M</div>
+              <div>
+                <p class="font-bold text-navy">María G.</p>
+                <p class="text-gray-400 text-xs">Lima</p>
+              </div>
+              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed italic">
+              "El lavavajillas es increíble. Un chorrito alcanza para lavar toda la vajilla del día y el aroma dura horas en la cocina. Ya no compro otro."
+            </p>
+          </div>
+        </div>
+
+        <div class="swiper-slide h-auto">
+          <div class="testimonial-card">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-sky rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">C</div>
+              <div>
+                <p class="font-bold text-navy">Carlos T.</p>
+                <p class="text-gray-400 text-xs">Chiclayo</p>
+              </div>
+              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed italic">
+              "Tengo un restaurante y los galoneros me salen mucho más económicos. El rendimiento es notablemente superior a lo que usábamos antes."
+            </p>
+          </div>
+        </div>
+
+        <div class="swiper-slide h-auto">
+          <div class="testimonial-card">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-navy rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">L</div>
+              <div>
+                <p class="font-bold text-navy">Lucía P.</p>
+                <p class="text-gray-400 text-xs">Trujillo</p>
+              </div>
+              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed italic">
+              "Tengo un bebé de 8 meses y el desinfectante libre de cloro me da tranquilidad. Limpia bien y no hay olor fuerte. Lo recomiendo a todas las mamás."
+            </p>
+          </div>
+        </div>
+
+        <div class="swiper-slide h-auto">
+          <div class="testimonial-card">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 bg-brand/70 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">R</div>
+              <div>
+                <p class="font-bold text-navy">Rosa M.</p>
+                <p class="text-gray-400 text-xs">Lima Norte</p>
+              </div>
+              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed italic">
+              "El limpiador de pisos deja un aroma que toda la visita nota. Mi casa siempre huele increíble y ya no necesito usar otro producto."
+            </p>
+          </div>
+        </div>
+
+      </div>
+      <div id="testimonios-pagination" class="swiper-pagination"></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ====================================================
+     LEGAL
+===================================================== -->
+<section id="legal" class="py-20 bg-white reveal-section">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-12 reveal-item">
+      <span class="badge">Transparencia</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-navy mt-4 mb-4">
+        Información <span class="gradient-text">Legal</span>
+      </h2>
+      <p class="text-gray-500">Cumplimos con todas las normativas peruanas vigentes.</p>
+    </div>
+
+    <div class="reveal-item space-y-2">
+
+      <!-- Fichas MSDS -->
+      <div class="legal-item">
+        <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <span class="font-bold text-navy">Fichas de Seguridad (MSDS)</span>
+          </div>
+          <svg class="accordion-icon h-5 w-5 text-gray-400 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="pb-6 space-y-3">
+            <p class="text-gray-500 text-sm mb-4">Descarga las fichas técnicas de seguridad de nuestros productos industriales (MSDS).</p>
+            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-gray-100">
+              <span class="text-sm font-medium text-navy">Ficha MSDS — Línea Industrial</span>
+              <span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-medium">Próximamente</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4 border border-gray-100">
+              <span class="text-sm font-medium text-navy">Ficha MSDS — Línea Especializada</span>
+              <span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-medium">Próximamente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NSO -->
+      <div class="legal-item">
+        <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <span class="font-bold text-navy">Registro Sanitario NSO — DIGESA</span>
+          </div>
+          <svg class="accordion-icon h-5 w-5 text-gray-400 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="pb-6">
+            <p class="text-gray-500 text-sm mb-4">Notificación Sanitaria Obligatoria emitida por DIGESA / DIGEMID.</p>
+            <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
+              <p class="text-sm text-gray-400 font-medium">NSO: <span class="text-navy font-bold">[En trámite — disponible próximamente]</span></p>
+              <p class="text-xs text-gray-400 mt-2">Una vez obtenido el registro, el número NSO se publicará aquí para verificación.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Libro de Reclamaciones -->
+      <div class="legal-item border-b-0">
+        <button class="accordion-trigger w-full flex items-center justify-between py-5 text-left">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <span class="font-bold text-navy">Libro de Reclamaciones (INDECOPI)</span>
+          </div>
+          <svg class="accordion-icon h-5 w-5 text-gray-400 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="accordion-body">
+          <div class="pb-6" x-data="{ reclamEnviado: false }">
+            <p class="text-gray-500 text-sm mb-5">Conforme al Código de Protección al Consumidor (INDECOPI). Responderemos en un plazo de 30 días calendario.</p>
+
+            <form x-show="!reclamEnviado"
+                  action="https://formsubmit.co/info@yanayacuclean.com"
+                  method="POST"
+                  @submit="reclamEnviado = true"
+                  class="space-y-4">
+              <input type="text"   name="_honey"    style="display:none">
+              <input type="hidden" name="_captcha"   value="false">
+              <input type="hidden" name="_subject"   value="[RECLAMACIÓN] Libro de Reclamaciones — YanaYacu Clean">
+              <input type="hidden" name="_template"  value="table">
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-600 text-sm mb-1.5 font-medium">Nombre completo *</label>
+                  <input type="text" name="nombre" required placeholder="Tu nombre completo"
+                         class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors font-sans" />
+                </div>
+                <div>
+                  <label class="block text-gray-600 text-sm mb-1.5 font-medium">DNI *</label>
+                  <input type="text" name="dni" required placeholder="12345678"
+                         class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors font-sans" />
+                </div>
+                <div>
+                  <label class="block text-gray-600 text-sm mb-1.5 font-medium">Email *</label>
+                  <input type="email" name="email" required placeholder="tu@email.com"
+                         class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors font-sans" />
+                </div>
+                <div>
+                  <label class="block text-gray-600 text-sm mb-1.5 font-medium">Tipo *</label>
+                  <select name="tipo" required
+                          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors font-sans">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="Queja">Queja</option>
+                    <option value="Reclamo">Reclamo</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-gray-600 text-sm mb-1.5 font-medium">Producto o servicio involucrado *</label>
+                <input type="text" name="producto" required placeholder="Nombre del producto"
+                       class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors font-sans" />
+              </div>
+              <div>
+                <label class="block text-gray-600 text-sm mb-1.5 font-medium">Descripción detallada *</label>
+                <textarea name="descripcion" rows="4" required placeholder="Describe tu queja o reclamo..."
+                          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors resize-none font-sans"></textarea>
+              </div>
+              <div>
+                <label class="block text-gray-600 text-sm mb-1.5 font-medium">Pedido del consumidor *</label>
+                <textarea name="pedido" rows="2" required placeholder="¿Qué solución esperas?"
+                          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand transition-colors resize-none font-sans"></textarea>
+              </div>
+              <div>
+                <label class="flex items-start gap-3 cursor-pointer">
+                  <input type="checkbox" name="acepta_politica" required class="mt-0.5 w-4 h-4 accent-brand shrink-0" />
+                  <span class="text-gray-500 text-xs leading-relaxed">
+                    Autorizo el tratamiento de mis datos personales conforme a la
+                    <a href="privacidad.html" target="_blank" class="text-brand underline">Política de Privacidad</a>
+                    y la Ley N° 29733.
+                  </span>
+                </label>
+              </div>
+              <button type="submit"
+                      class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors text-sm">
+                Registrar Reclamación
+              </button>
+            </form>
+
+            <div x-show="reclamEnviado" class="text-center py-6">
+              <div class="text-4xl mb-3">📋</div>
+              <p class="font-bold text-navy">Reclamación registrada</p>
+              <p class="text-gray-500 text-sm mt-1">Te responderemos en un plazo de 30 días calendario.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     FOOTER
+===================================================== -->
+<footer id="contacto" class="bg-navy pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <!-- Col 1: Marca -->
+      <div>
+        <div class="bg-white rounded-xl px-3 py-2 shadow-md shadow-black/30 inline-block mb-4">
+          <img src="LOGO - YANA YACU CLEAN.jpg" alt="YanaYacu Clean" class="h-10 w-auto object-contain" />
+        </div>
+        <p class="text-white/50 text-sm leading-relaxed mb-5">
+          El estándar definitivo de desinfección, seguridad y rendimiento en el Perú.
+        </p>
+        <!-- Redes sociales (agregar links reales) -->
+        <div class="flex gap-3">
+          <a href="#" aria-label="Facebook" class="w-9 h-9 bg-white/10 hover:bg-brand rounded-lg flex items-center justify-center transition-colors">
+            <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 bg-white/10 hover:bg-brand rounded-lg flex items-center justify-center transition-colors">
+            <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok" class="w-9 h-9 bg-white/10 hover:bg-brand rounded-lg flex items-center justify-center transition-colors">
+            <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.84 1.56V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2: Links rápidos -->
+      <div>
+        <h4 class="text-white font-bold mb-5">Navegación</h4>
+        <ul class="space-y-3">
+          <li><a href="#inicio"         class="footer-link">Inicio</a></li>
+          <li><a href="#productos"      class="footer-link">Productos Hogar</a></li>
+          <li><a href="#industrial"     class="footer-link">Línea Industrial</a></li>
+          <li><a href="#distribuidores" class="footer-link">Sé Distribuidor</a></li>
+          <li><a href="#legal"          class="footer-link">Legal y Normativa</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Contacto -->
+      <div>
+        <h4 class="text-white font-bold mb-5">Contacto</h4>
+        <ul class="space-y-3">
+          <li>
+            <a href="mailto:info@yanayacuclean.com" class="footer-link flex items-center gap-2">
+              <svg class="h-4 w-4 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              info@yanayacuclean.com
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/51974667498" target="_blank" rel="noopener" class="footer-link flex items-center gap-2">
+              <svg class="h-4 w-4 text-brand shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              974 667 498
+            </a>
+          </li>
+          <li class="text-white/50 text-sm flex items-start gap-2 pt-1">
+            <svg class="h-4 w-4 text-brand shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Lima: Av. República de Chile 324<br/>Chiclayo: Lapoint 1221</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Legal -->
+      <div>
+        <h4 class="text-white font-bold mb-5">Legal</h4>
+        <ul class="space-y-3">
+          <li><a href="privacidad.html" class="footer-link">Política de Privacidad</a></li>
+          <li><a href="terminos.html"   class="footer-link">Términos y Condiciones</a></li>
+          <li>
+            <a href="#legal" class="footer-link flex items-center gap-1.5">
+              <span class="w-2 h-2 bg-red-400 rounded-full shrink-0"></span>
+              Libro de Reclamaciones
+            </a>
+          </li>
+        </ul>
+        <div class="mt-6 p-3 bg-white/5 rounded-xl border border-white/10">
+          <p class="text-white/40 text-xs leading-relaxed">
+            Planta de Producción:<br/>
+            Calle Vilma Noriega Mz i Lote C03<br/>
+            Urb. Chacupe, La Victoria<br/>
+            Chiclayo, Lambayeque
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-white/30 text-xs text-center sm:text-left">
+        © 2026 YANAYACU CLEAN — RUC: [20XXXXXXXXX] — Todos los derechos reservados.
+      </p>
+      <p class="text-white/20 text-xs">
+        Chiclayo, Lambayeque, Perú
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ====================================================
+     WhatsApp flotante
+===================================================== -->
+<a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
+   target="_blank" rel="noopener"
+   class="whatsapp-float"
+   aria-label="Contactar por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+
+<!-- ====================================================
+     SCRIPTS
+===================================================== -->
+<!-- Alpine.js -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<!-- Swiper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.4/swiper-bundle.min.js"></script>
+
+<!-- tsParticles -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<!-- Main JS -->
+<script defer src="assets/js/main.js"></script>
+
+</body>
+</html>

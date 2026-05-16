@@ -1,0 +1,274 @@
+/* =============================================
+   YanaYacu Clean — Custom CSS
+   ============================================= */
+
+:root {
+  --navy:  #0D1B3E;
+  --blue:  #4DA6D6;
+  --sky:   #7EC8E3;
+  --white: #FFFFFF;
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Font base */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+/* ---- Navbar ---- */
+.nav-link {
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--sky);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ---- Hero particles canvas ---- */
+#tsparticles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ---- Gradient text ---- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--blue), var(--sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Bottle placeholder ---- */
+.bottle-placeholder {
+  position: relative;
+  width: 180px;
+  height: 280px;
+}
+.bottle-body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 220px;
+  background: linear-gradient(160deg, #4DA6D6 0%, #0D1B3E 100%);
+  border-radius: 20px 20px 30px 30px;
+  box-shadow: 0 0 60px rgba(77,166,214,0.4), inset 0 0 30px rgba(255,255,255,0.1);
+}
+.bottle-neck {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 60px;
+  background: linear-gradient(160deg, #7EC8E3, #4DA6D6);
+  border-radius: 8px 8px 0 0;
+}
+.bottle-cap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 28px;
+  background: #0D1B3E;
+  border-radius: 6px 6px 0 0;
+  border: 2px solid #4DA6D6;
+}
+.bottle-label {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 110px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.bottle-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(ellipse, rgba(77,166,214,0.25) 0%, transparent 70%);
+  z-index: -1;
+}
+
+/* ---- Product card placeholder ---- */
+.product-placeholder {
+  background: linear-gradient(145deg, #0D1B3E 0%, #1a3a6e 50%, #0D1B3E 100%);
+  position: relative;
+  overflow: hidden;
+}
+.product-placeholder::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(77,166,214,0.3), transparent 70%);
+  border-radius: 50%;
+}
+
+/* ---- Cards ---- */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(77,166,214,0.2);
+}
+
+/* ---- Swiper custom bullets ---- */
+.swiper-pagination-bullet {
+  background: var(--blue) !important;
+  opacity: 0.4;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  background: var(--blue) !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--blue) !important;
+}
+
+/* ---- Form inputs ---- */
+.form-input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 10px;
+  padding: 12px 16px;
+  width: 100%;
+  transition: border-color 0.3s, background 0.3s;
+  font-family: 'Poppins', sans-serif;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--sky);
+  background: rgba(255,255,255,0.12);
+}
+.form-input::placeholder { color: rgba(255,255,255,0.5); }
+.form-input option { background: var(--navy); color: white; }
+
+/* ---- Accordion ---- */
+.accordion-body {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  max-height: 0;
+}
+.accordion-body.open { max-height: 600px; }
+
+/* ---- CTA WhatsApp flotante ---- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.whatsapp-float:hover { transform: scale(1.12); }
+
+/* ---- Section reveal (GSAP) ---- */
+.reveal-item { opacity: 0; }
+
+/* ---- Stat counter ---- */
+.stat-number {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--blue), var(--sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Sector cards ---- */
+.sector-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(77,166,214,0.2);
+  border-radius: 16px;
+  padding: 24px 16px;
+  text-align: center;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  cursor: default;
+}
+.sector-card:hover {
+  background: rgba(77,166,214,0.12);
+  border-color: var(--blue);
+  transform: translateY(-4px);
+}
+
+/* ---- Testimonial card ---- */
+.testimonial-card {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(13,27,62,0.08);
+  height: 100%;
+}
+
+/* ---- Badge ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(77,166,214,0.15);
+  border: 1px solid rgba(77,166,214,0.4);
+  color: var(--sky);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Legal accordion ---- */
+.legal-item {
+  border-bottom: 1px solid rgba(13,27,62,0.1);
+}
+
+/* ---- Footer ---- */
+.footer-link {
+  color: rgba(255,255,255,0.6);
+  transition: color 0.2s;
+  font-size: 0.9rem;
+}
+.footer-link:hover { color: var(--sky); }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  #tsparticles { display: none; }
+  .reveal-item { opacity: 1 !important; transform: none !important; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
