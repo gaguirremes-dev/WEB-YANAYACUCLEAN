@@ -440,16 +440,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <!-- DEBUG TEMPORAL — eliminar cuando el correo funcione -->
-    <?php if (!empty($debugLog)): ?>
-    <div class="no-print mt-6 bg-gray-900 text-green-400 rounded-2xl p-4 font-mono text-xs space-y-1 border border-green-500/30">
-        <div class="text-green-300 font-bold mb-2 uppercase tracking-widest text-[10px]">🔍 Debug SMTP (temporal)</div>
-        <?php foreach ($debugLog as $line): ?>
-        <div class="<?= str_contains($line,'FALLÓ') || str_contains($line,'falló') ? 'text-red-400' : 'text-green-400' ?>">→ <?= htmlspecialchars($line) ?></div>
-        <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
-
     <div class="no-print mt-8 flex flex-col sm:flex-row justify-center gap-4">
         <button onclick="window.print()" class="btn-primary text-white font-bold px-6 py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
