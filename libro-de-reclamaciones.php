@@ -165,7 +165,7 @@ function enviarCorreoSMTP(string $toEmail, string $subject, string $htmlBody, st
     if (!$fp) { $err = "Conexión SMTP fallida: $errstr ($errno)"; return false; }
     stream_set_timeout($fp, 20);
     $read = function() use ($fp): string { $d=''; while(($l=fgets($fp,515))!==false){$d.=$l;if(strlen($l)<4||$l[3]===' ')break;} return $d; };
-    $cmd  = fn(string $c): string => (fwrite($fp, $c."\r\n") && $read());
+    $cmd  = function(string $c) use ($fp, $read): string { fwrite($fp, $c . "\r\n"); return $read(); };
     $ok   = function(string $r, array $codes) use (&$err): bool { foreach($codes as $c){if(strncmp($r,$c,strlen($c))===0)return true;} $err=trim($r);return false; };
     $fail = function() use ($fp) { @fwrite($fp,"QUIT\r\n"); @fclose($fp); return false; };
 
@@ -182,7 +182,7 @@ function enviarCorreoSMTP(string $toEmail, string $subject, string $htmlBody, st
     return true;
 }
 
-$success = false; $errorMsg = ''; $generatedCode = ''; $submittedData = [];
+$success = false; $errorMsg = ''; $generatedCode = ''; $submittedData = []; $debugLog = [];
 
 set_error_handler(function($errno) use (&$errorMsg) {
     if ($errno === E_ERROR || $errno === E_USER_ERROR) $errorMsg = 'Error interno. Inténtelo más tarde.';
@@ -245,7 +245,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($success) {
             $pdfBytes = '';
-            if ($fpdfAvailable) { try { $pdfBytes = generarPDFReclamo($submittedData); } catch(Exception $e) {} }
+            if ($fpdfAvailable) { try { $pdfBytes = generarPDFReclamo($submittedData); $debugLog[] = 'PDF generado OK.'; } catch(Exception $e) { $debugLog[] = 'PDF falló: ' . $e->getMessage(); } }
+            else { $debugLog[] = 'FPDF no disponible (falta lib/fpdf.php).'; }
             $pdfB64  = $pdfBytes ? chunk_split(base64_encode($pdfBytes)) : '';
             $pdfName = 'Hoja_Reclamacion_' . $generatedCode . '.pdf';
             if ($pdfBytes) @file_put_contents($recordsDir . '/' . $pdfName, $pdfBytes);
@@ -272,7 +273,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div style='background:#f5f5f5;padding:15px;text-align:center;font-size:12px;color:#888;border-top:1px solid #e0e0e0;'>Cargo automático — no responder a este mensaje.</div>
             </div>";
 
-            $errC = ''; enviarCorreoSMTP($email, "Cargo de Hoja de Reclamación N° $generatedCode - YanaYacu Clean", $emailBody, $pdfB64, $pdfName, $errC);
+            $errC = '';
+            $okC  = enviarCorreoSMTP($email, "Cargo de Hoja de Reclamación N° $generatedCode - YanaYacu Clean", $emailBody, $pdfB64, $pdfName, $errC);
+            $debugLog[] = $okC ? "Correo al cliente ($email): ENVIADO." : "Correo al cliente FALLÓ: $errC";
 
             $emailEmpresa = "
             <div style='font-family:Arial,sans-serif;color:#333;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;padding:25px;'>
@@ -285,7 +288,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div style='background:#f7f7f7;padding:12px;border-left:4px solid #dc2626;margin-bottom:10px;'><strong>Detalle:</strong><br>" . nl2br($detalle) . "</div>
                 <div style='background:#f7f7f7;padding:12px;border-left:4px solid #4DA6D6;'><strong>Pedido:</strong><br>" . nl2br($pedido) . "</div>
             </div>";
-            $errE = ''; enviarCorreoSMTP(EMPRESA_NOTIF_EMAIL, "NUEVA RECLAMACIÓN N° $generatedCode - $nombres", $emailEmpresa, $pdfB64, $pdfName, $errE);
+            $errE = '';
+            $okE  = enviarCorreoSMTP(EMPRESA_NOTIF_EMAIL, "NUEVA RECLAMACIÓN N° $generatedCode - $nombres", $emailEmpresa, $pdfB64, $pdfName, $errE);
+            $debugLog[] = $okE ? 'Correo a empresa (' . EMPRESA_NOTIF_EMAIL . '): ENVIADO.' : 'Correo a empresa FALLÓ: ' . $errE;
         }
     }
 }
@@ -434,6 +439,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
+
+    <!-- DEBUG TEMPORAL — eliminar cuando el correo funcione -->
+    <?php if (!empty($debugLog)): ?>
+    <div class="no-print mt-6 bg-gray-900 text-green-400 rounded-2xl p-4 font-mono text-xs space-y-1 border border-green-500/30">
+        <div class="text-green-300 font-bold mb-2 uppercase tracking-widest text-[10px]">🔍 Debug SMTP (temporal)</div>
+        <?php foreach ($debugLog as $line): ?>
+        <div class="<?= str_contains($line,'FALLÓ') || str_contains($line,'falló') ? 'text-red-400' : 'text-green-400' ?>">→ <?= htmlspecialchars($line) ?></div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
 
     <div class="no-print mt-8 flex flex-col sm:flex-row justify-center gap-4">
         <button onclick="window.print()" class="btn-primary text-white font-bold px-6 py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 cursor-pointer">
