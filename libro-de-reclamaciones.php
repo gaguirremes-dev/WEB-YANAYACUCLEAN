@@ -5,8 +5,13 @@
  * y el D.S. N° 011-2011-PCM (modificado por D.S. 101-2021-PCM).
  */
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params(['lifetime' => 0, 'path' => '/', 'secure' => isset($_SERVER['HTTPS']), 'httponly' => true, 'samesite' => 'Strict']);
+    session_start();
+}
 date_default_timezone_set('America/Lima');
 
+define('DOMINIO_PERMITIDO', 'yanayacuclean.com');
 define('EMPRESA_RAZON_SOCIAL', 'YANA YACU CLEAN S.A.C.S.');
 define('EMPRESA_RUC',          '20615474755');
 define('EMPRESA_DIRECCION',    'Cal. Calle 8 Mza. I\' Lote 3 H.U. Chacupe II (Altura Dren Bungalows Tio Sam), Lambayeque - Chiclayo - La Victoria');
@@ -19,6 +24,11 @@ if (!defined('SMTP_PORT'))           define('SMTP_PORT', 465);
 if (!defined('SMTP_FROM_NAME'))      define('SMTP_FROM_NAME', 'YanaYacu Clean');
 if (!defined('EMPRESA_NOTIF_EMAIL')) define('EMPRESA_NOTIF_EMAIL', 'reclamaciones@yanayacuclean.com');
 
+define('RATE_LIMIT_MAX',    1);
+define('RATE_LIMIT_WINDOW', 1800);
+if (!defined('HCAPTCHA_SITE_KEY'))   define('HCAPTCHA_SITE_KEY',   '');
+if (!defined('HCAPTCHA_SECRET_KEY')) define('HCAPTCHA_SECRET_KEY', '');
+
 $recordsDir  = __DIR__ . '/reclamaciones';
 $recordsFile = $recordsDir . '/records.json';
 $lockFile    = $recordsDir . '/records.lock';
@@ -26,6 +36,13 @@ $lockFile    = $recordsDir . '/records.lock';
 if (!is_dir($recordsDir)) {
     if (!@mkdir($recordsDir, 0755, true))
         $errorMsg = 'Error de configuración del servidor: no se puede crear el directorio de registros.';
+}
+
+$rateFile     = $recordsDir . '/rate_limits.json';
+$logFile      = $recordsDir . '/security.log';
+$htaccessPath = $recordsDir . '/.htaccess';
+if (!file_exists($htaccessPath)) {
+    @file_put_contents($htaccessPath, "Order Deny,Allow\nDeny from all\n");
 }
 
 $fpdfPath      = __DIR__ . '/lib/fpdf.php';
@@ -140,6 +157,8 @@ function enviarCorreoSMTP(string $toEmail, string $subject, string $htmlBody, st
     if (!defined('SMTP_HOST') || !defined('SMTP_USER') || !defined('SMTP_PASS')) {
         $err = 'Configuración SMTP no encontrada (falta config.smtp.php).'; return false;
     }
+    $toEmail   = sanitizarCabecera($toEmail);
+    $subject   = sanitizarCabecera($subject);
     $enc = fn(string $s): string => '=?UTF-8?B?' . base64_encode($s) . '?=';
     $fromEmail = SMTP_USER;
     $eol = "\r\n";
@@ -182,7 +201,52 @@ function enviarCorreoSMTP(string $toEmail, string $subject, string $htmlBody, st
     return true;
 }
 
+// ── Funciones de seguridad ────────────────────────────────────────────────────
+function sanitizarCabecera(string $s): string {
+    return trim(str_replace(["\r\n","\r","\n","%0d%0a","%0D%0A","%0d","%0D","%0a","%0A"], '', $s));
+}
+function esc(?string $s): string {
+    return htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}
+function limpiarTexto(?string $s, int $maxLen = 500): string {
+    if ($s === null || $s === '') return '';
+    return mb_substr(trim(strip_tags($s)), 0, $maxLen, 'UTF-8');
+}
+function checkAndRegisterRateLimit(string $ip, string $rateFile): bool {
+    $lockPath = $rateFile . '.lock';
+    $fp = @fopen($lockPath, 'c');
+    if (!$fp || !flock($fp, LOCK_EX)) return true;
+    $now = time(); $window = RATE_LIMIT_WINDOW; $max = RATE_LIMIT_MAX; $data = [];
+    if (file_exists($rateFile)) {
+        $raw = file_get_contents($rateFile);
+        $data = ($raw !== false && $raw !== '') ? (json_decode($raw, true) ?: []) : [];
+    }
+    foreach (array_keys($data) as $k) {
+        $data[$k] = array_values(array_filter($data[$k], function($ts) use ($now, $window) { return ($now - $ts) < $window; }));
+        if (empty($data[$k])) unset($data[$k]);
+    }
+    $ipEntries = $data[$ip] ?? [];
+    if (count($ipEntries) >= $max) { flock($fp, LOCK_UN); fclose($fp); return false; }
+    $ipEntries[] = $now; $data[$ip] = $ipEntries;
+    file_put_contents($rateFile, json_encode($data));
+    flock($fp, LOCK_UN); fclose($fp);
+    return true;
+}
+function logSecurityEvent(string $logFile, string $event, array $context = []): void {
+    foreach (['email','nombres','doc_nro','apoderado_nombres','apoderado_doc_nro'] as $k) unset($context[$k]);
+    @file_put_contents($logFile, date('Y-m-d H:i:s') . ' | ' . $event . ' | ' . json_encode($context, JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND | LOCK_EX);
+}
+function verificarHCaptcha(string $token, string $secretKey): bool {
+    if ($token === '' || $secretKey === '') return false;
+    $ctx = stream_context_create(['http' => ['method' => 'POST', 'header' => 'Content-Type: application/x-www-form-urlencoded', 'content' => http_build_query(['secret' => $secretKey, 'response' => $token]), 'timeout' => 10]]);
+    $result = @file_get_contents('https://hcaptcha.com/siteverify', false, $ctx);
+    if ($result === false) return false;
+    $data = json_decode($result, true);
+    return isset($data['success']) && $data['success'] === true;
+}
+
 $success = false; $errorMsg = ''; $generatedCode = ''; $submittedData = []; $debugLog = [];
+$clientIP = trim(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0')[0]);
 
 set_error_handler(function($errno) use (&$errorMsg) {
     if ($errno === E_ERROR || $errno === E_USER_ERROR) $errorMsg = 'Error interno. Inténtelo más tarde.';
@@ -190,30 +254,85 @@ set_error_handler(function($errno) use (&$errorMsg) {
 });
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $f = fn(string $k, int $filter = FILTER_SANITIZE_SPECIAL_CHARS) => filter_input(INPUT_POST, $k, $filter);
-    $nombres      = $f('nombres');
-    $doc_tipo     = $f('doc_tipo');
-    $doc_nro      = $f('doc_nro');
-    $email        = $f('email', FILTER_VALIDATE_EMAIL);
-    $telefono     = $f('telefono');
-    $direccion    = $f('direccion');
-    $departamento = $f('departamento');
-    $provincia    = $f('provincia');
-    $distrito     = $f('distrito');
-    $menor_edad   = isset($_POST['menor_edad']);
-    $ap_nombres   = $f('apoderado_nombres');
-    $ap_doc_tipo  = $f('apoderado_doc_tipo');
-    $ap_doc_nro   = $f('apoderado_doc_nro');
-    $bien_tipo    = $f('bien_tipo');
-    $monto        = $f('monto', FILTER_SANITIZE_NUMBER_FLOAT | FILTER_FLAG_ALLOW_FRACTION);
-    $bien_desc    = $f('bien_desc');
-    $reclamo_tipo = $f('reclamo_tipo');
-    $detalle      = $f('detalle');
-    $pedido       = $f('pedido');
 
-    if (!$nombres||!$doc_tipo||!$doc_nro||!$email||!$direccion||!$bien_tipo||!$reclamo_tipo||!$detalle||!$pedido||!empty($errorMsg)) {
-        if (empty($errorMsg)) $errorMsg = 'Por favor, rellene todos los campos obligatorios.';
-    } else {
+    // ── 1. Honeypot ───────────────────────────────────────────────────────────
+    if (!empty($_POST['hp_website'] ?? '')) {
+        logSecurityEvent($logFile, 'HONEYPOT_TRIGGERED', ['ip' => $clientIP]);
+        header('HTTP/1.1 200 OK'); exit;
+    }
+
+    // ── 2. CSRF ───────────────────────────────────────────────────────────────
+    $csrfPost = (string)($_POST['csrf_token'] ?? '');
+    $csrfSess = (string)($_SESSION['csrf_token'] ?? '');
+    if (!$csrfPost || !$csrfSess || !hash_equals($csrfSess, $csrfPost)) {
+        logSecurityEvent($logFile, 'CSRF_FAILED', ['ip' => $clientIP]);
+        $errorMsg = 'Token de seguridad inválido. Recarga la página e inténtalo de nuevo.';
+    }
+
+    // ── 3. hCaptcha ───────────────────────────────────────────────────────────
+    if (empty($errorMsg)) {
+        $captchaToken = (string)($_POST['h-captcha-response'] ?? '');
+        if (!verificarHCaptcha($captchaToken, HCAPTCHA_SECRET_KEY)) {
+            logSecurityEvent($logFile, 'CAPTCHA_FAILED', ['ip' => $clientIP]);
+            $errorMsg = 'Por favor, completa el desafío de seguridad (captcha) antes de enviar.';
+        }
+    }
+
+    // ── 4. Origin / Referer ───────────────────────────────────────────────────
+    if (empty($errorMsg)) {
+        $origin  = $_SERVER['HTTP_ORIGIN']  ?? '';
+        $referer = $_SERVER['HTTP_REFERER'] ?? '';
+        if ($origin && strpos($origin, DOMINIO_PERMITIDO) === false) {
+            logSecurityEvent($logFile, 'ORIGIN_REJECTED', ['ip' => $clientIP, 'origin' => $origin]);
+            $errorMsg = 'Solicitud rechazada por origen no permitido.';
+        } elseif (!$origin && $referer && strpos($referer, DOMINIO_PERMITIDO) === false) {
+            logSecurityEvent($logFile, 'REFERER_REJECTED', ['ip' => $clientIP]);
+            $errorMsg = 'Solicitud rechazada por referencia no permitida.';
+        }
+    }
+
+    // ── 5. Rate limiting ──────────────────────────────────────────────────────
+    if (empty($errorMsg)) {
+        if (!checkAndRegisterRateLimit($clientIP, $rateFile)) {
+            logSecurityEvent($logFile, 'RATE_LIMIT_EXCEEDED', ['ip' => $clientIP]);
+            $errorMsg = 'Has enviado un reclamo recientemente. Por favor, espera 30 minutos antes de volver a intentarlo.';
+        }
+    }
+
+    // ── 6. Sanitizar y validar ────────────────────────────────────────────────
+    if (empty($errorMsg)) {
+        $nombres      = limpiarTexto($_POST['nombres']      ?? '', 200);
+        $doc_tipo     = $_POST['doc_tipo']     ?? '';
+        $doc_nro      = limpiarTexto($_POST['doc_nro']      ?? '', 20);
+        $email        = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
+        $telefono     = limpiarTexto($_POST['telefono']     ?? '', 20);
+        $direccion    = limpiarTexto($_POST['direccion']    ?? '', 300);
+        $departamento = limpiarTexto($_POST['departamento'] ?? '', 100);
+        $provincia    = limpiarTexto($_POST['provincia']    ?? '', 100);
+        $distrito     = limpiarTexto($_POST['distrito']     ?? '', 100);
+        $menor_edad   = isset($_POST['menor_edad']);
+        $ap_nombres   = limpiarTexto($_POST['apoderado_nombres']  ?? '', 200);
+        $ap_doc_tipo  = $_POST['apoderado_doc_tipo'] ?? '';
+        $ap_doc_nro   = limpiarTexto($_POST['apoderado_doc_nro']  ?? '', 20);
+        $bien_tipo    = $_POST['bien_tipo']    ?? '';
+        $bien_desc    = limpiarTexto($_POST['bien_desc']    ?? '', 500);
+        $reclamo_tipo = $_POST['reclamo_tipo'] ?? '';
+        $detalle      = limpiarTexto($_POST['detalle']      ?? '', 2000);
+        $pedido       = limpiarTexto($_POST['pedido']       ?? '', 2000);
+        $monto        = number_format(max(0.0, (float)preg_replace('/[^\d.]/', '', $_POST['monto'] ?? '0')), 2, '.', '');
+
+        if (!in_array($doc_tipo,     ['DNI','CE','PASAPORTE','RUC'], true)) $doc_tipo     = 'DNI';
+        if (!in_array($ap_doc_tipo,  ['DNI','CE','PASAPORTE'],        true)) $ap_doc_tipo  = 'DNI';
+        if (!in_array($bien_tipo,    ['producto','servicio'],          true)) $bien_tipo    = 'producto';
+        if (!in_array($reclamo_tipo, ['reclamo','queja'],              true)) $reclamo_tipo = 'reclamo';
+
+        if (!$nombres || !$doc_nro || !$email || !$direccion || !$detalle || !$pedido) {
+            $errorMsg = 'Por favor, rellene todos los campos obligatorios.';
+        }
+    }
+
+    // ── 7. Guardar registro ───────────────────────────────────────────────────
+    if (empty($errorMsg)) {
         $fp = fopen($lockFile, 'w');
         if ($fp && flock($fp, LOCK_EX)) {
             $year    = date('Y');
@@ -229,10 +348,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'apoderado_nombres'  => $menor_edad ? $ap_nombres  : '',
                 'apoderado_doc_tipo' => $menor_edad ? $ap_doc_tipo : '',
                 'apoderado_doc_nro'  => $menor_edad ? $ap_doc_nro  : '',
-                'bien_tipo' => $bien_tipo,
-                'monto'     => $monto ? number_format((float)$monto, 2, '.', '') : '0.00',
-                'bien_desc' => $bien_desc, 'reclamo_tipo' => $reclamo_tipo,
-                'detalle' => $detalle, 'pedido' => $pedido, 'estado' => 'Pendiente',
+                'bien_tipo' => $bien_tipo, 'monto' => $monto, 'bien_desc' => $bien_desc,
+                'reclamo_tipo' => $reclamo_tipo, 'detalle' => $detalle, 'pedido' => $pedido,
+                'estado' => 'Pendiente',
             ];
             $records[] = $submittedData;
             file_put_contents($recordsFile, json_encode($records, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
@@ -242,57 +360,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errorMsg = 'Error al registrar en el servidor. Inténtelo nuevamente.';
         }
         if ($fp) fclose($fp);
-
-        if ($success) {
-            $pdfBytes = '';
-            if ($fpdfAvailable) { try { $pdfBytes = generarPDFReclamo($submittedData); $debugLog[] = 'PDF generado OK.'; } catch(Exception $e) { $debugLog[] = 'PDF falló: ' . $e->getMessage(); } }
-            else { $debugLog[] = 'FPDF no disponible (falta lib/fpdf.php).'; }
-            $pdfB64  = $pdfBytes ? chunk_split(base64_encode($pdfBytes)) : '';
-            $pdfName = 'Hoja_Reclamacion_' . $generatedCode . '.pdf';
-            if ($pdfBytes) @file_put_contents($recordsDir . '/' . $pdfName, $pdfBytes);
-
-            $emailBody = "
-            <div style='font-family:Arial,sans-serif;color:#333;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;'>
-                <div style='background:#0D1B3E;padding:25px;text-align:center;'>
-                    <h2 style='margin:0;font-size:22px;color:#4DA6D6;'>HOJA DE RECLAMACIÓN VIRTUAL</h2>
-                    <p style='margin:5px 0 0;color:#fff;font-size:14px;font-weight:bold;'>Código: $generatedCode</p>
-                </div>
-                <div style='padding:25px;line-height:1.6;'>
-                    <p>Estimado(a) <strong>$nombres</strong>,</p>
-                    <p>Confirmamos la recepción de tu reclamación registrada el <strong>" . date('d/m/Y') . "</strong>. Adjunto encontrarás el cargo de tu Hoja de Reclamación Virtual.</p>
-                    <p>Daremos respuesta en un plazo máximo de <strong>15 días hábiles</strong> (Ley N° 29571).</p>
-                    <hr style='border:none;border-top:1px solid #eee;margin:20px 0;'>
-                    <table style='width:100%;border-collapse:collapse;font-size:14px;'>
-                        <tr><td style='padding:6px 0;font-weight:bold;width:150px;'>Consumidor:</td><td>$nombres ($doc_tipo $doc_nro)</td></tr>
-                        <tr><td style='padding:6px 0;font-weight:bold;'>Bien:</td><td style='text-transform:capitalize;'>$bien_tipo — S/. " . ($monto ?: '0.00') . "</td></tr>
-                        <tr><td style='padding:6px 0;font-weight:bold;'>Incidencia:</td><td style='font-weight:bold;color:" . ($reclamo_tipo=='reclamo'?'#dc2626':'#d97706') . ";text-transform:capitalize;'>$reclamo_tipo</td></tr>
-                        <tr><td style='padding:6px 0;font-weight:bold;vertical-align:top;'>Detalle:</td><td style='background:#f9f9f9;padding:8px;border-radius:4px;'>$detalle</td></tr>
-                        <tr><td style='padding:6px 0;font-weight:bold;vertical-align:top;'>Pedido:</td><td style='background:#f9f9f9;padding:8px;border-radius:4px;'>$pedido</td></tr>
-                    </table>
-                </div>
-                <div style='background:#f5f5f5;padding:15px;text-align:center;font-size:12px;color:#888;border-top:1px solid #e0e0e0;'>Cargo automático — no responder a este mensaje.</div>
-            </div>";
-
-            $errC = '';
-            $okC  = enviarCorreoSMTP($email, "Cargo de Hoja de Reclamación N° $generatedCode - YanaYacu Clean", $emailBody, $pdfB64, $pdfName, $errC);
-            $debugLog[] = $okC ? "Correo al cliente ($email): ENVIADO." : "Correo al cliente FALLÓ: $errC";
-
-            $emailEmpresa = "
-            <div style='font-family:Arial,sans-serif;color:#333;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;padding:25px;'>
-                <h2 style='color:#dc2626;margin-top:0;'>Nuevo Reclamo/Queja — $generatedCode</h2>
-                <p>Plazo máximo: <strong>15 días hábiles</strong>.</p>
-                <p><strong>Reclamante:</strong> $nombres · $doc_tipo $doc_nro · $email · $telefono</p>
-                <p><strong>Domicilio:</strong> $direccion, $distrito - $provincia ($departamento)</p>
-                <p><strong>Bien:</strong> " . ucfirst($bien_tipo) . " · S/. " . ($monto ?: '0.00') . " · $bien_desc</p>
-                <p><strong>Tipo:</strong> " . strtoupper($reclamo_tipo) . "</p>
-                <div style='background:#f7f7f7;padding:12px;border-left:4px solid #dc2626;margin-bottom:10px;'><strong>Detalle:</strong><br>" . nl2br($detalle) . "</div>
-                <div style='background:#f7f7f7;padding:12px;border-left:4px solid #4DA6D6;'><strong>Pedido:</strong><br>" . nl2br($pedido) . "</div>
-            </div>";
-            $errE = '';
-            $okE  = enviarCorreoSMTP(EMPRESA_NOTIF_EMAIL, "NUEVA RECLAMACIÓN N° $generatedCode - $nombres", $emailEmpresa, $pdfB64, $pdfName, $errE);
-            $debugLog[] = $okE ? 'Correo a empresa (' . EMPRESA_NOTIF_EMAIL . '): ENVIADO.' : 'Correo a empresa FALLÓ: ' . $errE;
-        }
     }
+
+    // ── 8. Generar PDF + enviar correos + redirigir ───────────────────────────
+    if ($success) {
+        logSecurityEvent($logFile, 'RECLAMO_OK', ['ip' => $clientIP, 'codigo' => $generatedCode]);
+        $pdfBytes = '';
+        if ($fpdfAvailable) { try { $pdfBytes = generarPDFReclamo($submittedData); } catch(Exception $e) { } }
+        $pdfB64  = $pdfBytes ? chunk_split(base64_encode($pdfBytes)) : '';
+        $pdfName = 'Hoja_Reclamacion_' . $generatedCode . '.pdf';
+        if ($pdfBytes) @file_put_contents($recordsDir . '/' . $pdfName, $pdfBytes);
+
+        $emailBody = "
+        <div style='font-family:Arial,sans-serif;color:#333;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;'>
+            <div style='background:#0D1B3E;padding:25px;text-align:center;'>
+                <h2 style='margin:0;font-size:22px;color:#4DA6D6;'>HOJA DE RECLAMACIÓN VIRTUAL</h2>
+                <p style='margin:5px 0 0;color:#fff;font-size:14px;font-weight:bold;'>Código: " . esc($generatedCode) . "</p>
+            </div>
+            <div style='padding:25px;line-height:1.6;'>
+                <p>Estimado(a) <strong>" . esc($nombres) . "</strong>,</p>
+                <p>Confirmamos la recepción de tu reclamación registrada el <strong>" . date('d/m/Y') . "</strong>. Adjunto encontrarás el cargo de tu Hoja de Reclamación Virtual.</p>
+                <p>Daremos respuesta en un plazo máximo de <strong>15 días hábiles</strong> (Ley N° 29571).</p>
+                <hr style='border:none;border-top:1px solid #eee;margin:20px 0;'>
+                <table style='width:100%;border-collapse:collapse;font-size:14px;'>
+                    <tr><td style='padding:6px 0;font-weight:bold;width:150px;'>Consumidor:</td><td>" . esc($nombres) . " (" . esc($doc_tipo) . " " . esc($doc_nro) . ")</td></tr>
+                    <tr><td style='padding:6px 0;font-weight:bold;'>Bien:</td><td style='text-transform:capitalize;'>" . esc($bien_tipo) . " — S/. " . esc($monto) . "</td></tr>
+                    <tr><td style='padding:6px 0;font-weight:bold;'>Incidencia:</td><td style='font-weight:bold;color:" . ($reclamo_tipo==='reclamo'?'#dc2626':'#d97706') . ";text-transform:capitalize;'>" . esc($reclamo_tipo) . "</td></tr>
+                    <tr><td style='padding:6px 0;font-weight:bold;vertical-align:top;'>Detalle:</td><td style='background:#f9f9f9;padding:8px;border-radius:4px;'>" . esc($detalle) . "</td></tr>
+                    <tr><td style='padding:6px 0;font-weight:bold;vertical-align:top;'>Pedido:</td><td style='background:#f9f9f9;padding:8px;border-radius:4px;'>" . esc($pedido) . "</td></tr>
+                </table>
+            </div>
+            <div style='background:#f5f5f5;padding:15px;text-align:center;font-size:12px;color:#888;border-top:1px solid #e0e0e0;'>Cargo automático — no responder a este mensaje.</div>
+        </div>";
+
+        $errC = '';
+        enviarCorreoSMTP($email, 'Cargo de Hoja de Reclamación N° ' . $generatedCode . ' — YanaYacu Clean', $emailBody, $pdfB64, $pdfName, $errC);
+
+        $emailEmpresa = "
+        <div style='font-family:Arial,sans-serif;color:#333;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;padding:25px;'>
+            <h2 style='color:#dc2626;margin-top:0;'>Nuevo Reclamo/Queja — " . esc($generatedCode) . "</h2>
+            <p>Plazo máximo: <strong>15 días hábiles</strong>.</p>
+            <p><strong>Reclamante:</strong> " . esc($nombres) . " · " . esc($doc_tipo) . " " . esc($doc_nro) . " · " . esc($email) . " · " . esc($telefono) . "</p>
+            <p><strong>Domicilio:</strong> " . esc($direccion) . ", " . esc($distrito) . " - " . esc($provincia) . " (" . esc($departamento) . ")</p>
+            <p><strong>Bien:</strong> " . esc(ucfirst($bien_tipo)) . " · S/. " . esc($monto) . " · " . esc($bien_desc) . "</p>
+            <p><strong>Tipo:</strong> " . esc(strtoupper($reclamo_tipo)) . "</p>
+            <div style='background:#f7f7f7;padding:12px;border-left:4px solid #dc2626;margin-bottom:10px;'><strong>Detalle:</strong><br>" . nl2br(esc($detalle)) . "</div>
+            <div style='background:#f7f7f7;padding:12px;border-left:4px solid #4DA6D6;'><strong>Pedido:</strong><br>" . nl2br(esc($pedido)) . "</div>
+        </div>";
+        $errE = '';
+        enviarCorreoSMTP(EMPRESA_NOTIF_EMAIL, 'NUEVA RECLAMACIÓN N° ' . $generatedCode . ' — ' . $nombres, $emailEmpresa, $pdfB64, $pdfName, $errE);
+
+        $_SESSION['csrf_token']      = bin2hex(random_bytes(32));
+        $_SESSION['reclamo_success'] = $submittedData;
+        header('Location: libro-de-reclamaciones.php?ok=1');
+        exit;
+    }
+}
+
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
+    $success       = true;
+    $submittedData = $_SESSION['reclamo_success'];
+    $generatedCode = $submittedData['codigo'] ?? '';
+    unset($_SESSION['reclamo_success']);
 }
 ?>
 <!DOCTYPE html>
@@ -342,6 +475,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .print-label { color:#555!important; font-weight:bold!important; font-size:10px!important; }
         }
     </style>
+<?php if (defined('HCAPTCHA_SITE_KEY') && HCAPTCHA_SITE_KEY !== ''): ?>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<?php endif; ?>
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -472,6 +608,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="lg:col-span-2">
         <div class="glass rounded-3xl p-6 sm:p-8 shadow-xl">
             <form method="POST" action="libro-de-reclamaciones.php" class="space-y-6">
+                <input type="hidden" name="csrf_token" value="<?= esc($_SESSION['csrf_token'] ?? '') ?>">
+                <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                    <label for="hp_website">Sitio web (no llenar)</label>
+                    <input type="text" name="hp_website" id="hp_website" tabindex="-1" autocomplete="off" value="">
+                </div>
 
                 <!-- Sección 1 -->
                 <div class="border-b border-navy-deep/10 pb-5">
@@ -628,7 +769,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </label>
                 </div>
 
-                <button type="submit" class="btn-primary w-full py-4 rounded-2xl text-white font-black text-sm tracking-wider cursor-pointer">
+                <?php if (defined('HCAPTCHA_SITE_KEY') && HCAPTCHA_SITE_KEY !== ''): ?>
+                <div class="flex justify-center pt-2">
+                    <div class="h-captcha" data-sitekey="<?= esc(HCAPTCHA_SITE_KEY) ?>" data-theme="dark"></div>
+                </div>
+                <?php else: ?>
+                <p class="text-amber-400/70 text-[10px] text-center">⚠️ hCaptcha no configurado — define <code>HCAPTCHA_SITE_KEY</code> en <code>config.smtp.php</code>.</p>
+                <?php endif; ?>
+                <button type="submit" id="btn-submit" class="btn-primary w-full py-4 rounded-2xl text-white font-black text-sm tracking-wider cursor-pointer" onclick="this.disabled=true;this.form.submit()">
                     PRESENTAR RECLAMACIÓN
                 </button>
             </form>
@@ -704,7 +852,12 @@ function toggleApoderado() {
     if (cb.checked) { f.classList.remove('hidden'); n.required=true; d.required=true; }
     else            { f.classList.add('hidden');    n.required=false; d.required=false; n.value=''; d.value=''; }
 }
-window.addEventListener('DOMContentLoaded', () => { if(document.getElementById('menor_edad')) toggleApoderado(); });
+window.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('menor_edad')) toggleApoderado();
+    <?php if (!empty($errorMsg)): ?>
+    if (typeof hcaptcha !== 'undefined') { hcaptcha.reset(); }
+    <?php endif; ?>
+});
 function openNoticeModal()  { const m=document.getElementById('notice-modal'); m.classList.remove('hidden'); m.classList.add('flex'); }
 function closeNoticeModal() { const m=document.getElementById('notice-modal'); m.classList.add('hidden'); m.classList.remove('flex'); }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeNoticeModal(); });
