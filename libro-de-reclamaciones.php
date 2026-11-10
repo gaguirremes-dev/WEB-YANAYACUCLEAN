@@ -15,7 +15,7 @@ define('DOMINIO_PERMITIDO', 'yanayacuclean.com');
 define('EMPRESA_RAZON_SOCIAL', 'YANA YACU CLEAN S.A.C.S.');
 define('EMPRESA_RUC',          '20615474755');
 define('EMPRESA_DIRECCION',    'Cal. Calle 8 Mza. I\' Lote 3 H.U. Chacupe II (Altura Dren Bungalows Tio Sam), Lambayeque - Chiclayo - La Victoria');
-define('EMPRESA_EMAIL',        'info@yanayacuclean.com');
+define('EMPRESA_EMAIL',        'comercial@yanayacuclean.com');
 
 $smtpConfigFile = __DIR__ . '/config.smtp.php';
 if (file_exists($smtpConfigFile)) require $smtpConfigFile;
