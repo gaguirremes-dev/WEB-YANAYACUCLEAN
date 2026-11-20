@@ -4,6 +4,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---- 0. Non-blocking stylesheets (media="print" swap, no inline handler) ---- */
+  document.querySelectorAll('link[data-async-css]').forEach(l => { l.media = 'all'; });
+
   /* ---- 1. GSAP + ScrollTrigger ---- */
   gsap.registerPlugin(ScrollTrigger);
 
@@ -14,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .from('.hero-title',    { opacity: 0, y: 60,  duration: 0.8, ease: 'power3.out' }, '-=0.2')
     .from('.hero-subtitle', { opacity: 0, y: 30,  duration: 0.6, ease: 'power2.out' }, '-=0.5')
     .from('.hero-ctas',     { opacity: 0, y: 20,  duration: 0.5, ease: 'power2.out' }, '-=0.3')
-    .from('.hero-stats',    { opacity: 0, y: 20,  duration: 0.5, ease: 'power2.out' }, '-=0.2')
-    .from('.hero-product',  { opacity: 0, x: 60,  duration: 0.9, ease: 'power3.out' }, '-=1.0');
+    .from('.hero-stats',    { opacity: 0, y: 20,  duration: 0.5, ease: 'power2.out' }, '-=0.2');
+  // .hero-product (LCP image) uses a CSS-only transform entrance, see custom.css
 
   // Reveal sections on scroll
   document.querySelectorAll('.reveal-section').forEach(section => {
@@ -47,8 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---- 2. tsParticles (hero) ---- */
-  if (typeof tsParticles !== 'undefined') {
+  /* ---- 2. tsParticles (hero) — deferred until idle / first interaction ---- */
+  const initParticles = () => {
+    if (typeof tsParticles === 'undefined') return;
     tsParticles.load('tsparticles', {
       fullScreen: { enable: false },
       background: { color: { value: 'transparent' } },
@@ -78,7 +82,25 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       detectRetina: true,
     });
-  }
+  };
+
+  (function scheduleParticles() {
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev => window.removeEventListener(ev, start));
+      initParticles();
+    };
+    ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev =>
+      window.addEventListener(ev, start, { once: true, passive: true }));
+    const whenIdle = () => {
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 3000 });
+      else setTimeout(start, 2000);
+    };
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
+  })();
 
   /* ---- 3. Swiper — Catálogo B2C ---- */
   const swiperOptions = {
@@ -126,8 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ---- 5. Lucide icons ---- */
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  /* ---- 5. Catalog PDF: click-to-load ---- */
+  (function initCatalogViewer() {
+    const btn    = document.getElementById('catalogLoadBtn');
+    const poster = document.getElementById('catalogPoster');
+    const frame  = document.getElementById('catalogFrame');
+    if (!btn || !poster || !frame) return;
+    btn.addEventListener('click', () => {
+      frame.src = frame.dataset.src;
+      frame.hidden = false;
+      poster.hidden = true;
+    });
+  })();
 
   /* ---- 6. Accordion legal ---- */
   document.querySelectorAll('.accordion-trigger').forEach(btn => {
