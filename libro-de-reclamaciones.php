@@ -24,7 +24,11 @@ if (!defined('EMPRESA_NOTIF_EMAIL')) define('EMPRESA_NOTIF_EMAIL', 'reclamacione
 if (!defined('HCAPTCHA_SITE_KEY'))   define('HCAPTCHA_SITE_KEY',   '');
 if (!defined('HCAPTCHA_SECRET_KEY')) define('HCAPTCHA_SECRET_KEY', '');
 
-$recordsDir  = __DIR__ . '/reclamaciones';
+// Records live outside the web root when possible (see lib/storage.php and README).
+if (!defined('RECLAMOS_DATA_DIR')) define('RECLAMOS_DATA_DIR', '');
+require_once __DIR__ . '/lib/storage.php';
+$recordsDirLegacy = __DIR__ . '/reclamaciones';
+$recordsDir  = reclamosResolverDirectorioDatos(__DIR__);
 $recordsFile = $recordsDir . '/records.json';
 $lockFile    = $recordsDir . '/records.lock';
 
@@ -95,7 +99,7 @@ function generarPDFReclamo(array $d): string {
         $pdf->SetTextColor(0, 0, 0);
         foreach ($rows as [$label, $val]) {
             $pdf->SetFont('Arial', 'B', 8.5); $pdf->Cell($col1W, 5.5, $c($label), 'B', 0, 'L');
-            $pdf->SetFont('Arial', '', 8.5);  $pdf->Cell($col2W, 5.5, $c($val),   'B', 1, 'L');
+            $pdf->SetFont('Arial', '', 8.5);  $pdf->MultiCell($col2W, 5.5, $c($val), 'B', 'L'); // wraps long values
         }
         $pdf->Ln(3);
     }
@@ -143,8 +147,8 @@ function generarPDFReclamo(array $d): string {
 
 // Optional limits / switches (override them in config.smtp.php).
 foreach ([
-    'RATE_LIMIT_MAX'      => 1,     // submissions per IP inside RATE_LIMIT_WINDOW
-    'RATE_LIMIT_WINDOW'   => 1800,  // seconds (30 min)
+    'RATE_LIMIT_MAX'      => 3,     // submissions per IP inside RATE_LIMIT_WINDOW
+    'RATE_LIMIT_WINDOW'   => 3600,  // seconds (60 min)
     'RATE_LIMIT_DAY_MAX'  => 5,     // submissions per IP per 24 h
     'SITE_LIMIT_HOUR_MAX' => 20,    // site-wide submissions per hour
     'SITE_LIMIT_DAY_MAX'  => 80,    // site-wide submissions per 24 h
@@ -154,7 +158,9 @@ foreach ([
     if (!defined($reclamosK)) define($reclamosK, $reclamosV);
 }
 
-// Cloudflare published ranges (https://www.cloudflare.com/ips/). Review from time to time.
+// Cloudflare published ranges, copied from https://www.cloudflare.com/ips-v4 and
+// https://www.cloudflare.com/ips-v6 (retrieved 2026-11-20; identical to the previous list).
+// Static on purpose: no runtime network calls. Review every 6 months (see README).
 define('RECLAMOS_CF_RANGES', [
     '173.245.48.0/20', '103.21.244.0/22', '103.22.200.0/22', '103.31.4.0/22',
     '141.101.64.0/18', '108.162.192.0/18', '190.93.240.0/20', '188.114.96.0/20',
@@ -163,6 +169,8 @@ define('RECLAMOS_CF_RANGES', [
     '2400:cb00::/32', '2606:4700::/32', '2803:f800::/32', '2405:b500::/32',
     '2405:8100::/32', '2a06:98c0::/29', '2c0f:f248::/32',
 ]);
+// Fallback mailbox shown whenever the form cannot be used (legal requirement: the book is always reachable).
+const RECLAMOS_CONTACTO  = 'reclamaciones@yanayacuclean.com';
 const RECLAMOS_MAX_BODY  = 65536; // reject bigger POST bodies (bytes)
 const RECLAMOS_MIN_AGE   = 5;     // seconds after render before a submit is accepted
 const RECLAMOS_MAX_AGE   = 7200;  // seconds after render before the form expires
@@ -379,7 +387,7 @@ function reclamosGuardarSolicitud(string $dir, string $logFile, string $ipHash):
     $log = function (string $ev, array $ctx = []) use ($logFile, $ipHash): void {
         logSecurityEvent($logFile, $ev, $ctx + ['ip_hash' => $ipHash]);
     };
-    $contacto = defined('EMPRESA_EMAIL') ? ' o escríbenos a ' . EMPRESA_EMAIL : '';
+    $contacto = ' o escríbenos a ' . RECLAMOS_CONTACTO;
 
     if ($ipHash === '') {
         $log('NO_KEY_AVAILABLE');
@@ -437,7 +445,7 @@ function reclamosGuardarSolicitud(string $dir, string $logFile, string $ipHash):
 // ── Atomic rate limit (per IP-hash + site-wide) and duplicate-content check ──
 // Reserves the slot when everything passes. Returns '' on success, else a Spanish message.
 function reclamosReservarEnvio(string $dir, string $ipHash, string $dupHash, string $logFile): string {
-    $contacto = defined('EMPRESA_EMAIL') ? ' o escríbenos a ' . EMPRESA_EMAIL : '';
+    $contacto = ' o escríbenos a ' . RECLAMOS_CONTACTO;
     $generic  = 'No pudimos registrar tu solicitud en este momento. Inténtalo más tarde' . $contacto . '.';
     $stateFile = $dir . '/rate_state.json';
     @unlink($dir . '/rate_limits.json');      // legacy file kept raw IPs
@@ -470,7 +478,7 @@ function reclamosReservarEnvio(string $dir, string $ipHash, string $dupHash, str
     $err = '';
     if ($inWindow >= RATE_LIMIT_MAX) {
         $err = 'RATE_LIMIT_IP';
-        $msg = 'Has enviado un reclamo recientemente. Por favor, espera ' . (int)ceil(RATE_LIMIT_WINDOW / 60) . ' minutos antes de volver a intentarlo.';
+        $msg = 'Has alcanzado el límite de envíos desde tu conexión. Por favor, espera ' . (int)ceil(RATE_LIMIT_WINDOW / 60) . ' minutos antes de volver a intentarlo. Si necesitas registrar tu reclamo ahora, escríbenos a ' . RECLAMOS_CONTACTO . '.';
     } elseif (count($mine) >= RATE_LIMIT_DAY_MAX) {
         $err = 'RATE_LIMIT_IP_DAY';
         $msg = 'Has alcanzado el límite diario de envíos desde tu conexión. Inténtalo nuevamente mañana' . $contacto . '.';
@@ -596,11 +604,12 @@ reclamosIniciarSesion();
 
 $success = false; $errorMsg = ''; $generatedCode = ''; $submittedData = []; $debugLog = [];
 if (!reclamosPrepararDirectorio($recordsDir)) {
-    $errorMsg = 'El servicio no está disponible temporalmente. Inténtalo más tarde o escríbenos a ' . EMPRESA_EMAIL . '.';
+    $errorMsg = 'El servicio no está disponible temporalmente. Inténtalo más tarde o escríbenos a ' . RECLAMOS_CONTACTO . '.';
 }
-// The raw IP is never kept: $clientIP holds the salted hash (it is what the logs record).
+// One-time copy (never move/delete) of docroot data into the new directory.
+if ($errorMsg === '') reclamosMigrarDatosLegacy($recordsDirLegacy, $recordsDir);
+// The raw IP is never kept: only this salted hash is written to logs and rate-limit state.
 $ipHash   = reclamosHashIp(reclamosClientIp(), $recordsDir);
-$clientIP = $ipHash;
 
 set_error_handler(function ($errno) use (&$errorMsg) {
     if ($errno === E_ERROR || $errno === E_USER_ERROR) $errorMsg = 'Error interno del servidor. Por favor, inténtelo más tarde.';
@@ -682,12 +691,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $errorMsg === '') {
 
     // ── 8. Generar PDF + enviar correos + redirigir ───────────────────────────
     if ($success) {
-        logSecurityEvent($logFile, 'RECLAMO_OK', ['ip' => $clientIP, 'codigo' => $generatedCode]);
+        logSecurityEvent($logFile, 'RECLAMO_OK', ['ip_hash' => $ipHash, 'codigo' => $generatedCode]);
         $pdfBytes = '';
         if ($fpdfAvailable) { try { $pdfBytes = generarPDFReclamo($submittedData); } catch(Exception $e) { } }
         $pdfB64  = $pdfBytes ? chunk_split(base64_encode($pdfBytes)) : '';
-        $pdfName = 'Hoja_Reclamacion_' . $generatedCode . '.pdf';
-        if ($pdfBytes) @file_put_contents($recordsDir . '/' . $pdfName, $pdfBytes);
+        $pdfName = 'Hoja_Reclamacion_' . $generatedCode . '.pdf'; // attachment name (code visible to the consumer)
+        // On disk: unpredictable suffix, so the file can never be guessed from the claim code.
+        if ($pdfBytes) @file_put_contents($recordsDir . '/Hoja_Reclamacion_' . $generatedCode . '_' . bin2hex(random_bytes(8)) . '.pdf', $pdfBytes);
 
         $emailBody = "
         <div style='font-family:Arial,sans-serif;color:#333;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;'>
@@ -762,25 +772,12 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libro de Reclamaciones - YanaYacu Clean</title>
+    <meta name="robots" content="noindex, follow">
     <meta name="description" content="Libro de Reclamaciones Virtual de YanaYacu Clean. Conforme al Código de Protección al Consumidor.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy:  { deep: '#0D1B3E', mid: '#1A2F5C', light: '#2A4A8A' },
-                        brand: { DEFAULT: '#4DA6D6', light: '#B3DFF0', pale: '#EBF7FD' },
-                    },
-                    fontFamily: { sans: ['Poppins', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-400-normal.woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/fonts.css?v=07774ca3">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=30056da6">
     <style>
         * { box-sizing: border-box; }
         body { background: #FFFFFF; color: #111827; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
@@ -807,14 +804,14 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
 <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <?php endif; ?>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col"<?= !empty($errorMsg) ? ' data-form-error="1"' : '' ?>>
 
 <!-- HEADER -->
 <header class="no-print w-full border-b border-navy-deep/10 bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-3">
             <div class="bg-white rounded-xl px-2 py-1 border border-navy-deep/10 shadow-sm">
-                <img src="LOGO - YANA YACU CLEAN.jpg" alt="YanaYacu Clean" class="h-9 w-auto object-contain">
+                <img src="assets/img/brand/logo-original.webp" alt="YanaYacu Clean" width="400" height="400" class="h-9 w-auto object-contain">
             </div>
         </a>
         <a href="index.html" class="text-navy-deep/50 hover:text-navy-deep text-xs flex items-center gap-1.5 transition-colors">
@@ -905,7 +902,7 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
     </div>
 
     <div class="no-print mt-8 flex flex-col sm:flex-row justify-center gap-4">
-        <button onclick="window.print()" class="btn-primary text-white font-bold px-6 py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 cursor-pointer">
+        <button type="button" id="btn-print" class="btn-primary text-white font-bold px-6 py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
             Descargar / Imprimir Reclamo
         </button>
@@ -928,7 +925,7 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
 
 <?php if (!empty($errorMsg)): ?>
 <div class="no-print bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 text-sm flex items-center gap-2">
-    <span class="text-lg">⚠️</span> <?= $errorMsg ?>
+    <span class="text-lg">⚠️</span> <?= esc($errorMsg) ?>
 </div>
 <?php endif; ?>
 
@@ -994,7 +991,7 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
                     </div>
                     <div class="mt-4 bg-navy-deep/5 p-4 rounded-xl border border-navy-deep/5">
                         <label class="flex items-center gap-3 cursor-pointer">
-                            <input type="checkbox" id="menor_edad" name="menor_edad" class="w-4 h-4 rounded accent-brand flex-shrink-0 cursor-pointer" onclick="toggleApoderado()" <?= isset($_POST['menor_edad'])?'checked':'' ?>>
+                            <input type="checkbox" id="menor_edad" name="menor_edad" class="w-4 h-4 rounded accent-brand flex-shrink-0 cursor-pointer" <?= isset($_POST['menor_edad'])?'checked':'' ?>>
                             <span class="text-navy-deep/70 text-xs">Soy menor de edad (se requiere ingresar los datos de un tutor/apoderado).</span>
                         </label>
                         <div id="apoderado_fields" class="mt-4 pt-4 border-t border-navy-deep/10 grid grid-cols-1 sm:grid-cols-2 gap-4 hidden">
@@ -1100,12 +1097,12 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
 
                 <?php if (defined('HCAPTCHA_SITE_KEY') && HCAPTCHA_SITE_KEY !== ''): ?>
                 <div class="flex justify-center pt-2">
-                    <div class="h-captcha" data-sitekey="<?= esc(HCAPTCHA_SITE_KEY) ?>" data-theme="dark"></div>
+                    <div class="h-captcha" data-sitekey="<?= esc(HCAPTCHA_SITE_KEY) ?>" data-theme="light"></div>
                 </div>
                 <?php else: ?>
                 <p class="text-amber-400/70 text-[10px] text-center">⚠️ hCaptcha no configurado — define <code>HCAPTCHA_SITE_KEY</code> en <code>config.smtp.php</code>.</p>
                 <?php endif; ?>
-                <button type="submit" id="btn-submit" class="btn-primary w-full py-4 rounded-2xl text-white font-black text-sm tracking-wider cursor-pointer" onclick="this.disabled=true;this.form.submit()">
+                <button type="submit" id="btn-submit" class="btn-primary w-full py-4 rounded-2xl text-white font-black text-sm tracking-wider cursor-pointer">
                     PRESENTAR RECLAMACIÓN
                 </button>
             </form>
@@ -1139,9 +1136,9 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
                 Conforme al Código de Protección y Defensa del Consumidor, contamos con un Libro de Reclamaciones Virtual:
             </p>
             <div class="relative rounded-2xl overflow-hidden border border-navy-deep/10 bg-navy-deep/5 group">
-                <img src="Libro-reclamaciones/AvisoVirtual_page1.png" alt="Aviso Virtual INDECOPI" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                <img src="assets/img/reclamaciones/aviso-virtual.webp" alt="Aviso Virtual INDECOPI" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-opacity">
                 <div class="absolute inset-0 bg-navy-deep/30 flex items-center justify-center group-hover:bg-navy-deep/10 transition-all">
-                    <button onclick="openNoticeModal()" class="bg-brand text-white font-bold px-4 py-2 rounded-xl text-xs shadow-lg hover:scale-105 transition-transform cursor-pointer">
+                    <button type="button" id="btn-open-notice" class="bg-brand-dark text-white font-bold px-4 py-2 rounded-xl text-xs shadow-lg hover:scale-105 transition-transform cursor-pointer">
                         Ver a Pantalla Completa
                     </button>
                 </div>
@@ -1162,34 +1159,16 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
 
 <!-- Modal Aviso Virtual -->
 <div id="notice-modal" class="no-print fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
-    <div class="absolute inset-0 cursor-pointer" onclick="closeNoticeModal()"></div>
+    <div id="notice-backdrop" class="absolute inset-0 cursor-pointer"></div>
     <div class="relative z-10 max-w-lg w-full bg-white rounded-3xl p-4 shadow-2xl flex flex-col items-center">
-        <button onclick="closeNoticeModal()" class="absolute -top-10 right-0 sm:-right-8 text-white hover:text-brand text-3xl font-light cursor-pointer">✕</button>
+        <button type="button" id="btn-close-notice" class="absolute -top-10 right-0 sm:-right-8 text-white hover:text-brand text-3xl font-light cursor-pointer">✕</button>
         <div class="w-full overflow-y-auto max-h-[80vh] border border-gray-200 rounded-2xl">
-            <img src="Libro-reclamaciones/AvisoVirtual_page1.png" alt="Aviso Virtual Oficial INDECOPI" class="w-full h-auto">
+            <img src="assets/img/reclamaciones/aviso-virtual.webp" alt="Aviso Virtual Oficial INDECOPI" class="w-full h-auto">
         </div>
         <p class="text-gray-500 text-[10px] mt-3 text-center">Aviso oficial de disponibilidad de Libro de Reclamaciones - INDECOPI.</p>
     </div>
 </div>
 
-<script>
-function toggleApoderado() {
-    const cb = document.getElementById('menor_edad');
-    const f  = document.getElementById('apoderado_fields');
-    const n  = document.getElementById('apoderado_nombres');
-    const d  = document.getElementById('apoderado_doc_nro');
-    if (cb.checked) { f.classList.remove('hidden'); n.required=true; d.required=true; }
-    else            { f.classList.add('hidden');    n.required=false; d.required=false; n.value=''; d.value=''; }
-}
-window.addEventListener('DOMContentLoaded', () => {
-    if(document.getElementById('menor_edad')) toggleApoderado();
-    <?php if (!empty($errorMsg)): ?>
-    if (typeof hcaptcha !== 'undefined') { hcaptcha.reset(); }
-    <?php endif; ?>
-});
-function openNoticeModal()  { const m=document.getElementById('notice-modal'); m.classList.remove('hidden'); m.classList.add('flex'); }
-function closeNoticeModal() { const m=document.getElementById('notice-modal'); m.classList.add('hidden'); m.classList.remove('flex'); }
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeNoticeModal(); });
-</script>
+<script defer src="assets/js/claims-form.js?v=fd5aa3ff"></script>
 </body>
 </html>

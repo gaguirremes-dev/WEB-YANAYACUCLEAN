@@ -1,22 +1,54 @@
 # YanaYacu Clean — .htaccess
 
-# Forzar HTTPS
+Options -Indexes
+
 RewriteEngine On
+
+# Force HTTPS + www in a single hop (avoids redirect chains).
+# X-Forwarded-Proto check prevents loops behind proxies (e.g. Cloudflare Flexible SSL).
 RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^(.*)$ https://www.%1%{REQUEST_URI} [L,R=301]
 
-# Forzar www
+RewriteCond %{HTTPS} on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} https [NC]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^(.+)$ [NC]
+RewriteRule ^(.*)$ https://www.%1%{REQUEST_URI} [L,R=301]
 
-# Gzip compression
+# ---------------------------------------------------------------
+# Sensitive paths: never served over HTTP (404)
+# ---------------------------------------------------------------
+# Directories (git, agent files, build sources, claim records, PHP libs)
+RewriteRule ^(\.git|\.atl|node_modules|src|scripts|reclamaciones|reclamaciones-data|lib)(/|$) - [R=404,L,NC]
+# Any dotfile or dot-directory except .well-known
+RewriteRule (^|/)\.(?!well-known(/|$)) - [R=404,L]
+
+# Sensitive files
+<FilesMatch "(^config\.smtp.*\.php$|^package(-lock)?\.json$|^tailwind\.config\.js$|\.(md|log|lock|bak|sql|sh|zip)$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Compression
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/css
-  AddOutputFilterByType DEFLATE application/javascript application/json
-  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml image/svg+xml
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml
+  AddOutputFilterByType BROTLI_COMPRESS text/javascript application/javascript application/json
+  AddOutputFilterByType BROTLI_COMPRESS application/xml image/svg+xml
 </IfModule>
 
-# Browser caching
+# Browser caching (css/js are versioned with ?v= by the build)
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpg         "access plus 1 month"
@@ -24,20 +56,34 @@ RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   ExpiresByType image/png         "access plus 1 month"
   ExpiresByType image/webp        "access plus 1 month"
   ExpiresByType image/svg+xml     "access plus 1 month"
-  ExpiresByType text/css          "access plus 1 week"
-  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType application/pdf   "access plus 1 year"
+  ExpiresByType font/woff2        "access plus 1 year"
+  ExpiresByType image/x-icon      "access plus 1 year"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+  ExpiresByType text/css          "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript   "access plus 1 month"
+  ExpiresByType application/xml   "access plus 1 day"
+  ExpiresByType text/xml          "access plus 1 day"
   ExpiresByType text/html         "access plus 1 day"
 </IfModule>
 
 # Security headers
 <IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  # Content-Security-Policy (enforcing). Verified with headless Chrome: zero violations on the
+  # home, the three landing pages, 404, privacy, terms and the claims form (see README).
+  # - No 'unsafe-eval': Alpine runs as the CSP build (@alpinejs/csp), components in assets/js/alpine-components.js.
+  # - No inline <script>: all scripts are files under assets/. JSON-LD (type application/ld+json) is data, not executed.
+  # - style-src keeps 'unsafe-inline' on purpose: style="" attributes are used across the pages and by Swiper/GSAP/tsParticles at runtime.
+  # - hCaptcha (claims form and distributor form) needs its script, frame and connect origins.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://*.hcaptcha.com; font-src 'self'; img-src 'self' data:; frame-src 'self' https://*.hcaptcha.com; connect-src 'self' https://*.hcaptcha.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
 </IfModule>
 
-# Ocultar listado de directorios
-Options -Indexes
-
-# Pagina de error
-ErrorDocument 404 /index.html
+# Error page
+ErrorDocument 404 /404.html

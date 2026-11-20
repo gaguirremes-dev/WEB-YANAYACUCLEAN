@@ -19,12 +19,14 @@ define('HCAPTCHA_SECRET_KEY', 'TU_SECRET_KEY_AQUI');
 // Si no defines estas constantes se usan los valores por defecto que se muestran aquí.
 
 // Sal para anonimizar las IP: solo se guarda un hash SHA-256 salado, nunca la IP.
-// Déjala vacía y el sistema crea una clave aleatoria propia (reclamaciones/install.key).
+// Déjala vacía y el sistema crea una clave aleatoria propia (install.key dentro del directorio de datos, ver RECLAMOS_DATA_DIR).
 define('IP_HASH_SALT', '');
 
 // Límites anti-spam
-define('RATE_LIMIT_MAX',      1);     // envíos por IP dentro de la ventana
-define('RATE_LIMIT_WINDOW',   1800);  // ventana en segundos (1800 = 30 minutos)
+// Valores por defecto del código: 3 envíos por IP cada 60 minutos. Si tu config.smtp.php real
+// ya define estas constantes con otros valores, ACTUALÍZALO: tiene prioridad sobre el código.
+define('RATE_LIMIT_MAX',      3);     // envíos por IP dentro de la ventana
+define('RATE_LIMIT_WINDOW',   3600);  // ventana en segundos (3600 = 60 minutos)
 define('RATE_LIMIT_DAY_MAX',  5);     // envíos por IP cada 24 horas
 define('SITE_LIMIT_HOUR_MAX', 20);    // envíos de todo el sitio por hora
 define('SITE_LIMIT_DAY_MAX',  80);    // envíos de todo el sitio por día
@@ -33,3 +35,10 @@ define('SITE_LIMIT_DAY_MAX',  80);    // envíos de todo el sitio por día
 // Ponlo en false SOLO si los correos dejan de enviarse porque el certificado del
 // servidor no coincide con SMTP_HOST (sigue cifrado, pero no valida la identidad del servidor).
 define('SMTP_VERIFY_TLS', true);
+
+// Directorio de datos del Libro de Reclamaciones (records.json, PDF, install.key, security.log).
+// Por defecto: carpeta "reclamaciones-data" AL LADO de la carpeta pública (fuera del web root),
+// si el servidor permite escribir ahí; si no, se usa <web root>/reclamaciones (protegida con .htaccess).
+// Define una ruta absoluta para forzar otra ubicación. Al cambiar de ubicación, los datos antiguos
+// del web root se COPIAN una sola vez (nunca se borran ni se mueven).
+// define('RECLAMOS_DATA_DIR', '/home/USUARIO/reclamaciones-data');
