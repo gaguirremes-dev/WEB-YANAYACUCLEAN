@@ -1291,7 +1291,7 @@ body {
   position: absolute;
   z-index: 9;
   top: -4%;
-  right: -3%;
+  right: -16%;
 }
 .hero-iso img { display: block; width: clamp(230px, 21vw, 320px); height: auto; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35)); }
 @media (max-width: 767px) {
