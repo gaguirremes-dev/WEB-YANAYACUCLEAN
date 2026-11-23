@@ -17,16 +17,24 @@ config.smtp.example.php                                 copy to config.smtp.php 
 favicon.svg, robots.txt, sitemap.xml, .htaccess         site-level files
 lib/fpdf.php + lib/font/                               FPDF 1.86 (PDF receipts for the claims form)
 assets/css, assets/js                                   styles and scripts
-assets/vendor/                                          self-hosted libs (alpinejs 3.14.1, gsap 3.12.5, swiper 11.1.4, tsparticles 2.12.0)
+assets/vendor/                                          self-hosted libs (alpinejs 3.14.1, gsap 3.12.5, swiper 11.1.4, motion = framer-motion vanilla bundle, see build:motion)
 assets/fonts/                                           self-hosted Poppins woff2 (latin + latin-ext), @font-face in assets/css/fonts.css
 scripts/asset-version.js                                stamps ?v=<hash> on local css/js references
 assets/docs/                                            downloadable catalog PDF
 assets/img/brand/                                       logos
 assets/img/certificaciones/                             ISO 14001 badge
 assets/img/productos/                                   product images (kebab-case ASCII names)
+assets/img/hero/                                        hero splash background (1100/1920 WebP) and slides/ (product images trimmed to their alpha bounding box)
 assets/img/reclamaciones/                               claims book card and INDECOPI notice
 assets/img/originales/                                  local-only sources (gitignored)
 ```
+
+## Hero (home)
+
+- Markup: `section#inicio.yx-hero` in `index.html` (styles scoped as `.yx-*` in `assets/css/custom.css`). Layers: splash photo (`.yx-hero__bg`), white wash, copy + product stage (slideshow of 8 bottles, `object-fit: contain`, common baseline), SVG waves that merge into the navy marquee.
+- Scripts: `assets/js/hero-boot.js` (blocking, adds `yx-js` before first paint; a CSS failsafe reveals the copy after 3 s), then `assets/vendor/motion.min.js` and `assets/js/hero.js` (deferred, first in order; no GSAP/Swiper dependency). Entrance, slideshow transitions, idle float, parallax and button springs use Motion; `prefers-reduced-motion` gives a static hero.
+- `npm run build:motion` re-bundles only `animate` (motion/mini), `hover` and `press` from the `motion` package into `assets/vendor/motion.min.js` (esbuild, ~16 KB / ~6.6 KB gzip). Commit the output.
+- Removed from the hero: tsParticles, `hero-slideshow.js`, the ISO block and the benefits strip (the ISO image and the footer seal remain).
 
 ## Run
 
@@ -58,6 +66,7 @@ Config: `tailwind.config.js` (palette: navy, brand, sky). Input: `src/tailwind.i
 `/linea-hogar/`, `/linea-industrial/` and `/distribuidores/` are built from `src/` into plain static files (no runtime includes, no Node on the server). Generated `<slug>/index.html` files are committed.
 
 - Edit the navbar/footer once in `src/layout/header.html` and `src/layout/footer.html`, the document head in `src/layout/head.html`.
+- **Navbar** (single source: `src/layout/header.html`): `Productos` (dropdown: Línea hogar, Línea industrial, Catálogo de productos), `Distribuidores`, `Legal` (dropdown: Legal y normativa, Política de privacidad, Términos y condiciones, Libro de reclamaciones), `Contacto` (`/#contacto`, the footer) + WhatsApp CTA. Intranet is footer-only. On mobile the same links render as an accordion. `npm run build` injects the header into the generated pages AND into `index.html` between its `<!-- nav:start -->` / `<!-- nav:end -->` markers (never edit between them). Behavior: `navbar` / `navDropdown` in `assets/js/alpine-components.js`; styles: `.yx-nav*` in the standalone `assets/css/nav.css` (no dependency on `custom.css`, so it can load on the claims form without restyling it). The header is also injected into `404.html`, `privacidad.html`, `terminos.html` and `libro-de-reclamaciones.php` (list `NAV_TARGETS` in `scripts/build-pages.js`; each file needs its own `nav:start`/`nav:end` markers, the build fails if they are missing). Every page that renders the header must load `tailwind.css` + `nav.css` and, deferred and in this order, `alpine-components.js`, `alpine.min.js`, `nav-scroll.js`; the fixed bar is ~96px tall (86px on mobile), so the first block needs `pt-36`/`pt-40`. `/404.html` uses root-relative paths because it is served from any depth.
 - Edit page content in `src/pages/<slug>.html`, then run `npm run build`. Never edit the generated `<slug>/index.html`.
 - To add a page: create `src/pages/<new-slug>.html`, add its link to the layout and `sitemap.xml`, run `npm run build`.
 
@@ -80,7 +89,7 @@ faq:                                                 (optional)
 <main> ... {{faq}} ... </main>
 ```
 
-The canonical URL is `https://www.yanayacuclean.com/<slug>/`. The build generates the JSON-LD (BreadcrumbList, CollectionPage/WebPage and, if `faq` exists, FAQPage), renders the visible FAQ at `{{faq}}` from the same data so both always match, and fails on a missing field, a title over 62 chars, a description outside 120-160 chars or duplicate titles/descriptions. Other tokens: `{{icon:whatsapp}}`, `{{aria:<slug>}}` (navbar `aria-current`).
+The canonical URL is `https://www.yanayacuclean.com/<slug>/`. The build generates the JSON-LD (BreadcrumbList, CollectionPage/WebPage and, if `faq` exists, FAQPage), renders the visible FAQ at `{{faq}}` from the same data so both always match, and fails on a missing field, a title over 62 chars, a description outside 120-160 chars or duplicate titles/descriptions. Other tokens: `{{icon:whatsapp}}`, `{{aria:<slug>}}` (navbar `aria-current="page"`), `{{current:<slug>|<slug>}}` (dropdown parent `aria-current="true"`), `{{ico:<name>}}` (navbar icons).
 
 ## Cache busting
 

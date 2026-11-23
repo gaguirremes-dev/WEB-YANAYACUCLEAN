@@ -362,7 +362,7 @@ $ts      = $dirOk ? distTokenTiempo($dir, $csrf) : '';
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="assets/css/fonts.css?v=07774ca3">
-  <link rel="stylesheet" href="assets/css/tailwind.css?v=30056da6">
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=a9f8f504">
 <?php if (!$success && $configured): ?>
   <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <?php endif; ?>

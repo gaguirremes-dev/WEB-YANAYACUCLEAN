@@ -80,7 +80,7 @@ RewriteRule (^|/)\.(?!well-known(/|$)) - [R=404,L]
   # home, the three landing pages, 404, privacy, terms and the claims form (see README).
   # - No 'unsafe-eval': Alpine runs as the CSP build (@alpinejs/csp), components in assets/js/alpine-components.js.
   # - No inline <script>: all scripts are files under assets/. JSON-LD (type application/ld+json) is data, not executed.
-  # - style-src keeps 'unsafe-inline' on purpose: style="" attributes are used across the pages and by Swiper/GSAP/tsParticles at runtime.
+  # - style-src keeps 'unsafe-inline' on purpose: style="" attributes are used across the pages and by Swiper/GSAP/Motion at runtime.
   # - hCaptcha (claims form and distributor form) needs its script, frame and connect origins.
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://*.hcaptcha.com; font-src 'self'; img-src 'self' data:; frame-src 'self' https://*.hcaptcha.com; connect-src 'self' https://*.hcaptcha.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
 </IfModule>

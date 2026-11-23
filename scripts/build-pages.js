@@ -7,6 +7,8 @@
  *         src/layout/header.html  navbar
  *         src/layout/footer.html  footer, floating WhatsApp, scripts, </body></html>
  * Output: <slug>/index.html       committed; the server needs no Node.
+ *         index.html              ONLY the block between <!-- nav:start --> and <!-- nav:end -->
+ *                                 is replaced with the shared header (no active page).
  *
  * Front matter: a block between two `---` lines at the top of the page file.
  *   key: value            single-line field
@@ -20,7 +22,9 @@
  * The canonical URL is derived from the file name: /<slug>/.
  *
  * Tokens: {{title}} {{description}} {{canonical}} {{og_title}} {{og_description}} {{jsonld}}
- *         {{aria:<slug>}} -> ` aria-current="page"` when building that slug, else empty
+ *         {{aria:<slug>}} -> `aria-current="page"` when building that slug, else empty
+ *         {{current:<slug>|<slug>}} -> `aria-current="true"` when building any of those slugs (dropdown parents)
+ *         {{ico:<name>}} -> small inline nav icon (see NAV_ICONS)
  *         {{icon:whatsapp}} -> inline WhatsApp SVG
  *         {{faq}} -> FAQ section markup (page body only)
  */
@@ -36,6 +40,61 @@ const PAGES = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://www.yanayacuclean.com';
 const MAX_TITLE = 62;
 const DESC_RANGE = [120, 160];
+
+const NAV_START = '<!-- nav:start -->';
+const NAV_END = '<!-- nav:end -->';
+const svg = (inner, cls) =>
+  `<svg class="${cls}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${inner}</svg>`;
+const NAV_ICONS = {
+  chev: svg('<path d="m6 9 6 6 6-6"/>', 'yx-nav__chev'),
+  home: svg('<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/>', 'yx-nav__iico'),
+  factory: svg('<path d="M3 21h18"/><path d="M5 21V10l5 3v-3l5 3V4h4v17"/>', 'yx-nav__iico'),
+  grid: svg('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>', 'yx-nav__iico'),
+  shield: svg('<path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9.5-4.1-1.9-7-5.3-7-9.5V6z"/><path d="m9 12 2 2 4-4"/>', 'yx-nav__iico'),
+  lock: svg('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>', 'yx-nav__iico'),
+  file: svg('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/>', 'yx-nav__iico'),
+  book: svg('<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>', 'yx-nav__iico'),
+};
+
+/** Resolves the header tokens for one page (slug = null for the home page). */
+function renderHeader(header, slug, whatsapp) {
+  return header
+    .replace(/\{\{aria:([a-z0-9-]+)\}\}/g, (_, s) => (s === slug ? 'aria-current="page"' : ''))
+    .replace(/\{\{current:([a-z0-9|-]+)\}\}/g, (_, list) => (list.split('|').includes(slug) ? 'aria-current="true"' : ''))
+    .replace(/\{\{ico:([a-z]+)\}\}/g, (_, n) => {
+      if (!NAV_ICONS[n]) throw new Error(`unknown nav icon "${n}"`);
+      return NAV_ICONS[n];
+    })
+    .replace(/\{\{icon:whatsapp\}\}/g, whatsapp);
+}
+
+/**
+ * Standalone pages that are not generated from src/pages: the shared header is injected between
+ * their nav:start / nav:end markers. `slug` drives {{aria:..}} / {{current:..}} (null = no active page).
+ */
+const NAV_TARGETS = [
+  { file: 'index.html', slug: null },
+  { file: '404.html', slug: null },
+  { file: 'privacidad.html', slug: 'privacidad' },
+  { file: 'terminos.html', slug: 'terminos' },
+  { file: 'libro-de-reclamaciones.php', slug: 'libro-de-reclamaciones' },
+];
+
+/** Replaces the nav block of one standalone page (between the markers) with the shared header. */
+function injectNav(header, whatsapp, { file: name, slug }) {
+  const file = path.join(ROOT, name);
+  const html = fs.readFileSync(file, 'utf8');
+  const a = html.indexOf(NAV_START);
+  const b = html.indexOf(NAV_END);
+  if (a < 0 || b < a) throw new Error(`${name}: nav:start / nav:end markers not found`);
+  const eol = html.includes('\r\n') ? '\r\n' : '\n'; // keep each file own line endings (idempotent)
+  const nav = renderHeader(header, slug, whatsapp).trim().replace(/\r?\n/g, () => eol);
+  const leftover = nav.match(/\{\{[^}]+\}\}/);
+  if (leftover) throw new Error(`${name} nav: unresolved token ${leftover[0]}`);
+  const out = `${html.slice(0, a + NAV_START.length)}${eol}${nav}${eol}${html.slice(b)}`;
+  if (out !== html) fs.writeFileSync(file, out);
+  console.log(`injected nav into ${name} (${out !== html ? 'updated' : 'unchanged'})`);
+}
 
 const read = (p) => fs.readFileSync(p, 'utf8');
 const esc = (s) =>
@@ -174,9 +233,8 @@ function main() {
       jsonld: buildJsonLd(slug, data, faq),
     };
 
-    const html = [layout.head, layout.header, body.replace('{{faq}}', renderFaq(faq)), layout.footer]
+    const html = [layout.head, renderHeader(layout.header, slug, whatsapp), body.replace('{{faq}}', renderFaq(faq)), layout.footer]
       .join('\n')
-      .replace(/\{\{aria:([a-z0-9-]+)\}\}/g, (_, s) => (s === slug ? 'aria-current="page"' : ''))
       .replace(/\{\{icon:whatsapp\}\}/g, whatsapp)
       .replace(/\{\{(title|description|canonical|og_title|og_description|jsonld)\}\}/g, (_, k) => values[k]);
 
@@ -188,6 +246,7 @@ function main() {
     fs.writeFileSync(path.join(outDir, 'index.html'), stamp(html));
     console.log(`built /${slug}/index.html (title ${data.title.length} chars, description ${data.description.length} chars)`);
   }
+  for (const target of NAV_TARGETS) injectNav(layout.header, whatsapp, target);
 }
 
 try {

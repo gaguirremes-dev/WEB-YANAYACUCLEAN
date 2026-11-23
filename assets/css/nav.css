@@ -1,0 +1,247 @@
+/* Anchor jumps (/#distribuidores, /#productos, /#legal...) must land below the fixed navbar */
+html { scroll-padding-top: 6rem; }
+
+/* =============================================
+   YanaYacu Clean - navbar stylesheet (single source of the .yx-nav* rules)
+   Loaded by every page that renders src/layout/header.html:
+   home, generated landing pages, 404, privacidad, terminos, libro de reclamaciones.
+   Needs tailwind.css (utilities used by the markup) and fonts.css. Standalone: no custom.css dependency.
+   ============================================= */
+
+/* ====================================================
+   NAVBAR (2026 redesign) - scoped .yx-nav*
+   Shared by the home page and the generated landing pages.
+   The scroll script toggles py-4 / py-2 / shadow-xl on #navbar.
+   ==================================================== */
+[x-cloak] { display: none !important; }
+
+.yx-nav {
+  --yx-nav-radius: 26px;
+  background:
+    radial-gradient(ellipse 340px 150px at 0 100px, rgba(36, 172, 255, 0.95) 0%, rgba(22, 124, 232, 0.55) 45%, rgba(10, 70, 170, 0) 100%),
+    radial-gradient(ellipse 220px 90px at 0 0, rgba(44, 150, 255, 0.3) 0%, rgba(44, 150, 255, 0) 100%),
+    linear-gradient(100deg, #08336F 0%, #00204F 32%, #01224F 70%, #0B2A66 100%);
+  border-radius: 0 0 var(--yx-nav-radius) var(--yx-nav-radius);
+  box-shadow: 0 10px 28px -14px rgba(0, 20, 60, 0.6);
+  color: #fff;
+}
+.yx-nav__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+.yx-nav__logo { display: inline-flex; align-items: center; flex: none; border-radius: 12px; }
+.yx-nav__logo img { display: block; height: 3.4rem; width: auto; object-fit: contain; }
+
+.yx-nav__list, .yx-nav__actions { display: none; }
+.yx-nav__list { align-items: center; gap: 0.15rem; margin: 0; padding: 0; list-style: none; }
+.yx-nav__list > li { position: relative; }
+.yx-nav__actions { align-items: center; gap: 0.7rem; }
+
+.yx-nav__link {
+  display: block;
+  padding: 0.55rem 0.8rem;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 10, 40, 0.35);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.yx-nav__link:hover,
+.yx-nav__link[aria-current="page"],
+.yx-nav__trigger[aria-expanded="true"],
+.yx-nav__trigger[aria-current] { background: rgba(2, 18, 56, 0.55); }
+
+.yx-nav__ico { flex: none; width: 1.15em; height: 1.15em; }
+.yx-nav__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.yx-nav__cta {
+  padding: 0.7rem 1.2rem;
+  background: linear-gradient(95deg, #0B8FE0 0%, #0A6CCF 100%);
+  box-shadow: 0 8px 20px -8px rgba(18, 150, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+/* 1024-1399px: keep the full accessible name but show only "WhatsApp" to fit the bar */
+.yx-nav__cta-pre { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (min-width: 1400px), (max-width: 1023px) {
+  .yx-nav__cta-pre { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+}
+.yx-nav__cta svg { width: 1.3em; height: 1.3em; flex: none; }
+.yx-nav__cta:hover { transform: translateY(-1px); box-shadow: 0 12px 24px -8px rgba(18, 150, 255, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.3); }
+
+.yx-nav__link:focus-visible,
+.yx-nav__item:focus-visible,
+.yx-nav__cta:focus-visible,
+.yx-nav__toggle:focus-visible,
+.yx-nav__logo:focus-visible,
+.yx-nav__mlink:focus-visible { outline: 3px solid #5CD0FF; outline-offset: 2px; }
+
+/* Dropdown trigger (button that looks like a link) + chevron */
+.yx-nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+.yx-nav__chev { flex: none; width: 1em; height: 1em; opacity: 0.85; transition: transform 0.22s ease; }
+[aria-expanded="true"] > .yx-nav__chev { transform: rotate(180deg); }
+
+/* Desktop dropdown panel: dark-navy glass card. The transparent top padding bridges the gap
+   between trigger and card so the pointer never leaves the hover area. */
+.yx-nav__menu {
+  position: absolute;
+  top: 100%;
+  left: -0.5rem;
+  z-index: 60;
+  padding-top: 0.9rem;
+}
+.yx-nav__card {
+  position: relative;
+  min-width: 15rem;
+  margin: 0;
+  padding: 0.5rem;
+  list-style: none;
+  border-radius: 16px;
+  border: 1px solid rgba(126, 200, 227, 0.22);
+  background: linear-gradient(180deg, rgba(9, 36, 84, 0.97), rgba(2, 24, 60, 0.98));
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 26px 48px -18px rgba(0, 12, 40, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.yx-nav__card::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 1.6rem;
+  width: 12px;
+  height: 12px;
+  background: #0A2754;
+  border-top: 1px solid rgba(126, 200, 227, 0.22);
+  border-left: 1px solid rgba(126, 200, 227, 0.22);
+  transform: rotate(45deg);
+  border-top-left-radius: 3px;
+}
+.yx-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 11px;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.yx-nav__iico { flex: none; width: 1.2rem; height: 1.2rem; color: #5CD0FF; }
+.yx-nav__item:hover { background: rgba(126, 200, 227, 0.14); color: #fff; }
+.yx-nav__item[aria-current="page"] { background: rgba(92, 208, 255, 0.12); color: #8fe0ff; }
+
+.yx-nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 14px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: background-color 0.2s ease;
+}
+.yx-nav__toggle:hover { background: rgba(255, 255, 255, 0.16); }
+.yx-nav__burger { width: 1.55rem; height: 1.55rem; }
+
+/* Mobile panel (accordion) */
+.yx-nav__panel {
+  max-height: calc(100vh - 5.5rem);
+  max-height: calc(100svh - 5.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.4rem clamp(16px, 4vw, 40px) 1.4rem;
+}
+.yx-nav__mlink {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.7rem 0.25rem;
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  transition: color 0.2s ease;
+}
+.yx-nav__mlink:hover, .yx-nav__mlink[aria-current="page"] { color: #5CD0FF; }
+.yx-nav__gbtn {
+  width: 100%;
+  justify-content: space-between;
+  border-top: 0; border-left: 0; border-right: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.yx-nav__gbtn .yx-nav__chev { width: 1.25rem; height: 1.25rem; }
+.yx-nav__gbtn[aria-current] { color: #5CD0FF; }
+.yx-nav__gbody {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.26s ease, visibility 0s linear 0.26s;
+}
+.yx-nav__gbtn[aria-expanded="true"] + .yx-nav__gbody {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.26s ease, visibility 0s;
+}
+.yx-nav__gin {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0 0 0 0.65rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(126, 200, 227, 0.35);
+}
+.yx-nav__mchild { min-height: 2.9rem; border-bottom: 0; font-size: 0.95rem; font-weight: 500; color: rgba(255, 255, 255, 0.9); }
+.yx-nav__mactions { display: grid; gap: 0.75rem; margin-top: 1.1rem; }
+.yx-nav__cta--block { width: 100%; padding-block: 0.85rem; font-size: 1rem; }
+
+@media (min-width: 1024px) {
+  .yx-nav { --yx-nav-radius: 0; --yx-nav-curve: clamp(56px, 6.2vw, 96px); border-bottom-right-radius: var(--yx-nav-curve); border-bottom-left-radius: var(--yx-nav-curve); }
+  .yx-nav__list, .yx-nav__actions { display: flex; }
+  .yx-nav__toggle, .yx-nav__panel { display: none !important; }
+  /* keep logo and CTA clear of both curved corners */
+  .yx-nav__bar { gap: 0.6rem; padding-inline: max(20px, calc(var(--yx-nav-curve) * 0.5)); }
+  .yx-nav__logo img { height: 3.4rem; }
+  .yx-nav__list { gap: 0.1rem; }
+  .yx-nav__link { padding-inline: 0.7rem; font-size: 0.875rem; }
+  .yx-nav__actions { gap: 0.5rem; }
+  .yx-nav__cta { font-size: 0.875rem; padding-inline: 1.05rem; }
+}
+@media (min-width: 1280px) {
+  .yx-nav__logo img { height: 4rem; }
+  .yx-nav__list { gap: 0.35rem; }
+  .yx-nav__link { padding-inline: 1rem; font-size: 0.925rem; }
+  .yx-nav__cta { font-size: 0.925rem; padding-inline: 1.3rem; }
+  .yx-nav__bar { gap: 1.5rem; padding-inline: clamp(16px, 4vw, 40px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .yx-nav, .yx-nav * { transition: none !important; animation: none !important; }
+}
