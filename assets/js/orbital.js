@@ -14,7 +14,7 @@
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let Rx = 320, Ry = 44, baseY = -160;
+  let Rx = 320, Ry = 44, baseY = -190;
   function measure() {
     const w = stage.clientWidth;
     const h = stage.clientHeight || 600;

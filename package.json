@@ -6,7 +6,12 @@
     "build": "npm run build:pages && npm run build:css && npm run build:version",
     "build:version": "node scripts/asset-version.js",
     "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind.input.css -o assets/css/tailwind.css --minify",
-    "watch:css": "tailwindcss -c tailwind.config.js -i src/tailwind.input.css -o assets/css/tailwind.css --watch"
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/tailwind.input.css -o assets/css/tailwind.css --watch",
+    "build:motion": "node scripts/build-motion.js"
   },
-  "devDependencies": { "tailwindcss": "3.4.17" }
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "motion": "^14.14.0",
+    "tailwindcss": "3.4.17"
+  }
 }

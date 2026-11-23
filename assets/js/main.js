@@ -10,15 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---- 1. GSAP + ScrollTrigger ---- */
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero entrance
-  const heroTl = gsap.timeline({ delay: 0.2 });
-  heroTl
-    .from('.hero-badge',    { opacity: 0, y: -20, duration: 0.5, ease: 'power2.out' })
-    .from('.hero-title',    { opacity: 0, y: 60,  duration: 0.8, ease: 'power3.out' }, '-=0.2')
-    .from('.hero-subtitle', { opacity: 0, y: 30,  duration: 0.6, ease: 'power2.out' }, '-=0.5')
-    .from('.hero-ctas',     { opacity: 0, y: 20,  duration: 0.5, ease: 'power2.out' }, '-=0.3')
-    .from('.hero-stats',    { opacity: 0, y: 20,  duration: 0.5, ease: 'power2.out' }, '-=0.2');
-  // .hero-product (LCP image) uses a CSS-only transform entrance, see custom.css
+  // Hero entrance + slideshow live in assets/js/hero.js (Motion), not here.
 
   // Reveal sections on scroll
   document.querySelectorAll('.reveal-section').forEach(section => {
@@ -50,57 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---- 2. tsParticles (hero) — deferred until idle / first interaction ---- */
-  const initParticles = () => {
-    if (typeof tsParticles === 'undefined') return;
-    tsParticles.load('tsparticles', {
-      fullScreen: { enable: false },
-      background: { color: { value: 'transparent' } },
-      fpsLimit: 60,
-      particles: {
-        number: { value: 55, density: { enable: true, area: 900 } },
-        color: { value: ['#4DA6D6', '#7EC8E3', '#FFFFFF'] },
-        shape: { type: 'circle' },
-        opacity: { value: { min: 0.1, max: 0.45 }, animation: { enable: true, speed: 0.6 } },
-        size:    { value: { min: 2, max: 6 }, animation: { enable: true, speed: 2 } },
-        move: {
-          enable: true,
-          speed: 1.2,
-          direction: 'top',
-          random: true,
-          straight: false,
-          outModes: { default: 'out' },
-        },
-        links: { enable: false },
-      },
-      interactivity: {
-        events: {
-          onHover: { enable: true, mode: 'repulse' },
-          resize: true,
-        },
-        modes: { repulse: { distance: 80, duration: 0.4 } },
-      },
-      detectRetina: true,
-    });
-  };
-
-  (function scheduleParticles() {
-    let started = false;
-    const start = () => {
-      if (started) return;
-      started = true;
-      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev => window.removeEventListener(ev, start));
-      initParticles();
-    };
-    ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(ev =>
-      window.addEventListener(ev, start, { once: true, passive: true }));
-    const whenIdle = () => {
-      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 3000 });
-      else setTimeout(start, 2000);
-    };
-    if (document.readyState === 'complete') whenIdle();
-    else window.addEventListener('load', whenIdle, { once: true });
-  })();
+  /* ---- 2. tsParticles: removed with the 2026 hero redesign (no particles) ---- */
 
   /* ---- 3. Swiper — Catálogo B2C ---- */
   const swiperOptions = {

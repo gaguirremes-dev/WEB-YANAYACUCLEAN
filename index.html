@@ -96,19 +96,24 @@
   }
   </script>
 
-  <!-- LCP: first hero slide image -->
-  <link rel="preload" as="image" href="/assets/img/productos/desinfectante-floral.webp" fetchpriority="high" />
+  <!-- LCP: hero product image -->
+  <link rel="preload" as="image" href="/assets/img/hero/slides/desinfectante-floral.webp" fetchpriority="high" />
 
   <!-- Fonts (self-hosted) -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-400-normal.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-700-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-800-normal.woff2" crossorigin />
   <link rel="stylesheet" href="assets/css/fonts.css?v=07774ca3" />
 
   <!-- Compiled Tailwind -->
-  <link rel="stylesheet" href="assets/css/tailwind.css?v=30056da6" />
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=a9f8f504" />
+
+  <!-- Hero boot: adds the yx-js class before first paint (tiny, same-origin, CSP-safe) -->
+  <script src="assets/js/hero-boot.js?v=1c12b693"></script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css?v=b72ea197" />
+  <link rel="stylesheet" href="assets/css/nav.css?v=261cb32b" />
+  <link rel="stylesheet" href="assets/css/custom.css?v=6f9398b5" />
 
   <!-- Swiper CSS: only the testimonials slider (below the fold) uses it, so it must not block rendering.
        main.js switches media to "all" (no inline handler: keeps the CSP strict). -->
@@ -123,279 +128,284 @@
 <body class="font-sans bg-white text-navy">
 
 <!-- ====================================================
-     NAVBAR
+     NAVBAR - generated from src/layout/header.html by `npm run build`
+     (do not edit between the markers)
+===================================================== -->
+<!-- nav:start -->
+<!-- ====================================================
+     NAVBAR (shared layout)
+     Single source of truth: injected into every generated page AND into index.html
+     (between its nav:start / nav:end markers) by scripts/build-pages.js.
+     Desktop: Inicio / Productos / Distribuidores / Legal / Contacto (-> Socios Comerciales section) + CTA. Mobile: accordion.
+     Intranet lives only in the footer.
 ===================================================== -->
 <nav id="navbar"
      x-data="navbar"
-     class="fixed top-0 left-0 right-0 z-50 bg-navy py-4 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+     @keydown.escape="close"
+     aria-label="Principal"
+     class="yx-nav fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300">
+  <div class="yx-nav__bar">
 
     <!-- Logo -->
-    <a href="#inicio" class="flex items-center shrink-0">
-      <img src="assets/img/brand/logo.webp"
+    <a href="/#inicio" class="yx-nav__logo" aria-label="YanaYacu Clean – Inicio">
+      <img src="/assets/img/brand/logo.webp"
            alt="YanaYacu Clean Logo"
-           class="h-14 w-auto object-contain" width="480" height="165" />
+           width="480" height="165" />
     </a>
 
     <!-- Links desktop -->
-    <ul class="hidden md:flex items-center gap-8">
-      <li><a href="#productos"     class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Productos</a></li>
-      <li><a href="#industrial"    class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Industrial</a></li>
-      <li><a href="#distribuidores"class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Distribuidores</a></li>
-      <li><a href="#legal"         class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Legal</a></li>
-      <li><a href="#contacto"      class="nav-link text-white/80 hover:text-white text-sm font-medium transition-colors">Contacto</a></li>
-      <li><a href="https://rrhh.yanayacuclean.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-white text-sm font-semibold px-4 py-2 rounded-full border border-sky/60 bg-sky/10 hover:bg-sky/20 hover:border-sky transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-        Intranet
-      </a></li>
+    <ul class="yx-nav__list">
+      <li><a href="/" class="yx-nav__link">Inicio</a></li>
+      <li class="yx-nav__dd" x-data="navDropdown"
+          @pointerenter="show" @pointerleave="hide" @keydown.escape="onEscape" @focusout="onFocusOut"
+          @click.outside="close" @nav-dd-open.window="onOther">
+        <button type="button" class="yx-nav__link yx-nav__trigger" x-ref="trigger" 
+                aria-haspopup="true" :aria-expanded="expanded" @click="toggle" @keydown.arrow-down.prevent="openAndFocus">
+          Productos <svg class="yx-nav__chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="yx-nav__menu" x-show="open" x-cloak
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0">
+          <ul class="yx-nav__card">
+            <li><a href="/linea-hogar/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Línea hogar</a></li>
+            <li><a href="/linea-industrial/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V10l5 3v-3l5 3V4h4v17"/></svg>Línea industrial</a></li>
+            <li><a href="/#productos" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="/distribuidores/"  class="yx-nav__link">Distribuidores</a></li>
+      <li class="yx-nav__dd" x-data="navDropdown"
+          @pointerenter="show" @pointerleave="hide" @keydown.escape="onEscape" @focusout="onFocusOut"
+          @click.outside="close" @nav-dd-open.window="onOther">
+        <button type="button" class="yx-nav__link yx-nav__trigger" x-ref="trigger" 
+                aria-haspopup="true" :aria-expanded="expanded" @click="toggle" @keydown.arrow-down.prevent="openAndFocus">
+          Legal <svg class="yx-nav__chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="yx-nav__menu" x-show="open" x-cloak
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0">
+          <ul class="yx-nav__card">
+            <li><a href="/#legal" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 9.5-4.1-1.9-7-5.3-7-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>Legal y normativa</a></li>
+            <li><a href="/privacidad.html"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Política de privacidad</a></li>
+            <li><a href="/terminos.html"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>Términos y condiciones</a></li>
+            <li><a href="/libro-de-reclamaciones.php"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>Libro de reclamaciones</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="/#distribuidores" class="yx-nav__link">Contacto</a></li>
     </ul>
 
-    <!-- CTA desktop -->
-    <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
-       target="_blank" rel="noopener"
-       class="hidden md:inline-flex items-center gap-2 bg-brand-dark hover:bg-navy-light text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors duration-300">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Comprar por WhatsApp
-    </a>
+    <!-- Actions desktop -->
+    <div class="yx-nav__actions">
+      <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
+         target="_blank" rel="noopener" class="yx-nav__cta">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="yx-nav__cta-pre">Comprar por </span>WhatsApp
+      </a>
+    </div>
 
     <!-- Hamburger mobile -->
     <button @click="toggle"
-            class="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-            aria-label="Abrir menú">
-      <svg x-show="menuClosed" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            class="yx-nav__toggle"
+            :aria-expanded="expanded" aria-controls="mobile-menu"
+            :aria-label="toggleLabel" aria-label="Abrir menú">
+      <svg x-show="menuClosed" xmlns="http://www.w3.org/2000/svg" class="yx-nav__burger" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
-      <svg x-show="menuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg x-show="menuOpen" x-cloak xmlns="http://www.w3.org/2000/svg" class="yx-nav__burger" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
       </svg>
     </button>
   </div>
 
-  <!-- Mobile menu -->
-  <div x-show="menuOpen"
+  <!-- Mobile menu (accordion) -->
+  <div id="mobile-menu" x-show="menuOpen" x-cloak
        x-transition:enter="transition ease-out duration-200"
        x-transition:enter-start="opacity-0 -translate-y-2"
        x-transition:enter-end="opacity-100 translate-y-0"
        x-transition:leave="transition ease-in duration-150"
        x-transition:leave-start="opacity-100"
        x-transition:leave-end="opacity-0"
-       class="md:hidden bg-navy border-t border-white/10 px-4 pb-6 pt-4 space-y-1">
-    <a href="#productos"      @click="close" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Productos</a>
-    <a href="#industrial"     @click="close" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Industrial</a>
-    <a href="#distribuidores" @click="close" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Distribuidores</a>
-    <a href="#legal"          @click="close" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Legal</a>
-    <a href="#contacto"       @click="close" class="block py-3 text-white/80 hover:text-sky font-medium border-b border-white/10 transition-colors">Contacto</a>
-    <a href="https://rrhh.yanayacuclean.com" target="_blank" rel="noopener" class="mt-3 flex items-center justify-center gap-2 text-white font-semibold py-3 rounded-full border border-sky/60 bg-sky/10 hover:bg-sky/20 transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-      Intranet
-    </a>
-    <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
-       target="_blank" rel="noopener"
-       class="mt-4 flex items-center justify-center gap-2 bg-brand-dark text-white font-semibold py-3 rounded-full transition-colors hover:bg-navy-light">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Comprar por WhatsApp
-    </a>
+       class="yx-nav__panel">
+
+    <a href="/" @click="closeMenu" class="yx-nav__mlink">Inicio</a>
+
+    <div class="yx-nav__group" x-data="navDropdown" @nav-dd-open.window="onOther">
+      <button type="button" class="yx-nav__mlink yx-nav__gbtn" 
+              :aria-expanded="expanded" aria-controls="mnav-productos" @click="toggle">
+        Productos <svg class="yx-nav__chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="yx-nav__gbody" id="mnav-productos">
+        <div class="yx-nav__gin">
+          <a href="/linea-hogar/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea hogar</a>
+          <a href="/linea-industrial/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea industrial</a>
+          <a href="/#productos" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
+        </div>
+      </div>
+    </div>
+
+    <a href="/distribuidores/"  @click="closeMenu" class="yx-nav__mlink">Distribuidores</a>
+
+    <div class="yx-nav__group" x-data="navDropdown" @nav-dd-open.window="onOther">
+      <button type="button" class="yx-nav__mlink yx-nav__gbtn" 
+              :aria-expanded="expanded" aria-controls="mnav-legal" @click="toggle">
+        Legal <svg class="yx-nav__chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="yx-nav__gbody" id="mnav-legal">
+        <div class="yx-nav__gin">
+          <a href="/#legal" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Legal y normativa</a>
+          <a href="/privacidad.html"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Política de privacidad</a>
+          <a href="/terminos.html"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Términos y condiciones</a>
+          <a href="/libro-de-reclamaciones.php"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Libro de reclamaciones</a>
+        </div>
+      </div>
+    </div>
+
+    <a href="/#distribuidores" @click="closeMenu" class="yx-nav__mlink">Contacto</a>
+
+    <div class="yx-nav__mactions">
+      <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
+         target="_blank" rel="noopener" @click="closeMenu" class="yx-nav__cta yx-nav__cta--block">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Comprar por WhatsApp
+      </a>
+    </div>
   </div>
 </nav>
+<!-- nav:end -->
 
 
 <!-- ====================================================
      HERO
 ===================================================== -->
-<section id="inicio"
-         class="relative min-h-screen flex items-center bg-navy overflow-hidden pt-20">
+<section id="inicio" class="yx-hero" aria-labelledby="yx-title">
 
-  <!-- Partículas -->
-  <div id="tsparticles" class="absolute inset-0 z-0"></div>
+  <!-- Fondo: salpicadura de agua (decorativo). La versión se elige con srcset. -->
+  <div class="yx-hero__bg" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 599px)"
+              srcset="assets/img/hero/splash-m-640.webp 640w, assets/img/hero/splash-m-1170.webp 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)"
+              srcset="assets/img/hero/splash-t-1024.webp 1024w, assets/img/hero/splash-t-1536.webp 1536w" sizes="100vw" />
+      <img src="assets/img/hero/splash-1920.webp"
+           srcset="assets/img/hero/splash-1100.webp 1100w, assets/img/hero/splash-1920.webp 1920w"
+           sizes="100vw" width="1920" height="819" alt="" fetchpriority="high" />
+    </picture>
+  </div>
+  <div class="yx-hero__wash" aria-hidden="true"></div>
 
-  <!-- Gradiente decorativo -->
-  <div class="absolute top-0 right-0 w-96 h-96 bg-brand/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute bottom-0 left-0 w-80 h-80 bg-sky/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="yx-hero__inner">
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 grid md:grid-cols-[5fr_7fr] gap-8 lg:gap-12 items-center">
-
-    <!-- Texto -->
-    <div>
-      <div class="hero-badge mb-6">
-        <span class="badge">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 9-14 9V3z"/>
-          </svg>
-          Estándar Premium de Limpieza · Perú
-        </span>
-      </div>
-
-      <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-        El Brillo y Aroma<br/>
-        <span class="gradient-text">que Atrapan</span>
+    <!-- Columna de mensaje -->
+    <div class="yx-copy">
+      <h1 class="yx-title" id="yx-title">
+        <span class="yx-title__line yx-rv">El Brillo y</span>
+        <span class="yx-title__line yx-rv">Aroma que</span>
+        <span class="yx-title__line yx-title__line--accent yx-rv"><span class="yx-title__slant"><span class="yx-title__accent">Atrapan</span><svg class="yx-swoosh" viewBox="0 0 420 68" aria-hidden="true" focusable="false"><path d="M2 40 C70 16 170 4 262 5 C322 6 366 14 392 27 C364 25 318 20 262 20 C170 20 80 28 8 43 C4 44 0 42 2 40Z" fill="#1A9CF0"/><path class="yx-swoosh__star" d="M391.9 7.9 Q400.4 24.6 419.1 22.9 Q402.4 31.4 404.1 50.1 Q395.6 33.4 376.9 35.1 Q393.6 26.6 391.9 7.9Z" fill="#2BB0FA"/><path class="yx-swoosh__spark yx-swoosh__spark--a" d="M300.0 40.5 Q301.5 48.5 309.5 50.0 Q301.5 51.5 300.0 59.5 Q298.5 51.5 290.5 50.0 Q298.5 48.5 300.0 40.5Z" fill="#4DB6F5"/><path class="yx-swoosh__spark yx-swoosh__spark--b" d="M346.0 54.0 Q347.0 59.0 352.0 60.0 Q347.0 61.0 346.0 66.0 Q345.0 61.0 340.0 60.0 Q345.0 59.0 346.0 54.0Z" fill="#1A9CF0"/></svg></span></span>
       </h1>
 
-      <p class="hero-subtitle text-white/90 text-lg sm:text-xl leading-relaxed mb-8">
-        Detergentes, suavizantes y desinfectantes de alta concentración, con fragancia prolongada y libres de cloro.
-        Una vez que los usas, tu estándar de limpieza cambia para siempre.
+      <p class="yx-lead yx-rv">
+        Alta concentración, fragancia prolongada y libre de cloro. Una vez que lo usas, tu estándar de limpieza cambia para siempre.
       </p>
 
-      <div class="hero-ctas flex flex-col sm:flex-row gap-4 mb-10">
-        <a href="#productos"
-           class="inline-flex items-center justify-center gap-2 bg-brand-dark hover:bg-navy-light text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand/40 text-base">
-          Ver Productos
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+      <div class="yx-ctas yx-rv">
+        <a href="#productos" class="yx-btn yx-btn--primary">
+          <span>Ver Productos</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true" focusable="false">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0-6-6m6 6-6 6"/>
           </svg>
         </a>
         <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
-           target="_blank" rel="noopener"
-           class="inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:border-brand text-white hover:text-sky font-bold px-8 py-4 rounded-full transition-all duration-300 text-base">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+           target="_blank" rel="noopener" class="yx-btn yx-btn--ghost">
+          <svg class="yx-btn__wa" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
-          Escribir por WhatsApp
+          <span class="yx-btn__two">Escribir por <span>WhatsApp</span></span>
         </a>
       </div>
-
-      <!-- Panel de confianza: ISO + stats -->
-      <div class="hero-trust">
-        <div class="hero-stats grid grid-cols-3">
-          <div class="hero-stat">
-            <div class="stat-number"><span class="counter" data-target="500">0</span>+</div>
-            <p>Clientes satisfechos</p>
-          </div>
-          <div class="hero-stat">
-            <div class="stat-number"><span class="counter" data-target="3">0</span></div>
-            <p>Líneas de producto</p>
-          </div>
-          <div class="hero-stat">
-            <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
-            <p>Garantía de calidad</p>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- Producto visual — Slideshow automático -->
-    <div class="hero-product flex items-center">
-      <div class="relative w-full" style="height: clamp(520px, 68vw, 860px);">
-
-        <!-- Glow de fondo — escala con el contenedor -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div class="absolute inset-0 rounded-full" style="background:radial-gradient(ellipse 70% 70% at 50% 50%, rgba(77,166,214,0.22) 0%, transparent 70%);"></div>
+    <!-- Columna de producto: slideshow sobre la salpicadura -->
+    <div class="yx-media">
+      <div class="yx-stage" id="yxStage">
+        <span class="yx-stage__shadow" aria-hidden="true"></span>
+        <div class="yx-stage__float">
+          <img class="yx-slide is-active" src="assets/img/hero/slides/desinfectante-floral.webp" width="165" height="350" alt="Desinfectante Floral YanaYacu Clean" fetchpriority="high" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectante-lavanda.webp" width="168" height="379" alt="Desinfectante Lavanda YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectante-manzana.webp" width="153" height="324" alt="Desinfectante Manzana YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/detergente-liquido-floral.webp" width="450" height="970" alt="Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/detergente-liquido-bebe.webp" width="450" height="983" alt="Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/suavizante-bebe.webp" width="450" height="845" alt="Suavizante Bebé YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectantes.webp" width="234" height="279" alt="Línea Desinfectantes YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectante-perfumado.webp" width="305" height="1200" alt="Desinfectante Perfumado YanaYacu Clean" loading="lazy" decoding="async" />
         </div>
-        <!-- Anillos decorativos — tamaño proporcional al contenedor -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div class="animate-pulse rounded-full border border-brand/20" style="width:72%; aspect-ratio:1;"></div>
-        </div>
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div class="rounded-full border border-sky/15" style="width:56%; aspect-ratio:1;"></div>
-        </div>
-
-
-        <!-- Sello ISO 14001 -->
-        <div class="hero-iso">
-          <img src="assets/img/certificaciones/iso14001-white.webp" width="360" height="176" decoding="async"
-               alt="Certificación ISO 14001 – Sistema de Gestión Ambiental" />
-        </div>
-
-        <!-- Chips flotantes -->
-        <span class="hero-chip hero-chip--a">Libre de cloro</span>
-        <span class="hero-chip hero-chip--b">Aroma duradero</span>
-        <span class="hero-chip hero-chip--c">Alta concentración</span>
-
-        <!-- Slideshow -->
-        <div class="hero-slideshow" id="heroSlideshow" aria-live="polite">
-          <div class="hero-slide active">
-            <img src="assets/img/productos/desinfectante-floral.webp" width="433" height="576" alt="Desinfectante Floral YanaYacu Clean" fetchpriority="high" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/desinfectante-lavanda.webp" width="433" height="576" alt="Desinfectante Lavanda YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/desinfectante-manzana.webp" width="433" height="576" alt="Desinfectante Manzana YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/detergente-liquido-floral.webp" width="450" height="970" alt="Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/detergente-liquido-bebe.webp" width="450" height="983" alt="Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/suavizante-bebe.webp" width="450" height="845" alt="Suavizante Bebé YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/desinfectantes.webp" width="433" height="576" alt="Línea Desinfectantes YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-          <div class="hero-slide">
-            <img src="assets/img/productos/desinfectante-perfumado.webp" width="305" height="1200" alt="Desinfectante Perfumado YanaYacu Clean" loading="lazy" decoding="async" />
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+  <!-- Olas inferiores: se funden con la franja navy que sigue -->
+  <!-- Certificación ISO 14001: arriba a la derecha, pegada al borde de la pantalla -->
+  <div class="yx-iso yx-rv">
+    <img src="assets/img/certificaciones/iso14001.webp" width="720" height="353" decoding="async"
+         alt="Certificación ISO 14001 – Sistema de Gestión Ambiental" />
+  </div>
+
+  <!-- Yacu, la mascota: abajo a la izquierda, de pie sobre la ola. Guiña el ojo de vez en cuando (parche del ojo sobre la imagen base) -->
+  <div class="yx-mascot yx-rv">
+    <img class="yx-mascot__img"
+         src="assets/img/mascota/yacu.webp"
+         srcset="assets/img/mascota/yacu-640.webp 459w, assets/img/mascota/yacu.webp 860w"
+         sizes="(min-width: 900px) 14vw, 30vw"
+         width="860" height="1200" decoding="async" fetchpriority="low"
+         alt="Yacu, la mascota de YanaYacu Clean" />
+    <img class="yx-mascot__wink" src="assets/img/mascota/yacu-wink-eye.webp"
+         width="128" height="96" alt="" aria-hidden="true" decoding="async" />
+    <!-- Destello amarillo que aparece con el guiño (como en el video) -->
+    <svg class="yx-mascot__rays" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <defs><linearGradient id="yxray" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F6E94A"/><stop offset="1" stop-color="#E3D436"/></linearGradient></defs>
+      <g stroke="url(#yxray)" stroke-linecap="round" fill="none">
+        <line class="yx-ray yx-ray--1" x1="14" y1="26" x2="19" y2="7"  stroke-width="5"/>
+        <line class="yx-ray yx-ray--2" x1="42" y1="45" x2="64" y2="20" stroke-width="5.5"/>
+        <line class="yx-ray yx-ray--3" x1="60" y1="69" x2="93" y2="61" stroke-width="5.5"/>
+        <line class="yx-ray yx-ray--4" x1="58" y1="90" x2="86" y2="88" stroke-width="5"/>
+      </g>
     </svg>
   </div>
+
+  <svg class="yx-waves" viewBox="0 0 1672 141" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="yxw-back" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#58aeef"/>
+        <stop offset="0.55" stop-color="#34a3f0"/>
+        <stop offset="1" stop-color="#14a2f4"/>
+      </linearGradient>
+      <linearGradient id="yxw-mid" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#0b64b6"/>
+        <stop offset="0.6" stop-color="#0a79cc"/>
+        <stop offset="1" stop-color="#0b62b2"/>
+      </linearGradient>
+      <linearGradient id="yxw-front" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#083b83"/>
+        <stop offset="1" stop-color="#0D1B3E"/>
+      </linearGradient>
+    </defs>
+    <path class="yx-waves__back"  d="M0,100 C250,80 450,92 650,78 C850,62 1000,52 1200,60 C1400,68 1560,40 1672,8 L1672,141 L0,141 Z"/>
+    <path class="yx-waves__crest yx-waves__crest--back" fill="none" vector-effect="non-scaling-stroke" d="M0,100 C250,80 450,92 650,78 C850,62 1000,52 1200,60 C1400,68 1560,40 1672,8"/>
+    <path class="yx-waves__mid"   d="M0,95 C300,88 520,115 760,105 C1000,95 1150,75 1350,88 C1500,98 1600,82 1672,60 L1672,141 L0,141 Z"/>
+    <path class="yx-waves__crest yx-waves__crest--mid" fill="none" vector-effect="non-scaling-stroke" d="M0,95 C300,88 520,115 760,105 C1000,95 1150,75 1350,88 C1500,98 1600,82 1672,60"/>
+    <path class="yx-waves__front" d="M0,78 C150,62 330,58 520,80 C700,100 900,118 1120,112 C1350,106 1520,92 1672,58 L1672,141 L0,141 Z"/>
+    <path class="yx-waves__crest yx-waves__crest--front" fill="none" vector-effect="non-scaling-stroke" d="M0,78 C150,62 330,58 520,80 C700,100 900,118 1120,112 C1350,106 1520,92 1672,58"/>
+  </svg>
 </section>
 
-
-<!-- ====================================================
-     MARQUEE — Valores de Marca
-===================================================== -->
-<div class="bg-navy border-y border-white/10 py-5 overflow-hidden" aria-hidden="true">
-  <div class="mq-brand-track">
-    <div class="flex items-center whitespace-nowrap">
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Alta Concentración</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Aroma Duradero</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Libre de Cloro</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Seguro para Bebés</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Seguro para Mascotas</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Envíos a todo el Perú</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Línea Hogar</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Línea Industrial</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Estándar Premium</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Fórmula Concentrada</span>
-      <span class="mq-brand-sep"></span>
-    </div>
-    <div class="flex items-center whitespace-nowrap" aria-hidden="true">
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Alta Concentración</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Aroma Duradero</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Libre de Cloro</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Seguro para Bebés</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Seguro para Mascotas</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Envíos a todo el Perú</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Línea Hogar</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Línea Industrial</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Estándar Premium</span>
-      <span class="mq-brand-sep"></span>
-      <span class="text-white/55 text-xs font-semibold uppercase tracking-widest px-2">Fórmula Concentrada</span>
-      <span class="mq-brand-sep"></span>
-    </div>
-  </div>
-</div>
 
 
 <!-- ====================================================
@@ -633,12 +643,15 @@
         <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-perfumado.webp"    alt="Desinfectante Perfumado"   loading="lazy" decoding="async"><figcaption>Desinfectante Perfumado</figcaption></figure>
       </div>
 
-      <!-- Personaje central — reemplazar el div por <img class="yana-orbital-character-img"> cuando esté lista la imagen -->
+      <!-- Personaje central: Yacu, la mascota (WebP sin fondo) -->
       <div class="yana-orbital-character" id="yana-character">
-        <div class="yana-orbital-placeholder" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-          <p>Personaje<br>próximamente</p>
-        </div>
+        <img class="yana-orbital-character-img"
+             src="assets/img/mascota/yacu.webp"
+             srcset="assets/img/mascota/yacu-640.webp 459w, assets/img/mascota/yacu.webp 860w"
+             sizes="(min-width: 1024px) 420px, 300px"
+             width="860" height="1200"
+             alt="Yacu, la mascota de YanaYacu Clean, con su arnés celeste"
+             loading="lazy" decoding="async" />
       </div>
     </div>
 
@@ -1183,6 +1196,7 @@
           <li><a href="/distribuidores/"   class="footer-link">Sé Distribuidor</a></li>
           <li><a href="#productos"         class="footer-link">Catálogo</a></li>
           <li><a href="#legal"          class="footer-link">Legal y Normativa</a></li>
+          <li><a href="https://rrhh.yanayacuclean.com" target="_blank" rel="noopener" class="footer-link">Intranet</a></li>
         </ul>
       </div>
 
@@ -1274,25 +1288,25 @@
 <!-- ====================================================
      SCRIPTS
 ===================================================== -->
+<!-- Hero: Motion (framer-motion vanilla build) + hero.js run first so the hero starts early -->
+<script defer src="assets/vendor/motion.min.js?v=190bf210"></script>
+<script defer src="assets/js/hero.js?v=cc1bd575"></script>
+
 <!-- Alpine.js -->
-<script defer src="assets/js/hero-slideshow.js?v=bc0f1b11"></script>
-<script defer src="assets/js/alpine-components.js?v=ce3fd008"></script>
+<script defer src="assets/js/alpine-components.js?v=bf65f257"></script>
 <script defer src="assets/vendor/alpine.min.js?v=c4f4ac5f"></script>
 
 <!-- GSAP -->
 <script defer src="assets/vendor/gsap.min.js?v=47da594c"></script>
 <script defer src="assets/vendor/ScrollTrigger.min.js?v=ba1fa78e"></script>
-<script defer src="assets/js/orbital.js?v=4d60ec1f"></script>
+<script defer src="assets/js/orbital.js?v=1d536c77"></script>
 
 <!-- Swiper -->
 <script defer src="assets/vendor/swiper-bundle.min.js?v=8d5d9d62"></script>
 
-<!-- tsParticles -->
-<script defer src="assets/vendor/tsparticles.bundle.min.js?v=78469b42"></script>
-
 <!-- Main JS -->
 <script defer src="assets/js/distributor-form.js?v=5c98d4bb"></script>
-<script defer src="assets/js/main.js?v=cd734ea4"></script>
+<script defer src="assets/js/main.js?v=70c2cc8e"></script>
 
 </body>
 </html>
