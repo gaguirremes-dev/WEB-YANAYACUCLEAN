@@ -41,8 +41,8 @@ assets/img/raw/
 
 # Libro de Reclamaciones (credenciales y registros)
 config.smtp.php
-reclamaciones/
-reclamaciones-data/
+/reclamaciones/
+/reclamaciones-data/
 
 # Agent/tooling state
 .atl/
