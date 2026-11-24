@@ -31,7 +31,7 @@ foreach ([
 const DIST_MAX_BODY = 16384;
 const DIST_MIN_AGE  = 4;
 const DIST_MAX_AGE  = 7200;
-const DIST_WHATSAPP_FALLBACK = 'https://wa.me/51974667498';
+const DIST_WHATSAPP_FALLBACK = 'https://wa.me/51992672660';
 
 require_once __DIR__ . '/lib/storage.php';
 require_once __DIR__ . '/lib/mailer.php';

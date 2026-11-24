@@ -9,7 +9,7 @@ const path = require('path');
 
 const DATA = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'products.json'), 'utf8'));
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const WA = 'https://wa.me/51974667498?text=';
+const WA = 'https://wa.me/51992672660?text=';
 const waLink = (name) => `${WA}${encodeURIComponent(`Hola, quiero información sobre ${name} YanaYacu Clean`)}`;
 const badge = (text, tone) => `<span class="yxs-badge is-${tone}">${esc(text)}</span>`;
 const thumbW = (v) => Math.round((v.w * 460) / v.h);

@@ -59,18 +59,6 @@
     }
   }
 
-  // Parallax sutil del mouse sobre el personaje central
-  let mx = 0, my = 0;
-  const character = document.getElementById('yana-character');
-  if (!reduce && character) {
-    stage.addEventListener('mousemove', e => {
-      const r = stage.getBoundingClientRect();
-      mx = (e.clientX - r.left) / r.width  - 0.5;
-      my = (e.clientY - r.top)  / r.height - 0.5;
-    }, { passive: true });
-    stage.addEventListener('mouseleave', () => { mx = 0; my = 0; });
-  }
-
   // Render estático si no hay GSAP
   if (!window.gsap) { render(); return; }
 
@@ -80,8 +68,5 @@
     const dt = t - lastT; lastT = t;
     idleAngle += dt * idleSpeed;
     render();
-    if (character && !reduce) {
-      character.style.translate = `${(mx * 14).toFixed(1)}px ${(my * 10).toFixed(1)}px`;
-    }
   });
 })();

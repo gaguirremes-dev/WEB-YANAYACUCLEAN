@@ -743,18 +743,21 @@ body {
 /* Personaje central */
 .yana-orbital-character {
   position: absolute;
-  bottom: -8%;
+  bottom: 14px; /* paws stay fully inside the stage */
   left: 50%;
   transform: translateX(-50%);
   height: clamp(300px, 44vh, 430px);
   z-index: 60; /* above every orbiting card (they use z-index 8-52) so Yacu is never dimmed */
 }
-.yana-orbital-character-img {
-  height: 100%; width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 -10px 40px rgba(77,166,214,.22)) drop-shadow(0 30px 45px rgba(0,0,0,.55));
+.yana-orbital-character-in {
+  position: relative; height: 100%; aspect-ratio: 860 / 1200;
   animation: yana-float 5.5s ease-in-out infinite;
   will-change: transform;
+}
+.yana-orbital-character-img {
+  display: block; height: 100%; width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 -10px 40px rgba(77,166,214,.22)) drop-shadow(0 30px 45px rgba(0,0,0,.55));
 }
 .yana-orbital-placeholder {
   height: 100%; width: auto;
@@ -788,16 +791,13 @@ body {
 }
 .yana-orbital-prod img {
   display: block; width: 100%;
-  aspect-ratio: 1; object-fit: contain;
-  border-radius: 16px;
-  border: 1px solid rgba(77,166,214,.18);
-  box-shadow: 0 22px 55px rgba(0,0,0,.55);
-  transition: box-shadow .25s ease;
-  background: linear-gradient(145deg, rgba(13,27,62,.95) 0%, rgba(26,47,94,.8) 100%);
-  padding: 12%;
+  aspect-ratio: 4 / 5; object-fit: contain;
+  /* Bottles float on their own (no card): soft depth shadow only */
+  filter: drop-shadow(0 22px 24px rgba(0,0,0,.5));
+  transition: filter .25s ease;
 }
 .yana-orbital-prod.is-front img {
-  box-shadow: 0 22px 60px rgba(77,166,214,.35), 0 0 0 1px rgba(77,166,214,.45);
+  filter: drop-shadow(0 22px 26px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(77,166,214,.45));
 }
 .yana-orbital-prod figcaption {
   position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%);
@@ -1102,6 +1102,7 @@ body {
   .product-card-3d.card-floating { animation: none !important; }
   .card-inner-3d { transition: none !important; }
   .yana-strip-inner { animation: none !important; }
+  .yana-orbital-character-in { animation: none !important; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
