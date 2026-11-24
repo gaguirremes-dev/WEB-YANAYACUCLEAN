@@ -78,17 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
 
-  /* ---- 4. Navbar shrink on scroll ---- */
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      navbar.classList.add('shadow-xl', 'py-2');
-      navbar.classList.remove('py-4');
-    } else {
-      navbar.classList.remove('shadow-xl', 'py-2');
-      navbar.classList.add('py-4');
-    }
-  });
+  /* ---- 4. Navbar shrink on scroll: handled by assets/js/nav-scroll.js (shared by every page) ---- */
 
   /* ---- 5. Catalog PDF: click-to-load ---- */
   (function initCatalogViewer() {

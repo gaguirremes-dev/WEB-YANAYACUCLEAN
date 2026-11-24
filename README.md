@@ -23,7 +23,10 @@ scripts/asset-version.js                                stamps ?v=<hash> on loca
 assets/docs/                                            downloadable catalog PDF
 assets/img/brand/                                       logos
 assets/img/certificaciones/                             ISO 14001 badge
-assets/img/productos/                                   product images (kebab-case ASCII names)
+assets/img/productos/                                   2026 product photos (transparent WebP, bbox-cropped; <name>.webp 900px tall + -thumb 460px)
+assets/img/posts/                                       2026 marketing posts 9:16 (720x1280 + -thumb 360)
+assets/video/                                           4 product videos (H.264, 540x960, no audio) + -poster.webp
+src/data/products.json                                  single source for the product explorer, spec table and video strip
 assets/img/hero/                                        hero splash background (1100/1920 WebP) and slides/ (product images trimmed to their alpha bounding box)
 assets/img/reclamaciones/                               claims book card and INDECOPI notice
 assets/img/originales/                                  local-only sources (gitignored)
@@ -142,3 +145,11 @@ retrieved 2026-11-20) to trust `CF-Connecting-IP` only from Cloudflare. There ar
 
 - `assets/docs/catalogo-yanayacu-clean.pdf` is about 3 MB (only loaded on click). Lossless optimization gains <1%; lossy image recompression reaches ~2.6 MB at visible quality cost, so it was kept as is. A real reduction needs the original design source exported at lower image resolution.
 - Vendor upgrades: `npm pack` the new version and copy the dist file into `assets/vendor/`, then `npm run build`.
+
+
+## Product blocks and section system (2026 redesign)
+
+- `src/data/products.json` drives three generated blocks (`scripts/render-products.js`): product explorer with photo selectors (`{{gen:products}}`), technical table (`{{gen:spec-table}}`) and video strip (`{{gen:videos}}`). In `index.html` they live between `<!-- gen:NAME:start/end -->` markers and are rewritten by `npm run build`; in `src/pages/*` use the tokens. Behavior: `assets/js/products.js` (selectors, 1 Lt./Galon toggle, click-to-play videos, no autoplay).
+- Styles for every non-hero section: `assets/css/sections.css` (`.yxs-*`, `.yxp-*`, `.yxt-*`, `.yxv-*`, `.yxc-*`); hero in `custom.css`, navbar in `nav.css`.
+- Mapping: product -> photo -> post -> video is the file name (`desinfectante-floral-1l|galon`, `detergente-floral`, `detergente-bebe`, `lavavajillas-limon`, `suavizante-bebe`); videos exist for desinfectante floral/lavanda/manzana and detergente floral. Originals live in `assets/img/originales/` (gitignored).
+- Anchors: `#productos` = product explorer, `#catalogo` = PDF viewer.

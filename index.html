@@ -97,7 +97,7 @@
   </script>
 
   <!-- LCP: hero product image -->
-  <link rel="preload" as="image" href="/assets/img/hero/slides/desinfectante-floral.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/assets/img/productos/desinfectante-floral-1l.webp" fetchpriority="high" />
 
   <!-- Fonts (self-hosted) -->
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-400-normal.woff2" crossorigin />
@@ -106,14 +106,15 @@
   <link rel="stylesheet" href="assets/css/fonts.css?v=07774ca3" />
 
   <!-- Compiled Tailwind -->
-  <link rel="stylesheet" href="assets/css/tailwind.css?v=a9f8f504" />
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=6656a486" />
 
   <!-- Hero boot: adds the yx-js class before first paint (tiny, same-origin, CSP-safe) -->
   <script src="assets/js/hero-boot.js?v=1c12b693"></script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/nav.css?v=261cb32b" />
-  <link rel="stylesheet" href="assets/css/custom.css?v=6f9398b5" />
+  <link rel="stylesheet" href="assets/css/nav.css?v=d9e93f54" />
+  <link rel="stylesheet" href="assets/css/custom.css?v=f80e94b9" />
+  <link rel="stylesheet" href="assets/css/sections.css?v=c760b4b9" />
 
   <!-- Swiper CSS: only the testimonials slider (below the fold) uses it, so it must not block rendering.
        main.js switches media to "all" (no inline handler: keeps the CSP strict). -->
@@ -173,7 +174,7 @@
           <ul class="yx-nav__card">
             <li><a href="/linea-hogar/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Línea hogar</a></li>
             <li><a href="/linea-industrial/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V10l5 3v-3l5 3V4h4v17"/></svg>Línea industrial</a></li>
-            <li><a href="/#productos" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
+            <li><a href="/#catalogo" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
           </ul>
         </div>
       </li>
@@ -247,7 +248,7 @@
         <div class="yx-nav__gin">
           <a href="/linea-hogar/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea hogar</a>
           <a href="/linea-industrial/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea industrial</a>
-          <a href="/#productos" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
+          <a href="/#catalogo" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
         </div>
       </div>
     </div>
@@ -338,14 +339,16 @@
       <div class="yx-stage" id="yxStage">
         <span class="yx-stage__shadow" aria-hidden="true"></span>
         <div class="yx-stage__float">
-          <img class="yx-slide is-active" src="assets/img/hero/slides/desinfectante-floral.webp" width="165" height="350" alt="Desinfectante Floral YanaYacu Clean" fetchpriority="high" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectante-lavanda.webp" width="168" height="379" alt="Desinfectante Lavanda YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectante-manzana.webp" width="153" height="324" alt="Desinfectante Manzana YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/detergente-liquido-floral.webp" width="450" height="970" alt="Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/detergente-liquido-bebe.webp" width="450" height="983" alt="Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/suavizante-bebe.webp" width="450" height="845" alt="Suavizante Bebé YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectantes.webp" width="234" height="279" alt="Línea Desinfectantes YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/hero/slides/desinfectante-perfumado.webp" width="305" height="1200" alt="Desinfectante Perfumado YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide is-active" src="assets/img/productos/desinfectante-floral-1l.webp" width="267" height="900" alt="Desinfectante Floral 1 Lt. YanaYacu Clean" fetchpriority="high" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-lavanda-1l.webp" width="268" height="900" alt="Desinfectante Lavanda 1 Lt. YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-manzana-1l.webp" width="260" height="900" alt="Desinfectante Manzana 1 Lt. YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/detergente-floral.webp" width="465" height="900" alt="Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/detergente-bebe.webp" width="464" height="900" alt="Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/lavavajillas-limon.webp" width="377" height="900" alt="Lavavajillas Limón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/suavizante-bebe.webp" width="524" height="900" alt="Suavizante Bebé 1 Gln. YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-floral-galon.webp" width="417" height="900" alt="Desinfectante Floral Galón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-lavanda-galon.webp" width="417" height="900" alt="Desinfectante Lavanda Galón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-manzana-galon.webp" width="430" height="900" alt="Desinfectante Manzana Galón YanaYacu Clean" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -411,83 +414,334 @@
 <!-- ====================================================
      BENEFICIOS
 ===================================================== -->
-<section id="beneficios" class="py-20 bg-white reveal-section">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-
-    <!-- Header editorial: título a la izquierda, texto a la derecha -->
-    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 reveal-item">
-      <div>
-        <span class="badge text-navy border-navy/20 bg-navy/5">Nuestros Pilares</span>
-        <h2 class="text-4xl sm:text-5xl font-black text-navy mt-4 leading-[1.1]">
-          ¿Por qué elegir<br/><span class="gradient-text">YanaYacu Clean?</span>
-        </h2>
-      </div>
-      <p class="text-gray-400 max-w-xs text-sm leading-relaxed lg:text-right lg:pb-2">
-        Tecnología de alta concentración para que hogar o negocio experimente la diferencia.
-      </p>
+<section id="beneficios" class="yxs reveal-section" aria-labelledby="beneficios-title">
+  <div class="yxs__in">
+    <div class="yxs-head reveal-item">
+      <span class="yxs-eyebrow">Nuestros pilares</span>
+      <h2 class="yxs-h2" id="beneficios-title">¿Por qué elegir <span class="yxs-accent">YanaYacu Clean?</span></h2>
+      <p class="yxs-lead">Tecnología de alta concentración para que hogar o negocio experimente la diferencia.</p>
     </div>
 
-    <!-- Feature rows — sin cards, solo líneas divisoras -->
-    <div class="grid lg:grid-cols-2 lg:gap-x-20">
+    <div class="yxs-feats">
+      <div class="yxs-feat reveal-item">
+        <span class="yxs-feat__num" aria-hidden="true">01</span>
+        <h3>Alta concentración</h3>
+        <p>Rinde hasta 3 veces más que los productos convencionales. Ahorras más en cada compra.</p>
+      </div>
+      <div class="yxs-feat reveal-item">
+        <span class="yxs-feat__num" aria-hidden="true">02</span>
+        <h3>Aroma duradero</h3>
+        <p>Fijadores de fragancia de larga duración. El aroma permanece horas después de limpiar.</p>
+      </div>
+      <div class="yxs-feat reveal-item">
+        <span class="yxs-feat__num" aria-hidden="true">03</span>
+        <h3>Libre de cloro</h3>
+        <p>Seguro para bebés, mascotas y entornos sensibles. Desinfección sin riesgos químicos agresivos.</p>
+      </div>
+      <div class="yxs-feat reveal-item">
+        <span class="yxs-feat__num" aria-hidden="true">04</span>
+        <h3>Estándar industrial</h3>
+        <p>La misma fórmula que usan restaurantes, hoteles y lavanderías top del Perú.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Fila 1 -->
-      <div class="reveal-item flex gap-5 items-start py-8 border-t border-gray-100">
-        <div class="shrink-0 w-11 h-11 bg-brand/10 rounded-xl flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline justify-between mb-1.5">
-            <h3 class="font-black text-navy text-lg">Alta Concentración</h3>
-            <span class="text-brand font-black text-xl ml-3">3×</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed">Rinde hasta 3 veces más que los productos convencionales. Ahorras más en cada compra.</p>
+
+<!-- ====================================================
+     PRODUCTOS: selector con fotografías (generated: src/data/products.json -> scripts/render-products.js)
+===================================================== -->
+<section id="productos" class="yxs yxs--tint reveal-section" aria-labelledby="productos-title">
+  <div class="yxs__in">
+    <div class="yxs-head yxs-head--center reveal-item">
+      <span class="yxs-eyebrow">Nuestra línea</span>
+      <h2 class="yxs-h2" id="productos-title">Elige tu producto, <span class="yxs-accent">mira sus detalles</span></h2>
+      <p class="yxs-lead">Selecciona una fotografía para ver el producto, su publicación oficial y sus presentaciones.</p>
+    </div>
+    <div class="reveal-item">
+<!-- gen:products:start -->
+<div class="yxp" data-explorer>
+    <div class="yxp__tabs" role="group" aria-label="Elige un producto"><button type="button" class="yxp__tab" data-target="desinfectante-floral" aria-controls="px-desinfectante-floral" aria-pressed="true"><span class="yxp__thumb is-floral"><img src="/assets/img/productos/desinfectante-floral-1l-thumb.webp" alt="" width="136" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Desinfectante Floral</span></button><button type="button" class="yxp__tab" data-target="desinfectante-lavanda" aria-controls="px-desinfectante-lavanda" aria-pressed="false"><span class="yxp__thumb is-lavanda"><img src="/assets/img/productos/desinfectante-lavanda-1l-thumb.webp" alt="" width="137" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Desinfectante Lavanda</span></button><button type="button" class="yxp__tab" data-target="desinfectante-manzana" aria-controls="px-desinfectante-manzana" aria-pressed="false"><span class="yxp__thumb is-manzana"><img src="/assets/img/productos/desinfectante-manzana-1l-thumb.webp" alt="" width="133" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Desinfectante Manzana</span></button><button type="button" class="yxp__tab" data-target="detergente-floral" aria-controls="px-detergente-floral" aria-pressed="false"><span class="yxp__thumb is-floral"><img src="/assets/img/productos/detergente-floral-thumb.webp" alt="" width="238" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Detergente Floral</span></button><button type="button" class="yxp__tab" data-target="detergente-bebe" aria-controls="px-detergente-bebe" aria-pressed="false"><span class="yxp__thumb is-bebe"><img src="/assets/img/productos/detergente-bebe-thumb.webp" alt="" width="237" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Detergente Bebé</span></button><button type="button" class="yxp__tab" data-target="lavavajillas-limon" aria-controls="px-lavavajillas-limon" aria-pressed="false"><span class="yxp__thumb is-limon"><img src="/assets/img/productos/lavavajillas-limon-thumb.webp" alt="" width="193" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Lavavajillas Limón</span></button><button type="button" class="yxp__tab" data-target="suavizante-bebe" aria-controls="px-suavizante-bebe" aria-pressed="false"><span class="yxp__thumb is-bebe"><img src="/assets/img/productos/suavizante-bebe-thumb.webp" alt="" width="268" height="460" loading="lazy" decoding="async" /></span><span class="yxp__tabname">Suavizante Bebé</span></button></div>
+    <div class="yxp__panels">
+    <div class="yxp__panel is-floral" id="px-desinfectante-floral" data-panel="desinfectante-floral" role="group" aria-label="Desinfectante Perfumado Floral">
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/desinfectante-floral.webp" srcset="/assets/img/posts/desinfectante-floral-thumb.webp 360w, /assets/img/posts/desinfectante-floral.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Desinfectante Perfumado Floral YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/desinfectante-floral-1l.webp" width="267" height="900" alt="Desinfectante Perfumado Floral 1 Lt. YanaYacu Clean" data-size="1l" data-variant-show="1l" loading="lazy" decoding="async" /><img src="/assets/img/productos/desinfectante-floral-galon.webp" width="417" height="900" alt="Desinfectante Perfumado Floral Galón YanaYacu Clean" data-size="galon" data-variant-show="galon" loading="lazy" decoding="async" hidden /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-hogar">Línea Hogar</span><span class="yxs-badge is-floral">Aroma Floral</span></div>
+        <h3 class="yxp__name">Desinfectante Perfumado Floral</h3>
+        <p class="yxp__tagline">“Cada espacio merece un toque especial.”</p>
+        <p class="yxp__desc">Desinfección libre de cloro con aroma floral y fragancia prolongada.</p>
+        <div><span class="yxp__label" id="seg-desinfectante-floral">Presentación</span><div class="yxp__seg" role="group" aria-labelledby="seg-desinfectante-floral"><button type="button" data-variant="1l" aria-pressed="true">1 Lt.</button><button type="button" data-variant="galon" aria-pressed="false">Galón</button></div></div>
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Hogar</dd></div>
+          <div><dt>Aroma</dt><dd>Floral</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="1l">1 Lt.</dd><dd data-variant-show="galon" hidden>Galón</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="1l">Botella</dd><dd data-variant-show="galon" hidden>Galón con asa</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Desinfectante%20Perfumado%20Floral%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
         </div>
       </div>
-
-      <!-- Fila 2 -->
-      <div class="reveal-item flex gap-5 items-start py-8 border-t border-gray-100">
-        <div class="shrink-0 w-11 h-11 bg-sky/15 rounded-xl flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <h3 class="font-black text-navy text-lg mb-1.5">Aroma Duradero</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Fijadores de fragancia de larga duración. El aroma permanece horas después de limpiar.</p>
+    </div>
+    <div class="yxp__panel is-lavanda" id="px-desinfectante-lavanda" data-panel="desinfectante-lavanda" role="group" aria-label="Desinfectante Perfumado Lavanda" hidden>
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/desinfectante-lavanda.webp" srcset="/assets/img/posts/desinfectante-lavanda-thumb.webp 360w, /assets/img/posts/desinfectante-lavanda.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Desinfectante Perfumado Lavanda YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/desinfectante-lavanda-1l.webp" width="268" height="900" alt="Desinfectante Perfumado Lavanda 1 Lt. YanaYacu Clean" data-size="1l" data-variant-show="1l" loading="lazy" decoding="async" /><img src="/assets/img/productos/desinfectante-lavanda-galon.webp" width="417" height="900" alt="Desinfectante Perfumado Lavanda Galón YanaYacu Clean" data-size="galon" data-variant-show="galon" loading="lazy" decoding="async" hidden /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-hogar">Línea Hogar</span><span class="yxs-badge is-lavanda">Aroma Lavanda</span></div>
+        <h3 class="yxp__name">Desinfectante Perfumado Lavanda</h3>
+        <p class="yxp__tagline">“Respira calma, vive la frescura.”</p>
+        <p class="yxp__desc">Desinfección libre de cloro con aroma a lavanda y fragancia prolongada.</p>
+        <div><span class="yxp__label" id="seg-desinfectante-lavanda">Presentación</span><div class="yxp__seg" role="group" aria-labelledby="seg-desinfectante-lavanda"><button type="button" data-variant="1l" aria-pressed="true">1 Lt.</button><button type="button" data-variant="galon" aria-pressed="false">Galón</button></div></div>
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Hogar</dd></div>
+          <div><dt>Aroma</dt><dd>Lavanda</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="1l">1 Lt.</dd><dd data-variant-show="galon" hidden>Galón</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="1l">Botella</dd><dd data-variant-show="galon" hidden>Galón con asa</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Desinfectante%20Perfumado%20Lavanda%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
         </div>
       </div>
-
-      <!-- Fila 3 -->
-      <div class="reveal-item flex gap-5 items-start py-8 border-t border-gray-100">
-        <div class="shrink-0 w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline justify-between mb-1.5">
-            <h3 class="font-black text-navy text-lg">Libre de Cloro</h3>
-            <span class="text-green-500 font-black text-xl ml-3">0%</span>
-          </div>
-          <p class="text-gray-400 text-sm leading-relaxed">Seguro para bebés, mascotas y entornos sensibles. Desinfección sin riesgos químicos agresivos.</p>
+    </div>
+    <div class="yxp__panel is-manzana" id="px-desinfectante-manzana" data-panel="desinfectante-manzana" role="group" aria-label="Desinfectante Perfumado Manzana" hidden>
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/desinfectante-manzana.webp" srcset="/assets/img/posts/desinfectante-manzana-thumb.webp 360w, /assets/img/posts/desinfectante-manzana.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Desinfectante Perfumado Manzana YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/desinfectante-manzana-1l.webp" width="260" height="900" alt="Desinfectante Perfumado Manzana 1 Lt. YanaYacu Clean" data-size="1l" data-variant-show="1l" loading="lazy" decoding="async" /><img src="/assets/img/productos/desinfectante-manzana-galon.webp" width="430" height="900" alt="Desinfectante Perfumado Manzana Galón YanaYacu Clean" data-size="galon" data-variant-show="galon" loading="lazy" decoding="async" hidden /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-hogar">Línea Hogar</span><span class="yxs-badge is-manzana">Aroma Manzana</span></div>
+        <h3 class="yxp__name">Desinfectante Perfumado Manzana</h3>
+        <p class="yxp__tagline">“La frescura que revitaliza cada espacio.”</p>
+        <p class="yxp__desc">Desinfección libre de cloro con aroma a manzana y fragancia prolongada.</p>
+        <div><span class="yxp__label" id="seg-desinfectante-manzana">Presentación</span><div class="yxp__seg" role="group" aria-labelledby="seg-desinfectante-manzana"><button type="button" data-variant="1l" aria-pressed="true">1 Lt.</button><button type="button" data-variant="galon" aria-pressed="false">Galón</button></div></div>
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Hogar</dd></div>
+          <div><dt>Aroma</dt><dd>Manzana</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="1l">1 Lt.</dd><dd data-variant-show="galon" hidden>Galón</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="1l">Botella</dd><dd data-variant-show="galon" hidden>Galón con asa</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Desinfectante%20Perfumado%20Manzana%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
         </div>
       </div>
-
-      <!-- Fila 4 -->
-      <div class="reveal-item flex gap-5 items-start py-8 border-t border-gray-100">
-        <div class="shrink-0 w-11 h-11 bg-navy/8 rounded-xl flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-          </svg>
-        </div>
-        <div class="flex-1">
-          <h3 class="font-black text-navy text-lg mb-1.5">Estándar Industrial</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">La misma fórmula que usan restaurantes, hoteles y lavanderías top del Perú.</p>
+    </div>
+    <div class="yxp__panel is-floral" id="px-detergente-floral" data-panel="detergente-floral" role="group" aria-label="Detergente Líquido Floral" hidden>
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/detergente-floral.webp" srcset="/assets/img/posts/detergente-floral-thumb.webp 360w, /assets/img/posts/detergente-floral.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/detergente-floral.webp" width="465" height="900" alt="Detergente Líquido Floral 1 Lt. YanaYacu Clean" data-size="1l" data-variant-show="1l" loading="lazy" decoding="async" /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-hogar">Línea Hogar</span><span class="yxs-badge is-floral">Aroma Floral</span></div>
+        <h3 class="yxp__name">Detergente Líquido Floral</h3>
+        <p class="yxp__tagline">“Cuidado y frescura para cada prenda.”</p>
+        <p class="yxp__desc">Alta concentración y aroma floral duradero para tu ropa.</p>
+        
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Hogar</dd></div>
+          <div><dt>Aroma</dt><dd>Floral</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="1l">1 Lt.</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="1l">Botella con asa</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Detergente%20L%C3%ADquido%20Floral%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
         </div>
       </div>
+    </div>
+    <div class="yxp__panel is-bebe" id="px-detergente-bebe" data-panel="detergente-bebe" role="group" aria-label="Detergente Líquido Bebé" hidden>
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/detergente-bebe.webp" srcset="/assets/img/posts/detergente-bebe-thumb.webp 360w, /assets/img/posts/detergente-bebe.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/detergente-bebe.webp" width="464" height="900" alt="Detergente Líquido Bebé 1 Lt. YanaYacu Clean" data-size="1l" data-variant-show="1l" loading="lazy" decoding="async" /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-bebe">Línea Bebé</span><span class="yxs-badge is-bebe">Aroma Bebé</span></div>
+        <h3 class="yxp__name">Detergente Líquido Bebé</h3>
+        <p class="yxp__tagline">“Limpieza eficaz con el cuidado que tu ropa necesita.”</p>
+        <p class="yxp__desc">De la línea bebé, libre de cloro, para la ropa de los más pequeños.</p>
+        
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Bebé</dd></div>
+          <div><dt>Aroma</dt><dd>Bebé</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="1l">1 Lt.</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="1l">Botella con asa</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Detergente%20L%C3%ADquido%20Beb%C3%A9%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
+        </div>
+      </div>
+    </div>
+    <div class="yxp__panel is-limon" id="px-lavavajillas-limon" data-panel="lavavajillas-limon" role="group" aria-label="Lavavajillas Líquido Concentrado" hidden>
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/lavavajillas-limon.webp" srcset="/assets/img/posts/lavavajillas-limon-thumb.webp 360w, /assets/img/posts/lavavajillas-limon.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Lavavajillas Líquido Concentrado YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/lavavajillas-limon.webp" width="377" height="900" alt="Lavavajillas Líquido Concentrado 1 Lt. YanaYacu Clean" data-size="1l" data-variant-show="1l" loading="lazy" decoding="async" /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-hogar">Línea Hogar</span><span class="yxs-badge is-limon">Aroma Limón</span></div>
+        <h3 class="yxp__name">Lavavajillas Líquido Concentrado</h3>
+        <p class="yxp__tagline">“Porque una cocina limpia se siente diferente.”</p>
+        <p class="yxp__desc">Lavavajillas líquido concentrado con aroma a limón. Rinde 5 veces más.</p>
+        
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Hogar</dd></div>
+          <div><dt>Aroma</dt><dd>Limón</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="1l">1 Lt.</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="1l">Dispensador con bomba</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Lavavajillas%20L%C3%ADquido%20Concentrado%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
+        </div>
+      </div>
+    </div>
+    <div class="yxp__panel is-bebe" id="px-suavizante-bebe" data-panel="suavizante-bebe" role="group" aria-label="Suavizante Bebé" hidden>
+      <div class="yxp__media">
+        <figure class="yxp__post"><img src="/assets/img/posts/suavizante-bebe.webp" srcset="/assets/img/posts/suavizante-bebe-thumb.webp 360w, /assets/img/posts/suavizante-bebe.webp 720w" sizes="(min-width: 900px) 300px, 50vw" width="720" height="1280" alt="Publicación Suavizante Bebé YanaYacu Clean" loading="lazy" decoding="async" /></figure>
+        <div class="yxp__bottle"><img src="/assets/img/productos/suavizante-bebe.webp" width="524" height="900" alt="Suavizante Bebé 1 Gln. YanaYacu Clean" data-size="gln" data-variant-show="gln" loading="lazy" decoding="async" /></div>
+      </div>
+      <div class="yxp__info">
+        <div class="yxp__badges"><span class="yxs-badge is-bebe">Línea Bebé</span><span class="yxs-badge is-bebe">Aroma Bebé</span></div>
+        <h3 class="yxp__name">Suavizante Bebé</h3>
+        <p class="yxp__tagline">“El toque de suavidad que tu ropa merece.”</p>
+        <p class="yxp__desc">Suavizante de la línea bebé con aroma duradero, para dejar la ropa suave.</p>
+        
+        <dl class="yxp__dl">
+          <div><dt>Línea</dt><dd>Bebé</dd></div>
+          <div><dt>Aroma</dt><dd>Bebé</dd></div>
+          <div><dt>Contenido neto</dt><dd data-variant-show="gln">1 Gln.</dd></div>
+          <div><dt>Presentación</dt><dd data-variant-show="gln">Galón con asa</dd></div>
+        </dl>
+        <div class="yxs-cta-row">
+          <a class="yxs-btn yxs-btn--primary" href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20Suavizante%20Beb%C3%A9%20YanaYacu%20Clean" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          <a class="yxs-link" href="/assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+<!-- gen:products:end -->
+    </div>
+    <p class="yxs-links reveal-item">
+      <a href="/linea-hogar/" class="yxs-link">Ver línea hogar →</a>
+      <a href="/linea-industrial/" class="yxs-link">Ver línea industrial →</a>
+    </p>
+  </div>
+</section>
 
+
+<!-- ====================================================
+     LÍNEA COMPLETA (post + texto)
+===================================================== -->
+<section class="yxs reveal-section" aria-labelledby="completa-title">
+  <div class="yxs__in">
+    <div class="yxs-split yxs-split--rev">
+      <div>
+        <div class="reveal-item">
+          <span class="yxs-eyebrow">Línea completa</span>
+          <h2 class="yxs-h2" id="completa-title">Diseñados para cuidar <span class="yxs-accent">lo que más importa</span></h2>
+          <p class="yxs-lead">Desinfectantes, detergentes, lavavajillas y suavizante con la misma fórmula de alta concentración: para tu ropa, tu cocina y cada espacio de tu hogar.</p>
+        </div>
+        <dl class="yxs-stats reveal-item">
+          <div><dd>7</dd><dt>productos en la línea</dt></div>
+          <div><dd>3</dd><dt>aromas de desinfectante</dt></div>
+          <div><dd>2</dd><dt>presentaciones: 1 Lt. y galón</dt></div>
+        </dl>
+        <div class="yxs-cta-row reveal-item">
+          <a href="https://wa.me/51974667498?text=Hola%2C%20me%20interesa%20conocer%20sus%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9" target="_blank" rel="noopener" class="yxs-btn yxs-btn--primary">Hacer un pedido</a>
+          <a href="/linea-hogar/" class="yxs-link">Conocer la línea hogar →</a>
+        </div>
+      </div>
+      <figure class="yxs-photo yxs-photo--post reveal-item">
+        <img src="assets/img/posts/linea-completa.webp" srcset="assets/img/posts/linea-completa-thumb.webp 360w, assets/img/posts/linea-completa.webp 720w" sizes="(min-width: 900px) 384px, 90vw" width="720" height="1280" alt="Línea completa YanaYacu Clean: desinfectantes, detergentes, lavavajillas y suavizante sobre una mesada de cocina" loading="lazy" decoding="async" />
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     FICHA TÉCNICA
+===================================================== -->
+<section id="fichas" class="yxs yxs--tint reveal-section" aria-labelledby="fichas-title">
+  <div class="yxs__in">
+    <div class="yxs-head reveal-item">
+      <span class="yxs-eyebrow">Ficha técnica</span>
+      <h2 class="yxs-h2" id="fichas-title">Presentaciones y <span class="yxs-accent">contenido neto</span></h2>
+      <p class="yxs-lead">Todas las referencias de la línea, con su aroma y presentación.</p>
+    </div>
+    <div class="reveal-item">
+<!-- gen:spec-table:start -->
+<div class="yxt-wrap" tabindex="0" role="region" aria-label="Tabla de presentaciones y contenido neto">
+    <table class="yxt">
+      <caption class="sr-only">Presentaciones de la línea YanaYacu Clean</caption>
+      <thead><tr><th scope="col">Producto</th><th scope="col">Línea</th><th scope="col">Aroma</th><th scope="col">Presentación</th><th scope="col">Contenido neto</th></tr></thead>
+      <tbody>
+      <tr><th scope="row">Desinfectante Perfumado Floral</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-floral">Floral</span></td><td data-label="Presentación">Botella</td><td data-label="Contenido neto"><strong>1 Lt.</strong></td></tr>
+      <tr><th scope="row">Desinfectante Perfumado Floral</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-floral">Floral</span></td><td data-label="Presentación">Galón con asa</td><td data-label="Contenido neto"><strong>Galón</strong></td></tr>
+      <tr><th scope="row">Desinfectante Perfumado Lavanda</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-lavanda">Lavanda</span></td><td data-label="Presentación">Botella</td><td data-label="Contenido neto"><strong>1 Lt.</strong></td></tr>
+      <tr><th scope="row">Desinfectante Perfumado Lavanda</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-lavanda">Lavanda</span></td><td data-label="Presentación">Galón con asa</td><td data-label="Contenido neto"><strong>Galón</strong></td></tr>
+      <tr><th scope="row">Desinfectante Perfumado Manzana</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-manzana">Manzana</span></td><td data-label="Presentación">Botella</td><td data-label="Contenido neto"><strong>1 Lt.</strong></td></tr>
+      <tr><th scope="row">Desinfectante Perfumado Manzana</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-manzana">Manzana</span></td><td data-label="Presentación">Galón con asa</td><td data-label="Contenido neto"><strong>Galón</strong></td></tr>
+      <tr><th scope="row">Detergente Líquido Floral</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-floral">Floral</span></td><td data-label="Presentación">Botella con asa</td><td data-label="Contenido neto"><strong>1 Lt.</strong></td></tr>
+      <tr><th scope="row">Detergente Líquido Bebé</th><td data-label="Línea"><span class="yxs-badge is-bebe">Bebé</span></td><td data-label="Aroma"><span class="yxs-badge is-bebe">Bebé</span></td><td data-label="Presentación">Botella con asa</td><td data-label="Contenido neto"><strong>1 Lt.</strong></td></tr>
+      <tr><th scope="row">Lavavajillas Líquido Concentrado</th><td data-label="Línea"><span class="yxs-badge is-hogar">Hogar</span></td><td data-label="Aroma"><span class="yxs-badge is-limon">Limón</span></td><td data-label="Presentación">Dispensador con bomba</td><td data-label="Contenido neto"><strong>1 Lt.</strong></td></tr>
+      <tr><th scope="row">Suavizante Bebé</th><td data-label="Línea"><span class="yxs-badge is-bebe">Bebé</span></td><td data-label="Aroma"><span class="yxs-badge is-bebe">Bebé</span></td><td data-label="Presentación">Galón con asa</td><td data-label="Contenido neto"><strong>1 Gln.</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+<!-- gen:spec-table:end -->
+      <p class="yxt-note">Datos según las etiquetas y publicaciones oficiales de cada producto. Para otras presentaciones, consúltanos por WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     VIDEOS
+===================================================== -->
+<section id="videos" class="yxs reveal-section" aria-labelledby="videos-title">
+  <div class="yxs__in">
+    <div class="yxs-head yxs-head--center reveal-item">
+      <span class="yxs-eyebrow">Videos</span>
+      <h2 class="yxs-h2" id="videos-title">Mira cómo <span class="yxs-accent">se ve</span></h2>
+      <p class="yxs-lead">Toca un video para reproducirlo. Se descargan solo cuando los abres.</p>
+    </div>
+    <div class="reveal-item">
+<!-- gen:videos:start -->
+<div class="yxv">
+    <figure class="yxv__item">
+      <div class="yxv__frame" data-video>
+        <video muted playsinline loop preload="metadata" poster="/assets/video/desinfectante-floral-poster.webp" width="540" height="960" aria-label="Video Desinfectante Floral YanaYacu Clean" tabindex="-1"><source src="/assets/video/desinfectante-floral.mp4" type="video/mp4" /></video>
+      </div>
+      <figcaption class="yxv__cap">Desinfectante Floral <span class="yxs-badge is-floral">Floral</span></figcaption>
+    </figure>
+    <figure class="yxv__item">
+      <div class="yxv__frame" data-video>
+        <video muted playsinline loop preload="metadata" poster="/assets/video/desinfectante-lavanda-poster.webp" width="540" height="960" aria-label="Video Desinfectante Lavanda YanaYacu Clean" tabindex="-1"><source src="/assets/video/desinfectante-lavanda.mp4" type="video/mp4" /></video>
+      </div>
+      <figcaption class="yxv__cap">Desinfectante Lavanda <span class="yxs-badge is-lavanda">Lavanda</span></figcaption>
+    </figure>
+    <figure class="yxv__item">
+      <div class="yxv__frame" data-video>
+        <video muted playsinline loop preload="metadata" poster="/assets/video/desinfectante-manzana-poster.webp" width="540" height="960" aria-label="Video Desinfectante Manzana YanaYacu Clean" tabindex="-1"><source src="/assets/video/desinfectante-manzana.mp4" type="video/mp4" /></video>
+      </div>
+      <figcaption class="yxv__cap">Desinfectante Manzana <span class="yxs-badge is-manzana">Manzana</span></figcaption>
+    </figure>
+    <figure class="yxv__item">
+      <div class="yxv__frame" data-video>
+        <video muted playsinline loop preload="metadata" poster="/assets/video/detergente-floral-poster.webp" width="540" height="960" aria-label="Video Detergente Líquido Floral YanaYacu Clean" tabindex="-1"><source src="/assets/video/detergente-floral.mp4" type="video/mp4" /></video>
+      </div>
+      <figcaption class="yxv__cap">Detergente Líquido Floral <span class="yxs-badge is-floral">Floral</span></figcaption>
+    </figure>
+  </div>
+<!-- gen:videos:end -->
     </div>
   </div>
 </section>
@@ -496,120 +750,47 @@
 <!-- ====================================================
      CATÁLOGO DIGITAL PDF
 ===================================================== -->
-<section id="productos" class="catalog-section reveal-section">
-
-  <!-- Fondo decorativo -->
-  <div class="catalog-bg-deco" aria-hidden="true">
-    <div class="catalog-bg-orb catalog-bg-orb-1"></div>
-    <div class="catalog-bg-orb catalog-bg-orb-2"></div>
-    <div class="catalog-bg-grid"></div>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-
-    <!-- Header -->
-    <div class="text-center mb-14 reveal-item">
-      <span class="badge">Catálogo Oficial</span>
-      <h2 class="text-3xl sm:text-5xl font-black text-white mt-5 mb-4 leading-tight">
-        Toda la Línea <span class="gradient-text">YanaYacu Clean</span>
-      </h2>
-      <p class="text-white/50 max-w-lg mx-auto text-lg">
-        Explora nuestro catálogo completo. Navega, amplía y descárgalo cuando quieras.
-      </p>
-      <a href="/linea-hogar/" class="inline-flex items-center gap-1 mt-5 text-sky hover:text-white font-semibold transition-colors">Ver línea hogar →</a>
-    </div>
-
-    <!-- Layout: visor + info lateral -->
-    <div class="catalog-layout reveal-item">
-
-      <!-- Panel izquierdo: info + CTAs -->
-      <div class="catalog-info">
-
-        <!-- Icono animado -->
-        <div class="catalog-icon-wrap">
-          <div class="catalog-icon-ring"></div>
-          <svg class="catalog-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
-          </svg>
-        </div>
-
-        <h3 class="catalog-info-title">Catálogo de Productos</h3>
-        <p class="catalog-info-sub">Descubre todos nuestros productos con sus características, presentaciones y usos recomendados.</p>
-
-        <!-- Chips de datos -->
-        <ul class="catalog-chips">
-          <li class="catalog-chip">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
-            Línea Hogar completa
-          </li>
-          <li class="catalog-chip">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
-            Línea Industrial
-          </li>
-          <li class="catalog-chip">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
-            Línea Bebé
-          </li>
-          <li class="catalog-chip">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
-            Precios y presentaciones
-          </li>
+<section id="catalogo" class="yxs yxs--tint reveal-section" aria-labelledby="catalogo-title">
+  <div class="yxs__in">
+    <div class="yxc">
+      <div class="reveal-item">
+        <span class="yxs-eyebrow">Catálogo oficial</span>
+        <h2 class="yxs-h2" id="catalogo-title">Toda la línea en <span class="yxs-accent">un solo catálogo</span></h2>
+        <p class="yxs-lead">Descubre todos nuestros productos con sus características, presentaciones y usos recomendados. Navega, amplía y descárgalo cuando quieras.</p>
+        <ul class="yxs-list">
+          <li>Línea Hogar <span>completa</span></li>
+          <li>Línea Industrial <span>galoneros y bidones</span></li>
+          <li>Línea Bebé <span>detergente y suavizante</span></li>
+          <li>Precios y presentaciones <span>al día</span></li>
         </ul>
-
-        <!-- Botones CTA -->
-        <div class="catalog-ctas">
-          <a href="assets/docs/catalogo-yanayacu-clean.pdf" download
-             class="catalog-btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/></svg>
-            Descargar PDF
-          </a>
-          <a href="https://wa.me/51974667498?text=Hola%2C%20vi%20el%20cat%C3%A1logo%20y%20quiero%20hacer%20un%20pedido%20de%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9"
-             target="_blank" rel="noopener"
-             class="catalog-btn-wa">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Pedir por WhatsApp
-          </a>
+        <div class="yxs-cta-row">
+          <a href="assets/docs/catalogo-yanayacu-clean.pdf" download class="yxs-btn yxs-btn--primary">Descargar PDF</a>
+          <a href="https://wa.me/51974667498?text=Hola%2C%20vi%20el%20cat%C3%A1logo%20y%20quiero%20hacer%20un%20pedido%20de%20productos%20YanaYacu%20Clean%20%F0%9F%A7%B9" target="_blank" rel="noopener" class="yxs-btn yxs-btn--ghost">Pedir por WhatsApp</a>
         </div>
-
       </div>
 
-      <!-- Panel derecho: visor PDF -->
-      <div class="catalog-viewer-wrap">
-
-        <!-- Barra superior del "dispositivo" -->
-        <div class="catalog-device-bar">
-          <div class="catalog-device-dots">
-            <span></span><span></span><span></span>
-          </div>
-          <span class="catalog-device-label">Catálogo YanaYacu Clean.pdf</span>
-          <a href="assets/docs/catalogo-yanayacu-clean.pdf" target="_blank" rel="noopener"
-             class="catalog-device-open" title="Abrir en pantalla completa">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M13 4.5a2.5 2.5 0 11.702 1.737L6.97 9.604a2.519 2.519 0 010 .792l6.733 3.367a2.5 2.5 0 11-.671 1.341l-6.733-3.367a2.5 2.5 0 110-3.474l6.733-3.366A2.52 2.52 0 0113 4.5z"/></svg>
-            Pantalla completa
-          </a>
+      <div class="yxc__viewer reveal-item">
+        <div class="yxc__bar">
+          <span>Catálogo YanaYacu Clean.pdf</span>
+          <a href="assets/docs/catalogo-yanayacu-clean.pdf" target="_blank" rel="noopener">Pantalla completa</a>
         </div>
-
         <!-- Visor PDF: click-to-load, the 3 MB PDF is only fetched on demand.
              NOTE: recompressing assets/docs/catalogo-yanayacu-clean.pdf is a manual step. -->
-        <div class="catalog-iframe-wrap">
-          <div class="catalog-poster" id="catalogPoster">
-            <p class="catalog-poster-title">Catálogo de Productos</p>
+        <div class="yxc__frame">
+          <div class="yxc__poster" id="catalogPoster">
+            <p class="yxc__poster-title">Catálogo de Productos</p>
             <p>Míralo aquí mismo o descárgalo en PDF.</p>
-            <button type="button" id="catalogLoadBtn" class="catalog-poster-btn">Ver catálogo</button>
-            <a href="assets/docs/catalogo-yanayacu-clean.pdf" download class="catalog-poster-link">Descargar catálogo (PDF)</a>
+            <button type="button" id="catalogLoadBtn" class="yxs-btn yxs-btn--primary">Ver catálogo</button>
+            <a href="assets/docs/catalogo-yanayacu-clean.pdf" download>Descargar catálogo (PDF)</a>
           </div>
-          <iframe
-            id="catalogFrame"
+          <iframe id="catalogFrame"
             data-src="assets/docs/catalogo-yanayacu-clean.pdf#toolbar=1&amp;navpanes=0&amp;view=FitH"
-            class="catalog-iframe"
             title="Catálogo YanaYacu Clean"
             aria-label="Catálogo de productos YanaYacu Clean en PDF"
             hidden></iframe>
         </div>
-
       </div>
     </div>
-
   </div>
 </section>
 
@@ -634,13 +815,13 @@
 
       <!-- Productos en órbita -->
       <div class="yana-orbital-orbit" id="yana-orbit">
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-floral.webp"       alt="Desinfectante Floral"       loading="lazy" decoding="async"><figcaption>Desinfectante Floral</figcaption></figure>
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-lavanda.webp"      alt="Desinfectante Lavanda"      loading="lazy" decoding="async"><figcaption>Desinfectante Lavanda</figcaption></figure>
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-manzana.webp"      alt="Desinfectante Manzana"      loading="lazy" decoding="async"><figcaption>Desinfectante Manzana</figcaption></figure>
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/detergente-liquido-floral.webp" alt="Detergente Líquido Floral" loading="lazy" decoding="async"><figcaption>Detergente Floral</figcaption></figure>
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/detergente-liquido-bebe.webp" alt="Detergente Líquido Bebé" loading="lazy" decoding="async"><figcaption>Detergente Bebé</figcaption></figure>
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/suavizante-bebe.webp"       alt="Suavizante Bebé"           loading="lazy" decoding="async"><figcaption>Suavizante Bebé</figcaption></figure>
-        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-perfumado.webp"    alt="Desinfectante Perfumado"   loading="lazy" decoding="async"><figcaption>Desinfectante Perfumado</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-floral-1l-thumb.webp"       alt="Desinfectante Floral"       loading="lazy" decoding="async"><figcaption>Desinfectante Floral</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-lavanda-1l-thumb.webp"      alt="Desinfectante Lavanda"      loading="lazy" decoding="async"><figcaption>Desinfectante Lavanda</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/desinfectante-manzana-1l-thumb.webp"      alt="Desinfectante Manzana"      loading="lazy" decoding="async"><figcaption>Desinfectante Manzana</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/detergente-floral-thumb.webp" alt="Detergente Líquido Floral" loading="lazy" decoding="async"><figcaption>Detergente Floral</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/detergente-bebe-thumb.webp" alt="Detergente Líquido Bebé" loading="lazy" decoding="async"><figcaption>Detergente Bebé</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/suavizante-bebe-thumb.webp"       alt="Suavizante Bebé"           loading="lazy" decoding="async"><figcaption>Suavizante Bebé</figcaption></figure>
+        <figure class="yana-orbital-prod"><img src="assets/img/productos/lavavajillas-limon-thumb.webp" alt="Lavavajillas Limón" loading="lazy" decoding="async"><figcaption>Lavavajillas Limón</figcaption></figure>
       </div>
 
       <!-- Personaje central: Yacu, la mascota (WebP sin fondo) -->
@@ -662,72 +843,37 @@
 <!-- ====================================================
      DESINFECCIÓN ESPECIALIZADA
 ===================================================== -->
-<section class="py-20 bg-navy reveal-section">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-
-    <div class="text-center mb-16 reveal-item">
-      <span class="badge">Línea Especializada</span>
-      <h2 class="text-4xl sm:text-5xl font-black text-white mt-4 leading-[1.1]">
-        Desinfección <span class="gradient-text">Libre de Cloro</span>
-      </h2>
-      <p class="text-white/45 max-w-md mx-auto mt-4">
-        Protección profunda sin químicos agresivos, para los entornos más sensibles.
-      </p>
+<section class="yxs reveal-section" aria-labelledby="desinfeccion-title">
+  <div class="yxs__in">
+    <div class="yxs-head yxs-head--center reveal-item">
+      <span class="yxs-eyebrow">Línea especializada</span>
+      <h2 class="yxs-h2" id="desinfeccion-title">Desinfección <span class="yxs-accent">libre de cloro</span></h2>
+      <p class="yxs-lead">Protección profunda sin químicos agresivos, para los entornos más sensibles.</p>
     </div>
 
-    <!-- Sin cards — split limpio con divisor central -->
-    <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/10">
-
-      <!-- Bebés -->
-      <div class="reveal-item flex flex-col gap-5 py-10 md:py-0 md:pr-14">
-        <span class="text-5xl">👶</span>
-        <div>
-          <h3 class="text-white font-black text-2xl mb-3">Área de Bebés</h3>
-          <p class="text-white/55 leading-relaxed mb-6">
-            Elimina el 99.9% de virus y bacterias sin cloro ni componentes agresivos.
-            Seguro para superficies en contacto directo con recién nacidos.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-8">
-            <span class="text-xs bg-green-500/15 text-green-400 border border-green-500/20 px-3 py-1 rounded-full font-semibold">Sin cloro</span>
-            <span class="text-xs bg-sky/10 text-sky border border-sky/20 px-3 py-1 rounded-full font-semibold">Dermatológicamente seguro</span>
-            <span class="text-xs bg-white/8 text-white/55 border border-white/10 px-3 py-1 rounded-full font-semibold">Hipoalergénico</span>
-          </div>
-        </div>
-        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20desinfectante%20para%20beb%C3%A9s%20YanaYacu%20Clean"
-           target="_blank" rel="noopener"
-           class="self-start inline-flex items-center gap-2 border border-white/20 hover:border-brand hover:bg-brand text-white text-sm font-semibold px-6 py-3 rounded-full transition-all duration-200">
-          Consultar por WhatsApp
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
+    <div class="yxs-cols">
+      <div class="reveal-item">
+        <span class="yxs-feat__num" aria-hidden="true">01</span>
+        <h3>Área de bebés</h3>
+        <p>Elimina el 99.9% de virus y bacterias sin cloro ni componentes agresivos. Seguro para superficies en contacto directo con recién nacidos.</p>
+        <ul class="yxs-tags">
+          <li class="yxs-badge is-manzana">Sin cloro</li>
+          <li class="yxs-badge is-bebe">Dermatológicamente seguro</li>
+          <li class="yxs-badge is-hogar">Hipoalergénico</li>
+        </ul>
+        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20desinfectante%20para%20beb%C3%A9s%20YanaYacu%20Clean" target="_blank" rel="noopener" class="yxs-link">Consultar por WhatsApp →</a>
       </div>
-
-      <!-- Mascotas -->
-      <div class="reveal-item flex flex-col gap-5 py-10 md:py-0 md:pl-14">
-        <span class="text-5xl">🐾</span>
-        <div>
-          <h3 class="text-white font-black text-2xl mb-3">Hogares con Mascotas</h3>
-          <p class="text-white/55 leading-relaxed mb-6">
-            Elimina bacterias, hongos y malos olores asociados a mascotas.
-            No tóxico para perros ni gatos. Seguro al secarse.
-          </p>
-          <div class="flex flex-wrap gap-2 mb-8">
-            <span class="text-xs bg-green-500/15 text-green-400 border border-green-500/20 px-3 py-1 rounded-full font-semibold">No tóxico</span>
-            <span class="text-xs bg-sky/10 text-sky border border-sky/20 px-3 py-1 rounded-full font-semibold">Elimina olores</span>
-            <span class="text-xs bg-white/8 text-white/55 border border-white/10 px-3 py-1 rounded-full font-semibold">Seguro al secar</span>
-          </div>
-        </div>
-        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20desinfectante%20para%20mascotas%20YanaYacu%20Clean"
-           target="_blank" rel="noopener"
-           class="self-start inline-flex items-center gap-2 border border-white/20 hover:border-brand hover:bg-brand text-white text-sm font-semibold px-6 py-3 rounded-full transition-all duration-200">
-          Consultar por WhatsApp
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-          </svg>
-        </a>
+      <div class="reveal-item">
+        <span class="yxs-feat__num" aria-hidden="true">02</span>
+        <h3>Hogares con mascotas</h3>
+        <p>Elimina bacterias, hongos y malos olores asociados a mascotas. No tóxico para perros ni gatos. Seguro al secarse.</p>
+        <ul class="yxs-tags">
+          <li class="yxs-badge is-manzana">No tóxico</li>
+          <li class="yxs-badge is-bebe">Elimina olores</li>
+          <li class="yxs-badge is-hogar">Seguro al secar</li>
+        </ul>
+        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20desinfectante%20para%20mascotas%20YanaYacu%20Clean" target="_blank" rel="noopener" class="yxs-link">Consultar por WhatsApp →</a>
       </div>
-
     </div>
   </div>
 </section>
@@ -736,85 +882,33 @@
 <!-- ====================================================
      LÍNEA INDUSTRIAL B2B
 ===================================================== -->
-<section id="industrial" class="py-20 bg-white reveal-section">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <!-- Texto -->
+<section id="industrial" class="yxs yxs--tint reveal-section" aria-labelledby="industrial-title">
+  <div class="yxs__in">
+    <div class="yxs-split">
       <div>
-        <div class="reveal-item mb-6">
-          <span class="badge">Línea Industrial</span>
+        <div class="reveal-item">
+          <span class="yxs-eyebrow">Línea industrial</span>
+          <h2 class="yxs-h2" id="industrial-title">Galoneros y bidones <span class="yxs-accent">para tu negocio</span></h2>
+          <p class="yxs-lead">La misma fórmula de alta concentración en presentaciones industriales (5L, 10L, 20L). Optimiza costos con mayor rendimiento por litro para operaciones de cualquier tamaño.</p>
         </div>
-        <h2 class="reveal-item text-3xl sm:text-4xl font-black text-navy mb-6">
-          Galoneros y Bidones<br/>
-          <span class="gradient-text">para tu Negocio</span>
-        </h2>
-        <p class="reveal-item text-gray-500 leading-relaxed mb-8">
-          La misma fórmula de alta concentración en presentaciones industriales (5L, 10L, 20L).
-          Optimiza costos con mayor rendimiento por litro para operaciones de cualquier tamaño.
-        </p>
-
-        <!-- Sectores — lista limpia, sin cards -->
-        <div class="reveal-item flex flex-wrap items-center gap-x-5 gap-y-3 mb-8">
-          <span class="text-gray-500 text-sm font-medium">🍽️ Restaurantes</span>
-          <span class="text-gray-200 select-none">·</span>
-          <span class="text-gray-500 text-sm font-medium">🏨 Hoteles</span>
-          <span class="text-gray-200 select-none">·</span>
-          <span class="text-gray-500 text-sm font-medium">🏢 Oficinas</span>
-          <span class="text-gray-200 select-none">·</span>
-          <span class="text-gray-500 text-sm font-medium">🏫 Centros Educativos</span>
-          <span class="text-gray-200 select-none">·</span>
-          <span class="text-gray-500 text-sm font-medium">👔 Lavanderías</span>
-          <span class="text-gray-200 select-none">·</span>
-          <span class="text-gray-500 text-sm font-medium">🏥 Clínicas</span>
-        </div>
-
-        <div class="reveal-item flex flex-wrap items-center gap-x-6 gap-y-4">
-          <a href="#distribuidores"
-             class="inline-flex items-center gap-2 bg-navy hover:bg-brand text-white font-bold px-8 py-4 rounded-full transition-all duration-300">
-            Solicitar Cotización Mayorista
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </a>
-          <a href="/linea-industrial/" class="text-brand hover:text-navy font-semibold transition-colors">Ver línea industrial →</a>
+        <ul class="yxs-list reveal-item">
+          <li>Restaurantes</li>
+          <li>Hoteles</li>
+          <li>Oficinas</li>
+          <li>Centros educativos</li>
+          <li>Lavanderías</li>
+          <li>Clínicas</li>
+        </ul>
+        <div class="yxs-cta-row reveal-item">
+          <a href="#distribuidores" class="yxs-btn yxs-btn--primary">Solicitar cotización mayorista</a>
+          <a href="/linea-industrial/" class="yxs-link">Ver línea industrial →</a>
         </div>
       </div>
-
-      <!-- Visual galonero placeholder -->
-      <div class="reveal-item flex justify-center">
-        <div class="relative">
-          <!-- Galonero placeholder -->
-          <div class="w-52 h-72 bg-gradient-to-b from-brand to-navy rounded-2xl shadow-2xl flex flex-col items-center justify-center border border-sky/20 relative overflow-hidden">
-            <!-- Brillo -->
-            <div class="absolute top-0 left-0 w-1/2 h-full bg-white/5 rounded-r-full"></div>
-            <!-- Asa -->
-            <div class="absolute top-6 right-0 w-8 h-12 border-4 border-sky/40 rounded-r-full translate-x-4"></div>
-            <!-- Tapa -->
-            <div class="absolute top-0 w-16 h-6 bg-navy border border-sky/30 rounded-b-lg"></div>
-            <!-- Label -->
-            <div class="mt-8 px-6 text-center">
-              <img src="assets/img/brand/logo-original.webp" alt="YanaYacu Clean" width="400" height="400" class="w-20 h-auto object-contain rounded mb-3 mx-auto opacity-90" />
-              <p class="text-white font-bold text-sm">Línea Industrial</p>
-              <p class="text-sky text-xs mt-1">Alta Concentración</p>
-            </div>
-            <!-- Presentaciones -->
-            <div class="absolute bottom-6 flex gap-2">
-              <span class="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full">5L</span>
-              <span class="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full">10L</span>
-              <span class="text-xs bg-white/10 text-white px-2 py-0.5 rounded-full">20L</span>
-            </div>
-          </div>
-          <!-- Glow -->
-          <div class="absolute inset-0 bg-brand/15 blur-3xl rounded-full -z-10 scale-110"></div>
-          <!-- Badge -->
-          <div class="absolute -top-3 -right-3 bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
-            Mayor Rendimiento
-          </div>
-        </div>
+      <div class="yxs-hero__media yxs-hero__media--trio reveal-item">
+        <img src="assets/img/productos/desinfectante-floral-galon.webp" width="417" height="900" alt="Desinfectante Floral en galón YanaYacu Clean" loading="lazy" decoding="async" />
+        <img src="assets/img/productos/desinfectante-lavanda-galon.webp" width="417" height="900" alt="Desinfectante Lavanda en galón YanaYacu Clean" loading="lazy" decoding="async" />
+        <img src="assets/img/productos/desinfectante-manzana-galon.webp" width="430" height="900" alt="Desinfectante Manzana en galón YanaYacu Clean" loading="lazy" decoding="async" />
       </div>
-
     </div>
   </div>
 </section>
@@ -823,50 +917,24 @@
 <!-- ====================================================
      CAPTACIÓN B2B — DISTRIBUIDORES
 ===================================================== -->
-<section id="distribuidores" class="py-20 bg-gradient-to-br from-navy via-[#1a2f5e] to-navy reveal-section">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+<section id="distribuidores" class="yxs reveal-section" aria-labelledby="dist-title">
+  <div class="yxs__in yxs__in--narrow">
 
-    <div class="text-center mb-12 reveal-item">
-      <span class="badge">Socios Comerciales</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-white mt-4 mb-4">
-        ¿Deseas distribuir<br/>
-        <span class="gradient-text">YanaYacu Clean</span>?
-      </h2>
-      <p class="text-white/60 max-w-xl mx-auto">
-        Sé aliado de la marca de limpieza que está transformando hogares y
-        comercios peruanos. Accede a precios de fábrica y condiciones exclusivas.
-      </p>
-      <a href="/distribuidores/" class="inline-flex items-center gap-1 mt-5 text-sky hover:text-white font-semibold transition-colors">Conocer el programa →</a>
+    <div class="yxs-head yxs-head--center reveal-item">
+      <span class="yxs-eyebrow">Socios comerciales</span>
+      <h2 class="yxs-h2" id="dist-title">¿Deseas distribuir <span class="yxs-accent">YanaYacu Clean?</span></h2>
+      <p class="yxs-lead">Sé aliado de la marca de limpieza que está transformando hogares y comercios peruanos. Accede a precios de fábrica y condiciones exclusivas.</p>
+      <p class="yxs-links"><a href="/distribuidores/" class="yxs-link">Conocer el programa →</a></p>
     </div>
 
-    <!-- Beneficios distribuidores — fila con divisores, sin cajas -->
-    <div class="reveal-item grid sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10 border-t border-b border-white/10 mb-12">
-      <div class="flex items-center gap-4 py-6 sm:px-8 first:pl-0">
-        <span class="text-2xl shrink-0">💰</span>
-        <div>
-          <p class="text-white font-bold text-sm">Precios de Fábrica</p>
-          <p class="text-white/45 text-xs mt-0.5">Margen competitivo para tu negocio</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-4 py-6 sm:px-8">
-        <span class="text-2xl shrink-0">📦</span>
-        <div>
-          <p class="text-white font-bold text-sm">Promociones por Volumen</p>
-          <p class="text-white/45 text-xs mt-0.5">Mejor precio a mayor cantidad</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-4 py-6 sm:px-8">
-        <span class="text-2xl shrink-0">🚀</span>
-        <div>
-          <p class="text-white font-bold text-sm">Pack de Inicio</p>
-          <p class="text-white/45 text-xs mt-0.5">Alta rentabilidad desde el primer pedido</p>
-        </div>
-      </div>
+    <div class="yxs-benefits reveal-item">
+      <div><b aria-hidden="true">01</b><p><strong>Precios de fábrica</strong><span>Margen competitivo para tu negocio</span></p></div>
+      <div><b aria-hidden="true">02</b><p><strong>Promociones por volumen</strong><span>Mejor precio a mayor cantidad</span></p></div>
+      <div><b aria-hidden="true">03</b><p><strong>Pack de inicio</strong><span>Alta rentabilidad desde el primer pedido</span></p></div>
     </div>
 
-    <!-- Formulario B2B -->
-    <div class="reveal-item bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10">
-
+    <!-- Formulario B2B (the dark panel is the one call-to-action card of this section) -->
+    <div class="yxs-panel reveal-item">
       <h3 class="text-white font-bold text-xl mb-6">Solicitar Catálogo y Condiciones Mayoristas</h3>
 
       <noscript>
@@ -953,7 +1021,6 @@
           También escríbenos por WhatsApp
         </a>
       </div>
-
     </div>
   </div>
 </section>
@@ -962,81 +1029,47 @@
 <!-- ====================================================
      TESTIMONIOS
 ===================================================== -->
-<section class="py-20 bg-gray-50 reveal-section">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+<section class="yxs yxs--tint reveal-section" aria-labelledby="testimonios-title">
+  <div class="yxs__in">
 
-    <div class="text-center mb-12 reveal-item">
-      <span class="badge">Testimonios</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-navy mt-4">
-        Lo que dicen nuestros <span class="gradient-text">clientes</span>
-      </h2>
+    <div class="yxs-head yxs-head--center reveal-item">
+      <span class="yxs-eyebrow">Testimonios</span>
+      <h2 class="yxs-h2" id="testimonios-title">Lo que dicen nuestros <span class="yxs-accent">clientes</span></h2>
     </div>
 
     <div class="swiper reveal-item" id="swiper-testimonios">
       <div class="swiper-wrapper pb-12">
 
         <div class="swiper-slide h-auto">
-          <div class="testimonial-card">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">M</div>
-              <div>
-                <p class="font-bold text-navy">María G.</p>
-                <p class="text-gray-400 text-xs">Lima</p>
-              </div>
-              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
-            </div>
-            <p class="text-gray-600 text-sm leading-relaxed italic">
-              "El lavavajillas es increíble. Un chorrito alcanza para lavar toda la vajilla del día y el aroma dura horas en la cocina. Ya no compro otro."
-            </p>
-          </div>
+          <figure class="yxq" style="margin:0">
+            <span class="yxq__mark" aria-hidden="true">“</span>
+            <blockquote>El lavavajillas es increíble. Un chorrito alcanza para lavar toda la vajilla del día y el aroma dura horas en la cocina. Ya no compro otro.</blockquote>
+            <figcaption><span class="yxq__av" aria-hidden="true">M</span><span><strong>María G.</strong><small>Lima</small></span><span class="yxq__stars" aria-label="5 de 5 estrellas">★★★★★</span></figcaption>
+          </figure>
         </div>
 
         <div class="swiper-slide h-auto">
-          <div class="testimonial-card">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-sky rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">C</div>
-              <div>
-                <p class="font-bold text-navy">Carlos T.</p>
-                <p class="text-gray-400 text-xs">Chiclayo</p>
-              </div>
-              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
-            </div>
-            <p class="text-gray-600 text-sm leading-relaxed italic">
-              "Tengo un restaurante y los galoneros me salen mucho más económicos. El rendimiento es notablemente superior a lo que usábamos antes."
-            </p>
-          </div>
+          <figure class="yxq" style="margin:0">
+            <span class="yxq__mark" aria-hidden="true">“</span>
+            <blockquote>Tengo un restaurante y los galoneros me salen mucho más económicos. El rendimiento es notablemente superior a lo que usábamos antes.</blockquote>
+            <figcaption><span class="yxq__av" aria-hidden="true">C</span><span><strong>Carlos T.</strong><small>Chiclayo</small></span><span class="yxq__stars" aria-label="5 de 5 estrellas">★★★★★</span></figcaption>
+          </figure>
         </div>
 
         <div class="swiper-slide h-auto">
-          <div class="testimonial-card">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-navy rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">L</div>
-              <div>
-                <p class="font-bold text-navy">Lucía P.</p>
-                <p class="text-gray-400 text-xs">Trujillo</p>
-              </div>
-              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
-            </div>
-            <p class="text-gray-600 text-sm leading-relaxed italic">
-              "Tengo un bebé de 8 meses y el desinfectante libre de cloro me da tranquilidad. Limpia bien y no hay olor fuerte. Lo recomiendo a todas las mamás."
-            </p>
-          </div>
+          <figure class="yxq" style="margin:0">
+            <span class="yxq__mark" aria-hidden="true">“</span>
+            <blockquote>Tengo un bebé de 8 meses y el desinfectante libre de cloro me da tranquilidad. Limpia bien y no hay olor fuerte. Lo recomiendo a todas las mamás.</blockquote>
+            <figcaption><span class="yxq__av" aria-hidden="true">L</span><span><strong>Lucía P.</strong><small>Trujillo</small></span><span class="yxq__stars" aria-label="5 de 5 estrellas">★★★★★</span></figcaption>
+          </figure>
         </div>
 
         <div class="swiper-slide h-auto">
-          <div class="testimonial-card">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-brand/70 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">R</div>
-              <div>
-                <p class="font-bold text-navy">Rosa M.</p>
-                <p class="text-gray-400 text-xs">Lima Norte</p>
-              </div>
-              <div class="ml-auto text-yellow-400 text-sm">★★★★★</div>
-            </div>
-            <p class="text-gray-600 text-sm leading-relaxed italic">
-              "El limpiador de pisos deja un aroma que toda la visita nota. Mi casa siempre huele increíble y ya no necesito usar otro producto."
-            </p>
-          </div>
+          <figure class="yxq" style="margin:0">
+            <span class="yxq__mark" aria-hidden="true">“</span>
+            <blockquote>El limpiador de pisos deja un aroma que toda la visita nota. Mi casa siempre huele increíble y ya no necesito usar otro producto.</blockquote>
+            <figcaption><span class="yxq__av" aria-hidden="true">R</span><span><strong>Rosa M.</strong><small>Lima Norte</small></span><span class="yxq__stars" aria-label="5 de 5 estrellas">★★★★★</span></figcaption>
+          </figure>
         </div>
 
       </div>
@@ -1050,15 +1083,13 @@
 <!-- ====================================================
      LEGAL
 ===================================================== -->
-<section id="legal" class="py-20 bg-white reveal-section">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+<section id="legal" class="yxs reveal-section" aria-labelledby="legal-title">
+  <div class="yxs__in yxs__in--narrow">
 
-    <div class="text-center mb-12 reveal-item">
-      <span class="badge">Transparencia</span>
-      <h2 class="text-3xl sm:text-4xl font-black text-navy mt-4 mb-4">
-        Información <span class="gradient-text">Legal</span>
-      </h2>
-      <p class="text-gray-500">Cumplimos con todas las normativas peruanas vigentes.</p>
+    <div class="yxs-head yxs-head--center reveal-item">
+      <span class="yxs-eyebrow">Transparencia</span>
+      <h2 class="yxs-h2" id="legal-title">Información <span class="yxs-accent">legal</span></h2>
+      <p class="yxs-lead">Cumplimos con todas las normativas peruanas vigentes.</p>
     </div>
 
     <div class="reveal-item space-y-2">
@@ -1149,7 +1180,6 @@
   </div>
 </section>
 
-
 <!-- ====================================================
      FOOTER
 ===================================================== -->
@@ -1194,7 +1224,7 @@
           <li><a href="/linea-hogar/"      class="footer-link">Línea Hogar</a></li>
           <li><a href="/linea-industrial/" class="footer-link">Línea Industrial</a></li>
           <li><a href="/distribuidores/"   class="footer-link">Sé Distribuidor</a></li>
-          <li><a href="#productos"         class="footer-link">Catálogo</a></li>
+          <li><a href="#catalogo"          class="footer-link">Catálogo</a></li>
           <li><a href="#legal"          class="footer-link">Legal y Normativa</a></li>
           <li><a href="https://rrhh.yanayacuclean.com" target="_blank" rel="noopener" class="footer-link">Intranet</a></li>
         </ul>
@@ -1290,7 +1320,7 @@
 ===================================================== -->
 <!-- Hero: Motion (framer-motion vanilla build) + hero.js run first so the hero starts early -->
 <script defer src="assets/vendor/motion.min.js?v=190bf210"></script>
-<script defer src="assets/js/hero.js?v=cc1bd575"></script>
+<script defer src="assets/js/hero.js?v=69fcf0a0"></script>
 
 <!-- Alpine.js -->
 <script defer src="assets/js/alpine-components.js?v=bf65f257"></script>
@@ -1305,8 +1335,10 @@
 <script defer src="assets/vendor/swiper-bundle.min.js?v=8d5d9d62"></script>
 
 <!-- Main JS -->
+<script defer src="assets/js/nav-scroll.js?v=18a6319e"></script>
+<script defer src="assets/js/products.js?v=f19acb33"></script>
 <script defer src="assets/js/distributor-form.js?v=5c98d4bb"></script>
-<script defer src="assets/js/main.js?v=70c2cc8e"></script>
+<script defer src="assets/js/main.js?v=693f83a2"></script>
 
 </body>
 </html>

@@ -1146,7 +1146,7 @@ body {
   --yx-blue: #1470CC;
   --yx-nav: 90px;                              /* fixed navbar (logo 3.4rem + padding) */
   --yx-wave: clamp(64px, 8.4vw, 132px);        /* bottom wave divider */
-  --yx-stage-h: clamp(300px, 78vw, 440px);     /* product stage height (mobile first) */
+  --yx-stage-h: clamp(340px, 88vw, 500px);     /* product stage height (mobile first) */
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -1345,7 +1345,9 @@ body {
   object-position: 50% 100%; /* common baseline: all bottles stand on the floor */
   opacity: 0;
   pointer-events: none;
-  -webkit-box-reflect: below -3px linear-gradient(transparent 68%, rgba(255, 255, 255, 0.22));
+  /* Base dissolves into the water so the bottle sits in the splash instead of on top of it. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 90%, rgba(0, 0, 0, 0) 99%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 90%, rgba(0, 0, 0, 0) 99%);
 }
 .yx-slide.is-leaving { opacity: 1; z-index: 1; }
 .yx-slide.is-active { opacity: 1; z-index: 2; }
@@ -1370,12 +1372,12 @@ body {
   .yx-iso { top: calc(var(--yx-nav) + 16px); width: clamp(230px, 18vw, 330px); }
 }
 
-/* ---- Yacu (mascot): bottom left, standing on the navy wave crest (z-index above the waves) ---- */
+/* ---- Yacu (mascot): bottom left, sitting ON the wave: he stands slightly behind the front wave (z-index 2 < waves 3) so the crest covers his boots ---- */
 .yx-mascot {
   position: absolute;
   left: clamp(14px, 2vw, 36px);
-  bottom: 0;
-  z-index: 4;
+  bottom: calc(var(--yx-wave) * 0.46);
+  z-index: 2;
   height: clamp(170px, 44vw, 340px);
   aspect-ratio: 860 / 1200;
   width: auto;
@@ -1414,7 +1416,7 @@ body {
      The copy rises by half of --yx-dog-room and Yacu gets that room; screens without slack get no shift
      and a small Yacu, so he never reaches the buttons and the hero never grows past the viewport. */
   .yx-hero { --yx-dog-room: clamp(0px, min(calc(100svh - 301px - 33vw), calc((100vw - 1280px) * 0.9)), 150px); } /* none below 1280px: the narrower copy column wraps to more lines */
-  .yx-mascot { height: clamp(108px, calc(var(--yx-dog-room) * 1.25 + 100px), 330px); }
+  .yx-mascot { height: clamp(88px, calc(var(--yx-dog-room) * 1.25 + 100px - var(--yx-wave) * 0.46), 330px); }
 }
 /* wide screens: the left margin beside the copy is free, so Yacu can be bigger */
 @media (min-width: 1700px) {
@@ -1467,7 +1469,7 @@ body {
 
 @media (min-width: 900px) {
   .yx-hero {
-    --yx-stage-h: clamp(330px, 34vw, 560px);
+    --yx-stage-h: clamp(380px, 40vw, 660px);
     /* Fill the first screen exactly so the waves sit flush with the bottom edge of the viewport */
     min-height: max(720px, 100svh);
   }

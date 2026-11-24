@@ -13,9 +13,10 @@
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-400-normal.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-700-normal.woff2" crossorigin />
   <link rel="stylesheet" href="assets/css/fonts.css?v=07774ca3" />
-  <link rel="stylesheet" href="assets/css/tailwind.css?v=a9f8f504" />
-  <link rel="stylesheet" href="assets/css/nav.css?v=261cb32b" />
-  <link rel="stylesheet" href="assets/css/custom.css?v=6f9398b5" />
+  <link rel="stylesheet" href="assets/css/tailwind.css?v=6656a486" />
+  <link rel="stylesheet" href="assets/css/nav.css?v=d9e93f54" />
+  <link rel="stylesheet" href="assets/css/custom.css?v=f80e94b9" />
+  <link rel="stylesheet" href="assets/css/sections.css?v=c760b4b9" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 </head>
 <body class="font-sans bg-white text-navy">
@@ -63,7 +64,7 @@
           <ul class="yx-nav__card">
             <li><a href="/linea-hogar/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Línea hogar</a></li>
             <li><a href="/linea-industrial/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V10l5 3v-3l5 3V4h4v17"/></svg>Línea industrial</a></li>
-            <li><a href="/#productos" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
+            <li><a href="/#catalogo" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
           </ul>
         </div>
       </li>
@@ -137,7 +138,7 @@
         <div class="yx-nav__gin">
           <a href="/linea-hogar/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea hogar</a>
           <a href="/linea-industrial/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea industrial</a>
-          <a href="/#productos" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
+          <a href="/#catalogo" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
         </div>
       </div>
     </div>
@@ -173,9 +174,10 @@
 <!-- nav:end -->
 
 <!-- Contenido -->
-<main class="max-w-3xl mx-auto px-4 sm:px-6 pt-36 sm:pt-40 pb-16">
+<main class="yxl max-w-3xl mx-auto px-4 sm:px-6 pt-36 sm:pt-40 pb-16">
 
-  <h1 class="text-3xl sm:text-4xl font-black text-navy mb-3">Términos y Condiciones</h1>
+  <span class="yxs-eyebrow">Legal</span>
+  <h1 class="yxs-h2 mb-3">Términos y <span class="yxs-accent">Condiciones</span></h1>
   <p class="text-gray-400 text-sm mb-10">Última actualización: 16 de mayo de 2026</p>
 
   <div class="space-y-8 text-gray-600 leading-relaxed">
@@ -290,7 +292,7 @@
 <footer class="bg-navy py-8 mt-16">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
     <p class="text-white/70 text-xs">© 2026 YANAYACU CLEAN — Todos los derechos reservados.</p>
-    <div class="flex justify-center gap-6 mt-3">
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-3">
       <a href="index.html"      class="footer-link text-xs">Inicio</a>
       <a href="/linea-hogar/" class="footer-link text-xs">Línea hogar</a>
       <a href="/linea-industrial/" class="footer-link text-xs">Línea industrial</a>
@@ -303,6 +305,6 @@
 <!-- Navbar: Alpine (CSP build) + scroll shrink. Components file must come first. -->
 <script defer src="assets/js/alpine-components.js?v=bf65f257"></script>
 <script defer src="assets/vendor/alpine.min.js?v=c4f4ac5f"></script>
-<script defer src="assets/js/nav-scroll.js?v=8d2d93b7"></script>
+<script defer src="assets/js/nav-scroll.js?v=18a6319e"></script>
 </body>
 </html>

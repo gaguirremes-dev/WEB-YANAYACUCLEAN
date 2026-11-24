@@ -1,0 +1,84 @@
+{
+  "note": "Single source for the product explorer, the spec table and the video strip (rendered by scripts/build-pages.js). Facts (aroma, net content, taglines) come from the 2026 marketing posts; do not add specs that are not on the posts or the site.",
+  "products": [
+    {
+      "id": "desinfectante-floral", "family": "Desinfectante Perfumado", "name": "Desinfectante Perfumado Floral", "short": "Desinfectante Floral",
+      "line": "Hogar", "aroma": "Floral", "tone": "floral",
+      "tagline": "Cada espacio merece un toque especial.",
+      "desc": "Desinfección libre de cloro con aroma floral y fragancia prolongada.",
+      "post": "desinfectante-floral",
+      "variants": [
+        { "key": "1l", "label": "1 Lt.", "img": "desinfectante-floral-1l", "w": 267, "h": 900, "net": "1 Lt.", "pres": "Botella" },
+        { "key": "galon", "label": "Galón", "img": "desinfectante-floral-galon", "w": 417, "h": 900, "net": "Galón", "pres": "Galón con asa" }
+      ]
+    },
+    {
+      "id": "desinfectante-lavanda", "family": "Desinfectante Perfumado", "name": "Desinfectante Perfumado Lavanda", "short": "Desinfectante Lavanda",
+      "line": "Hogar", "aroma": "Lavanda", "tone": "lavanda",
+      "tagline": "Respira calma, vive la frescura.",
+      "desc": "Desinfección libre de cloro con aroma a lavanda y fragancia prolongada.",
+      "post": "desinfectante-lavanda",
+      "variants": [
+        { "key": "1l", "label": "1 Lt.", "img": "desinfectante-lavanda-1l", "w": 268, "h": 900, "net": "1 Lt.", "pres": "Botella" },
+        { "key": "galon", "label": "Galón", "img": "desinfectante-lavanda-galon", "w": 417, "h": 900, "net": "Galón", "pres": "Galón con asa" }
+      ]
+    },
+    {
+      "id": "desinfectante-manzana", "family": "Desinfectante Perfumado", "name": "Desinfectante Perfumado Manzana", "short": "Desinfectante Manzana",
+      "line": "Hogar", "aroma": "Manzana", "tone": "manzana",
+      "tagline": "La frescura que revitaliza cada espacio.",
+      "desc": "Desinfección libre de cloro con aroma a manzana y fragancia prolongada.",
+      "post": "desinfectante-manzana",
+      "variants": [
+        { "key": "1l", "label": "1 Lt.", "img": "desinfectante-manzana-1l", "w": 260, "h": 900, "net": "1 Lt.", "pres": "Botella" },
+        { "key": "galon", "label": "Galón", "img": "desinfectante-manzana-galon", "w": 430, "h": 900, "net": "Galón", "pres": "Galón con asa" }
+      ]
+    },
+    {
+      "id": "detergente-floral", "family": "Detergente Líquido", "name": "Detergente Líquido Floral", "short": "Detergente Floral",
+      "line": "Hogar", "aroma": "Floral", "tone": "floral",
+      "tagline": "Cuidado y frescura para cada prenda.",
+      "desc": "Alta concentración y aroma floral duradero para tu ropa.",
+      "post": "detergente-floral",
+      "variants": [
+        { "key": "1l", "label": "1 Lt.", "img": "detergente-floral", "w": 465, "h": 900, "net": "1 Lt.", "pres": "Botella con asa" }
+      ]
+    },
+    {
+      "id": "detergente-bebe", "family": "Detergente Líquido", "name": "Detergente Líquido Bebé", "short": "Detergente Bebé",
+      "line": "Bebé", "aroma": "Bebé", "tone": "bebe",
+      "tagline": "Limpieza eficaz con el cuidado que tu ropa necesita.",
+      "desc": "De la línea bebé, libre de cloro, para la ropa de los más pequeños.",
+      "post": "detergente-bebe",
+      "variants": [
+        { "key": "1l", "label": "1 Lt.", "img": "detergente-bebe", "w": 464, "h": 900, "net": "1 Lt.", "pres": "Botella con asa" }
+      ]
+    },
+    {
+      "id": "lavavajillas-limon", "family": "Lavavajillas Líquido", "name": "Lavavajillas Líquido Concentrado", "short": "Lavavajillas Limón",
+      "line": "Hogar", "aroma": "Limón", "tone": "limon",
+      "tagline": "Porque una cocina limpia se siente diferente.",
+      "desc": "Lavavajillas líquido concentrado con aroma a limón. Rinde 5 veces más.",
+      "post": "lavavajillas-limon",
+      "variants": [
+        { "key": "1l", "label": "1 Lt.", "img": "lavavajillas-limon", "w": 377, "h": 900, "net": "1 Lt.", "pres": "Dispensador con bomba" }
+      ]
+    },
+    {
+      "id": "suavizante-bebe", "family": "Suavizante", "name": "Suavizante Bebé", "short": "Suavizante Bebé",
+      "line": "Bebé", "aroma": "Bebé", "tone": "bebe",
+      "tagline": "El toque de suavidad que tu ropa merece.",
+      "desc": "Suavizante de la línea bebé con aroma duradero, para dejar la ropa suave.",
+      "post": "suavizante-bebe",
+      "variants": [
+        { "key": "gln", "label": "1 Gln.", "img": "suavizante-bebe", "w": 524, "h": 900, "net": "1 Gln.", "pres": "Galón con asa" }
+      ]
+    }
+  ],
+  "videos": [
+    { "id": "desinfectante-floral", "title": "Desinfectante Floral", "tone": "floral", "aroma": "Floral" },
+    { "id": "desinfectante-lavanda", "title": "Desinfectante Lavanda", "tone": "lavanda", "aroma": "Lavanda" },
+    { "id": "desinfectante-manzana", "title": "Desinfectante Manzana", "tone": "manzana", "aroma": "Manzana" },
+    { "id": "detergente-floral", "title": "Detergente Líquido Floral", "tone": "floral", "aroma": "Floral" }
+  ]
+}

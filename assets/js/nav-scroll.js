@@ -1,4 +1,4 @@
-/* Navbar shadow/shrink on scroll for the landing pages (the home page does this in main.js). */
+/* Navbar shadow/shrink on scroll (shared by every page that renders the header, home included). */
 (function () {
   var navbar = document.getElementById('navbar');
   if (!navbar) return;

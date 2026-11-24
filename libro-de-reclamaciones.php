@@ -777,8 +777,8 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-400-normal.woff2" crossorigin>
     <link rel="stylesheet" href="assets/css/fonts.css?v=07774ca3">
-    <link rel="stylesheet" href="assets/css/tailwind.css?v=a9f8f504">
-    <link rel="stylesheet" href="assets/css/nav.css?v=261cb32b">
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=6656a486">
+    <link rel="stylesheet" href="assets/css/nav.css?v=d9e93f54">
     <style>
         * { box-sizing: border-box; }
         body { background: #FFFFFF; color: #111827; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
@@ -850,7 +850,7 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
           <ul class="yx-nav__card">
             <li><a href="/linea-hogar/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Línea hogar</a></li>
             <li><a href="/linea-industrial/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V10l5 3v-3l5 3V4h4v17"/></svg>Línea industrial</a></li>
-            <li><a href="/#productos" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
+            <li><a href="/#catalogo" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
           </ul>
         </div>
       </li>
@@ -924,7 +924,7 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
         <div class="yx-nav__gin">
           <a href="/linea-hogar/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea hogar</a>
           <a href="/linea-industrial/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea industrial</a>
-          <a href="/#productos" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
+          <a href="/#catalogo" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
         </div>
       </div>
     </div>
@@ -1308,7 +1308,7 @@ if (isset($_GET['ok']) && !empty($_SESSION['reclamo_success'])) {
 <!-- Navbar: Alpine (CSP build) + scroll shrink. Components file must come first. -->
 <script defer src="assets/js/alpine-components.js?v=bf65f257"></script>
 <script defer src="assets/vendor/alpine.min.js?v=c4f4ac5f"></script>
-<script defer src="assets/js/nav-scroll.js?v=8d2d93b7"></script>
+<script defer src="assets/js/nav-scroll.js?v=18a6319e"></script>
 <script defer src="assets/js/claims-form.js?v=fd5aa3ff"></script>
 </body>
 </html>

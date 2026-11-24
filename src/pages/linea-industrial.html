@@ -16,59 +16,35 @@ faq:
 <!-- ====================================================
      HERO
 ===================================================== -->
-<section class="relative bg-navy overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
-  <div class="absolute top-0 right-0 w-96 h-96 bg-brand/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute bottom-0 left-0 w-80 h-80 bg-sky/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-[7fr_5fr] gap-10 items-center">
-    <div>
-      <nav aria-label="Migas de pan" class="mb-6">
-        <ol class="flex flex-wrap items-center gap-2 text-sm text-white/60">
-          <li><a href="/" class="hover:text-sky transition-colors">Inicio</a></li>
+<section class="yxs-hero" aria-labelledby="hero-title">
+  <div class="yxs__in">
+    <div class="yxs-hero__grid">
+      <div>
+        <ol class="yxs-crumbs" aria-label="Migas de pan">
+          <li><a href="/">Inicio</a></li>
           <li aria-hidden="true">/</li>
-          <li class="text-white" aria-current="page">Línea industrial</li>
+          <li aria-current="page">Línea industrial</li>
         </ol>
-      </nav>
-
-      <span class="badge mb-5">Línea Industrial</span>
-      <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
-        Productos de limpieza industrial en <span class="gradient-text">Perú</span>
-      </h1>
-      <p class="text-white/85 text-lg leading-relaxed mb-4">
-        La misma fórmula de alta concentración de YanaYacu Clean en galoneros y bidones de 5L, 10L y 20L.
-        Optimiza costos con mayor rendimiento por litro, en operaciones de cualquier tamaño.
-      </p>
-      <p class="text-white/60 leading-relaxed mb-8">
-        Pensada para restaurantes, hoteles, oficinas, centros educativos, lavanderías y clínicas.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20la%20l%C3%ADnea%20industrial%20de%20YanaYacu%20Clean"
-           target="_blank" rel="noopener"
-           class="inline-flex items-center justify-center gap-2 bg-brand-dark hover:bg-navy-light text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand/40">
-          {{icon:whatsapp}}
-          Solicitar cotización
-        </a>
-        <a href="/assets/docs/catalogo-yanayacu-clean.pdf" download
-           class="inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:border-brand text-white hover:text-sky font-bold px-8 py-4 rounded-full transition-all duration-300">
-          Descargar catálogo (PDF)
-        </a>
+        <span class="yxs-eyebrow">Línea industrial</span>
+        <h1 id="hero-title">Productos de limpieza industrial en <span class="yxs-accent">Perú</span></h1>
+        <p class="yxs-lead">
+          La misma fórmula de alta concentración de YanaYacu Clean en galoneros y bidones de 5L, 10L y 20L.
+          Optimiza costos con mayor rendimiento por litro, en operaciones de cualquier tamaño.
+        </p>
+        <p class="yxs-lead" style="margin-top:0.6rem">Pensada para restaurantes, hoteles, oficinas, centros educativos, lavanderías y clínicas.</p>
+        <div class="yxs-cta-row">
+          <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20la%20l%C3%ADnea%20industrial%20de%20YanaYacu%20Clean"
+             target="_blank" rel="noopener" class="yxs-btn yxs-btn--primary">
+            {{icon:whatsapp}}
+            Solicitar cotización
+          </a>
+          <a href="/assets/docs/catalogo-yanayacu-clean.pdf" download class="yxs-btn yxs-btn--ghost">Descargar catálogo (PDF)</a>
+        </div>
       </div>
-    </div>
-
-    <div class="flex justify-center">
-      <div class="relative w-64 rounded-3xl bg-gradient-to-b from-brand to-navy border border-sky/20 shadow-2xl p-8 text-center">
-        <img src="/assets/img/brand/logo-original.webp"
-             alt="YanaYacu Clean – línea industrial"
-             width="400" height="400" decoding="async"
-             class="w-24 h-24 object-contain rounded mx-auto mb-4" />
-        <p class="text-white font-bold">Línea Industrial</p>
-        <p class="text-sky text-sm mt-1 mb-5">Alta concentración</p>
-        <ul class="flex justify-center gap-2" aria-label="Presentaciones disponibles">
-          <li class="text-xs bg-white/10 text-white px-3 py-1 rounded-full">5L</li>
-          <li class="text-xs bg-white/10 text-white px-3 py-1 rounded-full">10L</li>
-          <li class="text-xs bg-white/10 text-white px-3 py-1 rounded-full">20L</li>
-        </ul>
+      <div class="yxs-hero__media yxs-hero__media--trio">
+        <img src="/assets/img/productos/desinfectante-floral-galon.webp" width="417" height="900" alt="Desinfectante Floral en galón YanaYacu Clean" decoding="async" />
+        <img src="/assets/img/productos/desinfectante-lavanda-galon.webp" width="417" height="900" alt="Desinfectante Lavanda en galón YanaYacu Clean" decoding="async" />
+        <img src="/assets/img/productos/desinfectante-manzana-galon.webp" width="430" height="900" alt="Desinfectante Manzana en galón YanaYacu Clean" decoding="async" />
       </div>
     </div>
   </div>
@@ -78,50 +54,52 @@ faq:
 <!-- ====================================================
      PRESENTACIONES Y BENEFICIOS
 ===================================================== -->
-<section class="py-20 bg-white" aria-labelledby="beneficios-title">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="max-w-2xl mb-12">
-      <span class="badge text-navy border-navy/20 bg-navy/5">Galoneros y bidones</span>
-      <h2 id="beneficios-title" class="text-3xl sm:text-4xl font-black text-navy mt-4 leading-tight">
-        Más rendimiento por litro para <span class="gradient-text">tu negocio</span>
-      </h2>
-      <p class="text-gray-500 mt-4 leading-relaxed">
-        La línea industrial usa la misma fórmula que la línea hogar, en presentaciones grandes pensadas para el uso diario.
-      </p>
+<section class="yxs" aria-labelledby="beneficios-title">
+  <div class="yxs__in">
+    <div class="yxs-head">
+      <span class="yxs-eyebrow">Galoneros y bidones</span>
+      <h2 class="yxs-h2" id="beneficios-title">Más rendimiento por litro para <span class="yxs-accent">tu negocio</span></h2>
+      <p class="yxs-lead">La línea industrial usa la misma fórmula que la línea hogar, en presentaciones grandes pensadas para el uso diario.</p>
     </div>
 
-    <div class="grid sm:grid-cols-3 gap-6 mb-14">
-      <div class="rounded-2xl border border-gray-100 p-6 text-center">
-        <p class="text-5xl font-black text-brand mb-1">5L</p>
-        <h3 class="font-black text-navy">Presentación de 5 litros</h3>
-      </div>
-      <div class="rounded-2xl border border-gray-100 p-6 text-center">
-        <p class="text-5xl font-black text-brand mb-1">10L</p>
-        <h3 class="font-black text-navy">Presentación de 10 litros</h3>
-      </div>
-      <div class="rounded-2xl border border-gray-100 p-6 text-center">
-        <p class="text-5xl font-black text-brand mb-1">20L</p>
-        <h3 class="font-black text-navy">Presentación de 20 litros</h3>
-      </div>
-    </div>
+    <dl class="yxs-stats yxs-stats--xl">
+      <div><dd>5L</dd><dt>Presentación de 5 litros</dt></div>
+      <div><dd>10L</dd><dt>Presentación de 10 litros</dt></div>
+      <div><dd>20L</dd><dt>Presentación de 20 litros</dt></div>
+    </dl>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10">
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Alta concentración</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Rinde hasta 3 veces más que los productos convencionales.</p>
+    <div class="yxs-feats" style="margin-top:clamp(2rem,5vw,3.5rem)">
+      <div class="yxs-feat"><span class="yxs-feat__num" aria-hidden="true">01</span><h3>Alta concentración</h3><p>Rinde hasta 3 veces más que los productos convencionales.</p></div>
+      <div class="yxs-feat"><span class="yxs-feat__num" aria-hidden="true">02</span><h3>Mayor rendimiento por litro</h3><p>Optimiza los costos de operaciones de cualquier tamaño.</p></div>
+      <div class="yxs-feat"><span class="yxs-feat__num" aria-hidden="true">03</span><h3>Aroma duradero</h3><p>Fijadores de fragancia de larga duración: el aroma permanece horas después de limpiar.</p></div>
+      <div class="yxs-feat"><span class="yxs-feat__num" aria-hidden="true">04</span><h3>Libre de cloro</h3><p>Desinfección sin riesgos químicos agresivos, apta para entornos sensibles.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     GALONES
+===================================================== -->
+<section class="yxs yxs--tint" aria-labelledby="galon-title">
+  <div class="yxs__in">
+    <div class="yxs-split">
+      <div>
+        <span class="yxs-eyebrow">Presentación galón</span>
+        <h2 class="yxs-h2" id="galon-title">Desinfectante perfumado <span class="yxs-accent">en galón</span></h2>
+        <p class="yxs-lead">Los tres aromas del desinfectante YanaYacu Clean también se ofrecen en galón con asa, listos para el uso diario.</p>
+        <ul class="yxs-tags" style="margin-top:1.4rem">
+          <li class="yxs-badge is-floral">Floral</li>
+          <li class="yxs-badge is-lavanda">Lavanda</li>
+          <li class="yxs-badge is-manzana">Manzana</li>
+        </ul>
+        <div class="yxs-cta-row" style="margin-top:0.6rem">
+          <a href="/linea-hogar/#productos" class="yxs-btn yxs-btn--ghost">Ver todas las presentaciones</a>
+        </div>
       </div>
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Mayor rendimiento por litro</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Optimiza los costos de operaciones de cualquier tamaño.</p>
-      </div>
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Aroma duradero</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Fijadores de fragancia de larga duración: el aroma permanece horas después de limpiar.</p>
-      </div>
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Libre de cloro</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Desinfección sin riesgos químicos agresivos, apta para entornos sensibles.</p>
-      </div>
+      <figure class="yxs-photo" style="max-width:26rem;margin-inline:auto">
+        <img src="/assets/img/posts/desinfectante-manzana.webp" srcset="/assets/img/posts/desinfectante-manzana-thumb.webp 360w, /assets/img/posts/desinfectante-manzana.webp 720w" sizes="(min-width: 900px) 416px, 90vw" width="720" height="1280" alt="Publicación Desinfectante Perfumado Manzana YanaYacu Clean" loading="lazy" decoding="async" />
+      </figure>
     </div>
   </div>
 </section>
@@ -130,26 +108,28 @@ faq:
 <!-- ====================================================
      SECTORES
 ===================================================== -->
-<section class="py-20 bg-gray-50" aria-labelledby="sectores-title">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <h2 id="sectores-title" class="text-3xl font-black text-navy mb-3">Para quién es la línea industrial</h2>
-    <p class="text-gray-500 mb-10 max-w-2xl leading-relaxed">
-      La misma fórmula que usan restaurantes, hoteles y lavanderías, disponible para cualquier negocio que limpie todos los días.
-    </p>
-    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      <li class="bg-white rounded-2xl border border-gray-100 px-5 py-4 font-semibold text-navy"><span aria-hidden="true">🍽️</span> Restaurantes</li>
-      <li class="bg-white rounded-2xl border border-gray-100 px-5 py-4 font-semibold text-navy"><span aria-hidden="true">🏨</span> Hoteles</li>
-      <li class="bg-white rounded-2xl border border-gray-100 px-5 py-4 font-semibold text-navy"><span aria-hidden="true">🏢</span> Oficinas</li>
-      <li class="bg-white rounded-2xl border border-gray-100 px-5 py-4 font-semibold text-navy"><span aria-hidden="true">🏫</span> Centros educativos</li>
-      <li class="bg-white rounded-2xl border border-gray-100 px-5 py-4 font-semibold text-navy"><span aria-hidden="true">👔</span> Lavanderías</li>
-      <li class="bg-white rounded-2xl border border-gray-100 px-5 py-4 font-semibold text-navy"><span aria-hidden="true">🏥</span> Clínicas</li>
-    </ul>
-
-    <p class="mt-10 text-gray-500 leading-relaxed max-w-2xl">
-      ¿Quieres ver qué productos comparten esta fórmula? Revisa la
-      <a href="/linea-hogar/" class="text-brand font-semibold underline">línea hogar</a>
-      o descarga el <a href="/assets/docs/catalogo-yanayacu-clean.pdf" download class="text-brand font-semibold underline">catálogo en PDF</a>.
-    </p>
+<section class="yxs" aria-labelledby="sectores-title">
+  <div class="yxs__in">
+    <div class="yxs-split">
+      <div>
+        <span class="yxs-eyebrow">Sectores</span>
+        <h2 class="yxs-h2" id="sectores-title">Para quién es la <span class="yxs-accent">línea industrial</span></h2>
+        <p class="yxs-lead">La misma fórmula que usan restaurantes, hoteles y lavanderías, disponible para cualquier negocio que limpie todos los días.</p>
+        <p class="yxs-lead">
+          ¿Quieres ver qué productos comparten esta fórmula? Revisa la
+          <a href="/linea-hogar/" class="yxs-link">línea hogar</a>
+          o descarga el <a href="/assets/docs/catalogo-yanayacu-clean.pdf" download class="yxs-link">catálogo en PDF</a>.
+        </p>
+      </div>
+      <ul class="yxs-list yxs-list--lg">
+        <li>Restaurantes</li>
+        <li>Hoteles</li>
+        <li>Oficinas</li>
+        <li>Centros educativos</li>
+        <li>Lavanderías</li>
+        <li>Clínicas</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -158,28 +138,26 @@ faq:
 <!-- ====================================================
      CTA + ENLACES
 ===================================================== -->
-<section class="py-16 bg-navy" aria-labelledby="cta-title">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-    <h2 id="cta-title" class="text-3xl font-black text-white mb-4">Solicita tu cotización mayorista</h2>
-    <p class="text-white/60 mb-8">Escríbenos al 974 667 498 o a comercial@yanayacuclean.com con tu tipo de negocio y los productos que necesitas.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-      <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20la%20l%C3%ADnea%20industrial%20de%20YanaYacu%20Clean"
-         target="_blank" rel="noopener"
-         class="inline-flex items-center justify-center gap-2 bg-brand-dark hover:bg-navy-light text-white font-bold px-8 py-4 rounded-full transition-colors">
-        {{icon:whatsapp}}
-        Cotizar por WhatsApp
-      </a>
-      <a href="mailto:comercial@yanayacuclean.com?subject=Cotizaci%C3%B3n%20l%C3%ADnea%20industrial"
-         class="inline-flex items-center justify-center border-2 border-white/30 hover:border-brand text-white hover:text-sky font-bold px-8 py-4 rounded-full transition-colors">
-        Escribir por correo
-      </a>
+<section class="yxs yxs--tint-rev" aria-labelledby="cta-title">
+  <div class="yxs__in yxs__in--narrow">
+    <div class="yxs-panel yxs-panel--center">
+      <h2 class="yxs-h2 yxs-h2--sm" id="cta-title">Solicita tu cotización mayorista</h2>
+      <p>Escríbenos al 974 667 498 o a comercial@yanayacuclean.com con tu tipo de negocio y los productos que necesitas.</p>
+      <div class="yxs-cta-row">
+        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20la%20l%C3%ADnea%20industrial%20de%20YanaYacu%20Clean"
+           target="_blank" rel="noopener" class="yxs-btn yxs-btn--light">
+          {{icon:whatsapp}}
+          Cotizar por WhatsApp
+        </a>
+        <a href="mailto:comercial@yanayacuclean.com?subject=Cotizaci%C3%B3n%20l%C3%ADnea%20industrial" class="yxs-btn yxs-btn--outline-light">Escribir por correo</a>
+      </div>
+      <p class="yxs-panel__links">
+        Ver también:
+        <a href="/linea-hogar/">Línea hogar</a> ·
+        <a href="/distribuidores/">Programa de distribuidores</a> ·
+        <a href="/">Inicio</a>
+      </p>
     </div>
-    <p class="text-white/50 text-sm">
-      Ver también:
-      <a href="/linea-hogar/" class="text-sky underline hover:text-white">Línea hogar</a> ·
-      <a href="/distribuidores/" class="text-sky underline hover:text-white">Programa de distribuidores</a> ·
-      <a href="/" class="text-sky underline hover:text-white">Inicio</a>
-    </p>
   </div>
 </section>
 

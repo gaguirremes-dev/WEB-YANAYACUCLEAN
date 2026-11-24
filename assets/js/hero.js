@@ -1,6 +1,6 @@
 /* =============================================
    YanaYacu Clean - hero.js
-   Hero entrance, product slideshow, idle float, parallax and button springs.
+   Hero entrance, product slideshow (static crossfade, no movement) and button springs.
    - Loads right after motion.min.js (Motion = vanilla framer-motion) and deliberately depends on
      neither GSAP nor Swiper: the slideshow must start as soon as this file runs.
    - Without Motion (or with prefers-reduced-motion) the hero is static and complete; the slideshow
@@ -78,9 +78,9 @@
     busy = true;
     prev.classList.add('is-leaving');
     var done = function () { prev.classList.remove('is-leaving'); busy = false; };
-    animate(prev, { opacity: [1, 0], transform: ['translateY(0px) scale(1)', 'translateY(10px) scale(0.985)'] }, { duration: 0.42, ease: 'easeIn' })
+    animate(prev, { opacity: [1, 0] }, { duration: 0.9, ease: 'easeInOut' })
       .finished.then(done, done);
-    animate(next, { opacity: [0, 1], transform: ['translateY(18px) scale(0.96)', 'translateY(0px) scale(1)'] }, { duration: 0.75, delay: 0.12, ease: EASE_OUT });
+    animate(next, { opacity: [0, 1] }, { duration: 0.9, ease: 'easeInOut' });
   }
 
   function schedule(ms) { clearTimeout(timer); timer = setTimeout(tick, ms); }
@@ -107,50 +107,6 @@
     else window.addEventListener('load', fetchRest, { once: true });
   }
 
-  /* ---------- 3. Idle float (bottle) + inverse contact shadow ---------- */
-  function idleFloat() {
-    if (!canAnimate) return;
-    var float = stage.querySelector('.yx-stage__float');
-    var shadow = stage.querySelector('.yx-stage__shadow');
-    var loop = { duration: 3.2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' };
-    safe(function () { animate(float, { transform: ['translateY(0px)', 'translateY(-6px)'] }, loop); });
-    safe(function () { animate(shadow, { transform: ['scale(1)', 'scale(0.93)'], opacity: [1, 0.72] }, loop); });
-  }
-
-  /* ---------- 4. Subtle parallax (mouse on fine pointers, scroll everywhere) ---------- */
-  function parallax() {
-    if (!canAnimate) return;
-    var bgWrap = hero.querySelector('.yx-hero__bg');
-    var bgImg = bgWrap && bgWrap.querySelector('img');
-    if (!bgWrap || !bgImg) return;
-
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        var y = window.scrollY || 0;
-        if (y < hero.offsetHeight) bgWrap.style.transform = 'translate3d(0,' + Math.min(y * 0.06, 28).toFixed(1) + 'px,0)';
-        ticking = false;
-      });
-    }, { passive: true });
-
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var last = 0;
-    var move = function (nx, ny) {
-      safe(function () { animate(stage, { transform: 'translate3d(' + (nx * -7).toFixed(1) + 'px,' + (ny * -4).toFixed(1) + 'px,0)' }, { duration: 0.9, ease: EASE_OUT }); });
-      safe(function () { animate(bgImg, { transform: 'translate3d(' + (nx * 6).toFixed(1) + 'px,' + (ny * 4).toFixed(1) + 'px,0)' }, { duration: 1.1, ease: EASE_OUT }); });
-    };
-    hero.addEventListener('pointermove', function (e) {
-      var now = performance.now();
-      if (now - last < 90) return;
-      last = now;
-      var r = hero.getBoundingClientRect();
-      move((e.clientX - r.left) / r.width * 2 - 1, (e.clientY - r.top) / r.height * 2 - 1);
-    }, { passive: true });
-    hero.addEventListener('pointerleave', function () { move(0, 0); });
-  }
-
   /* ---------- 5. Button springs ---------- */
   function buttons() {
     if (!canAnimate || !M.hover || !M.press) return;
@@ -168,7 +124,5 @@
 
   entrance();
   startSlideshow();
-  idleFloat();
-  parallax();
   buttons();
 })();

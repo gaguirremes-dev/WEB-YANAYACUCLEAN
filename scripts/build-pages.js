@@ -27,12 +27,16 @@
  *         {{ico:<name>}} -> small inline nav icon (see NAV_ICONS)
  *         {{icon:whatsapp}} -> inline WhatsApp SVG
  *         {{faq}} -> FAQ section markup (page body only)
+ *         {{gen:products}} {{gen:spec-table}} {{gen:videos}} -> data-driven blocks from src/data/products.json
+ *           (scripts/render-products.js). In index.html the same blocks live between
+ *           <!-- gen:NAME:start --> / <!-- gen:NAME:end --> markers and are regenerated on every build.
  */
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 const { stamp } = require('./asset-version');
+const gen = require('./render-products');
 
 const ROOT = path.resolve(__dirname, '..');
 const LAYOUT = path.join(ROOT, 'src', 'layout');
@@ -96,6 +100,24 @@ function injectNav(header, whatsapp, { file: name, slug }) {
   console.log(`injected nav into ${name} (${out !== html ? 'updated' : 'unchanged'})`);
 }
 
+/** Regenerates the data-driven blocks of index.html between its gen:NAME:start / gen:NAME:end markers. */
+function injectGenerated(name) {
+  const file = path.join(ROOT, name);
+  let html = fs.readFileSync(file, 'utf8');
+  const eol = html.includes('\r\n') ? '\r\n' : '\n';
+  for (const block of ['products', 'spec-table', 'videos']) {
+    const start = `<!-- gen:${block}:start -->`;
+    const end = `<!-- gen:${block}:end -->`;
+    const a = html.indexOf(start);
+    const b = html.indexOf(end);
+    if (a < 0 || b < a) throw new Error(`${name}: ${start} / ${end} markers not found`);
+    const body = gen[block]().replace(/\r?\n/g, eol);
+    html = `${html.slice(0, a + start.length)}${eol}${body}${eol}${html.slice(b)}`;
+  }
+  fs.writeFileSync(file, html);
+  console.log(`generated product blocks into ${name}`);
+}
+
 const read = (p) => fs.readFileSync(p, 'utf8');
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -142,16 +164,19 @@ function parseFaq(slug, items = []) {
 function renderFaq(faq) {
   if (!faq.length) return '';
   const rows = faq.map(({ q, a }) => `
-        <details class="group border-b border-gray-200 py-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
-            <h3 class="text-base sm:text-lg font-bold">${esc(q)}</h3>
-            <span class="shrink-0 text-brand transition-transform group-open:rotate-45 text-2xl leading-none" aria-hidden="true">+</span>
+        <details>
+          <summary>
+            <h3>${esc(q)}</h3>
+            <span aria-hidden="true">+</span>
           </summary>
-          <p class="mt-3 text-gray-500 leading-relaxed">${esc(a)}</p>
+          <p>${esc(a)}</p>
         </details>`).join('');
-  return `<section class="py-20 bg-white" aria-labelledby="faq-title">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <h2 id="faq-title" class="text-3xl font-black text-navy mb-8">Preguntas frecuentes</h2>${rows}
+  return `<section class="yxs yxs-faq" aria-labelledby="faq-title">
+    <div class="yxs__in yxs__in--narrow">
+      <div class="yxs-head">
+        <span class="yxs-eyebrow">Ayuda</span>
+        <h2 class="yxs-h2 yxs-h2--sm" id="faq-title">Preguntas <span class="yxs-accent">frecuentes</span></h2>
+      </div>${rows}
     </div>
   </section>`;
 }
@@ -236,6 +261,7 @@ function main() {
     const html = [layout.head, renderHeader(layout.header, slug, whatsapp), body.replace('{{faq}}', renderFaq(faq)), layout.footer]
       .join('\n')
       .replace(/\{\{icon:whatsapp\}\}/g, whatsapp)
+      .replace(/\{\{gen:([a-z-]+)\}\}/g, (_, n) => { if (!gen[n]) throw new Error(`${slug}: unknown block {{gen:${n}}}`); return gen[n](); })
       .replace(/\{\{(title|description|canonical|og_title|og_description|jsonld)\}\}/g, (_, k) => values[k]);
 
     const leftover = html.match(/\{\{[^}]+\}\}/);
@@ -247,6 +273,7 @@ function main() {
     console.log(`built /${slug}/index.html (title ${data.title.length} chars, description ${data.description.length} chars)`);
   }
   for (const target of NAV_TARGETS) injectNav(layout.header, whatsapp, target);
+  injectGenerated('index.html');
 }
 
 try {

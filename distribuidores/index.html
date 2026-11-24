@@ -111,9 +111,10 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/fonts.css?v=07774ca3" />
-  <link rel="stylesheet" href="/assets/css/tailwind.css?v=a9f8f504" />
-  <link rel="stylesheet" href="/assets/css/nav.css?v=261cb32b" />
-  <link rel="stylesheet" href="/assets/css/custom.css?v=6f9398b5" />
+  <link rel="stylesheet" href="/assets/css/tailwind.css?v=6656a486" />
+  <link rel="stylesheet" href="/assets/css/nav.css?v=d9e93f54" />
+  <link rel="stylesheet" href="/assets/css/custom.css?v=f80e94b9" />
+  <link rel="stylesheet" href="/assets/css/sections.css?v=c760b4b9" />
   <style>[x-cloak]{display:none !important}</style>
 
   <!-- Favicon -->
@@ -163,7 +164,7 @@
           <ul class="yx-nav__card">
             <li><a href="/linea-hogar/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg>Línea hogar</a></li>
             <li><a href="/linea-industrial/"  class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V10l5 3v-3l5 3V4h4v17"/></svg>Línea industrial</a></li>
-            <li><a href="/#productos" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
+            <li><a href="/#catalogo" class="yx-nav__item" @click="close"><svg class="yx-nav__iico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>Catálogo de productos</a></li>
           </ul>
         </div>
       </li>
@@ -237,7 +238,7 @@
         <div class="yx-nav__gin">
           <a href="/linea-hogar/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea hogar</a>
           <a href="/linea-industrial/"  @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Línea industrial</a>
-          <a href="/#productos" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
+          <a href="/#catalogo" @click="closeMenu" class="yx-nav__mlink yx-nav__mchild">Catálogo de productos</a>
         </div>
       </div>
     </div>
@@ -276,39 +277,33 @@
 <!-- ====================================================
      HERO
 ===================================================== -->
-<section class="relative bg-navy overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
-  <div class="absolute top-0 right-0 w-96 h-96 bg-brand/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute bottom-0 left-0 w-80 h-80 bg-sky/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-
-  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
-    <nav aria-label="Migas de pan" class="mb-6">
-      <ol class="flex flex-wrap items-center gap-2 text-sm text-white/60">
-        <li><a href="/" class="hover:text-sky transition-colors">Inicio</a></li>
-        <li aria-hidden="true">/</li>
-        <li class="text-white" aria-current="page">Distribuidores</li>
-      </ol>
-    </nav>
-
-    <span class="badge mb-5">Socios Comerciales</span>
-    <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
-      Distribuidores de productos de limpieza en <span class="gradient-text">Perú</span>
-    </h1>
-    <p class="text-white/85 text-lg leading-relaxed mb-8 max-w-2xl">
-      Sé aliado de la marca de limpieza que está transformando hogares y comercios peruanos.
-      Accede a precios de fábrica y condiciones exclusivas para distribuir YanaYacu Clean.
-    </p>
-
-    <div class="flex flex-col sm:flex-row gap-4">
-      <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20ser%20distribuidor%20de%20YanaYacu%20Clean%20y%20solicitar%20el%20cat%C3%A1logo%20y%20las%20condiciones%20mayoristas"
-         target="_blank" rel="noopener"
-         class="inline-flex items-center justify-center gap-2 bg-brand-dark hover:bg-navy-light text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-brand/40">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Solicitar condiciones por WhatsApp
-      </a>
-      <a href="mailto:comercial@yanayacuclean.com?subject=Solicitud%20de%20distribuidor%20-%20YanaYacu%20Clean"
-         class="inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:border-brand text-white hover:text-sky font-bold px-8 py-4 rounded-full transition-all duration-300">
-        Escribir por correo
-      </a>
+<section class="yxs-hero" aria-labelledby="hero-title">
+  <div class="yxs__in">
+    <div class="yxs-hero__grid">
+      <div>
+        <ol class="yxs-crumbs" aria-label="Migas de pan">
+          <li><a href="/">Inicio</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">Distribuidores</li>
+        </ol>
+        <span class="yxs-eyebrow">Socios comerciales</span>
+        <h1 id="hero-title">Distribuidores de productos de limpieza en <span class="yxs-accent">Perú</span></h1>
+        <p class="yxs-lead">
+          Sé aliado de la marca de limpieza que está transformando hogares y comercios peruanos.
+          Accede a precios de fábrica y condiciones exclusivas para distribuir YanaYacu Clean.
+        </p>
+        <div class="yxs-cta-row">
+          <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20ser%20distribuidor%20de%20YanaYacu%20Clean%20y%20solicitar%20el%20cat%C3%A1logo%20y%20las%20condiciones%20mayoristas"
+             target="_blank" rel="noopener" class="yxs-btn yxs-btn--primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar condiciones por WhatsApp
+          </a>
+          <a href="mailto:comercial@yanayacuclean.com?subject=Solicitud%20de%20distribuidor%20-%20YanaYacu%20Clean" class="yxs-btn yxs-btn--ghost">Escribir por correo</a>
+        </div>
+      </div>
+      <figure class="yxs-photo yxs-photo--post" style="max-width:19rem">
+        <img src="/assets/img/posts/linea-completa.webp" srcset="/assets/img/posts/linea-completa-thumb.webp 360w, /assets/img/posts/linea-completa.webp 720w" sizes="304px" width="720" height="1280" alt="Línea completa YanaYacu Clean para distribuir" decoding="async" />
+      </figure>
     </div>
   </div>
 </section>
@@ -317,34 +312,21 @@
 <!-- ====================================================
      BENEFICIOS
 ===================================================== -->
-<section class="py-20 bg-white" aria-labelledby="beneficios-title">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6">
-    <div class="max-w-2xl mb-12">
-      <span class="badge text-navy border-navy/20 bg-navy/5">Beneficios</span>
-      <h2 id="beneficios-title" class="text-3xl sm:text-4xl font-black text-navy mt-4 leading-tight">
-        Por qué distribuir <span class="gradient-text">YanaYacu Clean</span>
-      </h2>
+<section class="yxs" aria-labelledby="beneficios-title">
+  <div class="yxs__in">
+    <div class="yxs-head">
+      <span class="yxs-eyebrow">Beneficios</span>
+      <h2 class="yxs-h2" id="beneficios-title">Por qué distribuir <span class="yxs-accent">YanaYacu Clean</span></h2>
     </div>
-
-    <div class="grid sm:grid-cols-3 gap-x-10">
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Precios de fábrica</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Margen competitivo para tu negocio.</p>
-      </div>
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Promociones por volumen</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Mejor precio a mayor cantidad.</p>
-      </div>
-      <div class="py-6 border-t border-gray-100">
-        <h3 class="font-black text-navy text-lg mb-2">Pack de inicio</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Alta rentabilidad desde el primer pedido.</p>
-      </div>
+    <div class="yxs-benefits">
+      <div><b aria-hidden="true">01</b><p><strong>Precios de fábrica</strong><span>Margen competitivo para tu negocio</span></p></div>
+      <div><b aria-hidden="true">02</b><p><strong>Promociones por volumen</strong><span>Mejor precio a mayor cantidad</span></p></div>
+      <div><b aria-hidden="true">03</b><p><strong>Pack de inicio</strong><span>Alta rentabilidad desde el primer pedido</span></p></div>
     </div>
-
-    <p class="mt-8 text-gray-500 leading-relaxed max-w-2xl">
+    <p class="yxs-lead" style="max-width:40rem">
       Distribuyes una marca con alta concentración, aroma duradero y fórmulas libres de cloro, en
-      <a href="/linea-hogar/" class="text-brand font-semibold underline">línea hogar</a> y
-      <a href="/linea-industrial/" class="text-brand font-semibold underline">línea industrial</a>.
+      <a href="/linea-hogar/" class="yxs-link">línea hogar</a> y
+      <a href="/linea-industrial/" class="yxs-link">línea industrial</a>.
     </p>
   </div>
 </section>
@@ -353,64 +335,63 @@
 <!-- ====================================================
      CÓMO SOLICITARLO
 ===================================================== -->
-<section class="py-20 bg-gray-50" aria-labelledby="pasos-title">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6">
-    <h2 id="pasos-title" class="text-3xl font-black text-navy mb-10">Cómo solicitar condiciones mayoristas</h2>
+<section class="yxs yxs--tint" aria-labelledby="pasos-title">
+  <div class="yxs__in">
+    <div class="yxs-head">
+      <span class="yxs-eyebrow">Proceso</span>
+      <h2 class="yxs-h2" id="pasos-title">Cómo solicitar <span class="yxs-accent">condiciones mayoristas</span></h2>
+    </div>
 
-    <ol class="grid md:grid-cols-2 gap-6 mb-14">
-      <li class="bg-white rounded-2xl border border-gray-100 p-6">
-        <p class="text-brand font-black text-3xl mb-2">1</p>
-        <h3 class="font-black text-navy text-lg mb-2">Envía tu solicitud</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">
-          Escríbenos por WhatsApp o correo, o completa el
-          <a href="/#distribuidores" class="text-brand font-semibold underline">formulario de solicitud</a>
-          de la página de inicio.
-        </p>
+    <ol class="yxs-feats" style="margin:0;padding:0;list-style:none">
+      <li class="yxs-feat">
+        <span class="yxs-feat__num" aria-hidden="true">1</span>
+        <h3>Envía tu solicitud</h3>
+        <p>Escríbenos por WhatsApp o correo, o completa el <a href="/#distribuidores" class="yxs-link">formulario de solicitud</a> de la página de inicio.</p>
       </li>
-      <li class="bg-white rounded-2xl border border-gray-100 p-6">
-        <p class="text-brand font-black text-3xl mb-2">2</p>
-        <h3 class="font-black text-navy text-lg mb-2">Te contactamos</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">
-          Nuestro equipo se pone en contacto contigo en menos de 24 horas con el catálogo y las condiciones mayoristas.
-        </p>
+      <li class="yxs-feat">
+        <span class="yxs-feat__num" aria-hidden="true">2</span>
+        <h3>Te contactamos</h3>
+        <p>Nuestro equipo se pone en contacto contigo en menos de 24 horas con el catálogo y las condiciones mayoristas.</p>
       </li>
     </ol>
 
-    <h3 class="text-xl font-black text-navy mb-3">Qué información te pediremos</h3>
-    <p class="text-gray-500 leading-relaxed mb-4 max-w-2xl">
+    <h3 style="margin:2.5rem 0 0.7rem;font-size:1.25rem;font-weight:800">Qué información te pediremos</h3>
+    <p class="yxs-lead" style="max-width:42rem;margin-top:0">
       Para atenderte más rápido, ten a la mano estos datos: nombre completo, ciudad, WhatsApp de contacto y tipo de negocio
       (bodega, distribuidora, empresa de servicios de limpieza, restaurante u hotel, u otro). Si quieres, cuéntanos más sobre tu negocio.
     </p>
-    <p class="text-gray-400 text-sm max-w-2xl">
-      Tus datos se tratan conforme a nuestra
-      <a href="/privacidad.html" class="text-brand underline">Política de Privacidad</a> y la Ley 29733.
+    <p class="yxt-note">
+      Tus datos se tratan conforme a nuestra <a href="/privacidad.html" class="yxs-link">Política de Privacidad</a> y la Ley 29733.
     </p>
   </div>
 </section>
 
-<section class="py-20 bg-white" aria-labelledby="faq-title">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <h2 id="faq-title" class="text-3xl font-black text-navy mb-8">Preguntas frecuentes</h2>
-        <details class="group border-b border-gray-200 py-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
-            <h3 class="text-base sm:text-lg font-bold">¿Qué beneficios tiene ser distribuidor de YanaYacu Clean?</h3>
-            <span class="shrink-0 text-brand transition-transform group-open:rotate-45 text-2xl leading-none" aria-hidden="true">+</span>
+<section class="yxs yxs-faq" aria-labelledby="faq-title">
+    <div class="yxs__in yxs__in--narrow">
+      <div class="yxs-head">
+        <span class="yxs-eyebrow">Ayuda</span>
+        <h2 class="yxs-h2 yxs-h2--sm" id="faq-title">Preguntas <span class="yxs-accent">frecuentes</span></h2>
+      </div>
+        <details>
+          <summary>
+            <h3>¿Qué beneficios tiene ser distribuidor de YanaYacu Clean?</h3>
+            <span aria-hidden="true">+</span>
           </summary>
-          <p class="mt-3 text-gray-500 leading-relaxed">Accedes a precios de fábrica con margen competitivo, promociones por volumen con mejor precio a mayor cantidad y un pack de inicio pensado para una alta rentabilidad desde el primer pedido.</p>
+          <p>Accedes a precios de fábrica con margen competitivo, promociones por volumen con mejor precio a mayor cantidad y un pack de inicio pensado para una alta rentabilidad desde el primer pedido.</p>
         </details>
-        <details class="group border-b border-gray-200 py-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
-            <h3 class="text-base sm:text-lg font-bold">¿Cómo solicito ser distribuidor?</h3>
-            <span class="shrink-0 text-brand transition-transform group-open:rotate-45 text-2xl leading-none" aria-hidden="true">+</span>
+        <details>
+          <summary>
+            <h3>¿Cómo solicito ser distribuidor?</h3>
+            <span aria-hidden="true">+</span>
           </summary>
-          <p class="mt-3 text-gray-500 leading-relaxed">Escríbenos por WhatsApp al 974 667 498 o al correo comercial@yanayacuclean.com, o completa el formulario de solicitud en la página de inicio. Nuestro equipo se pone en contacto contigo en menos de 24 horas.</p>
+          <p>Escríbenos por WhatsApp al 974 667 498 o al correo comercial@yanayacuclean.com, o completa el formulario de solicitud en la página de inicio. Nuestro equipo se pone en contacto contigo en menos de 24 horas.</p>
         </details>
-        <details class="group border-b border-gray-200 py-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy">
-            <h3 class="text-base sm:text-lg font-bold">¿Qué tipo de negocios pueden solicitar condiciones mayoristas?</h3>
-            <span class="shrink-0 text-brand transition-transform group-open:rotate-45 text-2xl leading-none" aria-hidden="true">+</span>
+        <details>
+          <summary>
+            <h3>¿Qué tipo de negocios pueden solicitar condiciones mayoristas?</h3>
+            <span aria-hidden="true">+</span>
           </summary>
-          <p class="mt-3 text-gray-500 leading-relaxed">Bodegas, distribuidoras, empresas de servicios de limpieza, restaurantes y hoteles, entre otros negocios.</p>
+          <p>Bodegas, distribuidoras, empresas de servicios de limpieza, restaurantes y hoteles, entre otros negocios.</p>
         </details>
     </div>
   </section>
@@ -418,28 +399,26 @@
 <!-- ====================================================
      CTA + ENLACES
 ===================================================== -->
-<section class="py-16 bg-navy" aria-labelledby="cta-title">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-    <h2 id="cta-title" class="text-3xl font-black text-white mb-4">Empieza a distribuir YanaYacu Clean</h2>
-    <p class="text-white/60 mb-8">Escríbenos al 974 667 498 o a comercial@yanayacuclean.com y solicita el catálogo y las condiciones mayoristas.</p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-      <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20ser%20distribuidor%20de%20YanaYacu%20Clean%20y%20solicitar%20el%20cat%C3%A1logo%20y%20las%20condiciones%20mayoristas"
-         target="_blank" rel="noopener"
-         class="inline-flex items-center justify-center gap-2 bg-brand-dark hover:bg-navy-light text-white font-bold px-8 py-4 rounded-full transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Escribir por WhatsApp
-      </a>
-      <a href="/assets/docs/catalogo-yanayacu-clean.pdf" download
-         class="inline-flex items-center justify-center border-2 border-white/30 hover:border-brand text-white hover:text-sky font-bold px-8 py-4 rounded-full transition-colors">
-        Descargar catálogo (PDF)
-      </a>
+<section class="yxs yxs--tint-rev" aria-labelledby="cta-title">
+  <div class="yxs__in yxs__in--narrow">
+    <div class="yxs-panel yxs-panel--center">
+      <h2 class="yxs-h2 yxs-h2--sm" id="cta-title">Empieza a distribuir YanaYacu Clean</h2>
+      <p>Escríbenos al 974 667 498 o a comercial@yanayacuclean.com y solicita el catálogo y las condiciones mayoristas.</p>
+      <div class="yxs-cta-row">
+        <a href="https://wa.me/51974667498?text=Hola%2C%20quiero%20ser%20distribuidor%20de%20YanaYacu%20Clean%20y%20solicitar%20el%20cat%C3%A1logo%20y%20las%20condiciones%20mayoristas"
+           target="_blank" rel="noopener" class="yxs-btn yxs-btn--light">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escribir por WhatsApp
+        </a>
+        <a href="/assets/docs/catalogo-yanayacu-clean.pdf" download class="yxs-btn yxs-btn--outline-light">Descargar catálogo (PDF)</a>
+      </div>
+      <p class="yxs-panel__links">
+        Ver también:
+        <a href="/linea-hogar/">Línea hogar</a> ·
+        <a href="/linea-industrial/">Línea industrial</a> ·
+        <a href="/">Inicio</a>
+      </p>
     </div>
-    <p class="text-white/50 text-sm">
-      Ver también:
-      <a href="/linea-hogar/" class="text-sky underline hover:text-white">Línea hogar</a> ·
-      <a href="/linea-industrial/" class="text-sky underline hover:text-white">Línea industrial</a> ·
-      <a href="/" class="text-sky underline hover:text-white">Inicio</a>
-    </p>
   </div>
 </section>
 
@@ -487,7 +466,7 @@
           <li><a href="/linea-hogar/"      class="footer-link">Línea hogar</a></li>
           <li><a href="/linea-industrial/" class="footer-link">Línea industrial</a></li>
           <li><a href="/distribuidores/"   class="footer-link">Sé distribuidor</a></li>
-          <li><a href="/#productos"        class="footer-link">Catálogo</a></li>
+          <li><a href="/#catalogo"         class="footer-link">Catálogo</a></li>
           <li><a href="/#legal"            class="footer-link">Legal y normativa</a></li>
           <li><a href="https://rrhh.yanayacuclean.com" target="_blank" rel="noopener" class="footer-link">Intranet</a></li>
         </ul>
@@ -573,6 +552,7 @@
 <script defer src="/assets/js/alpine-components.js?v=bf65f257"></script>
 <script defer src="/assets/vendor/alpine.min.js?v=c4f4ac5f"></script>
 <!-- Navbar shrink on scroll (same behaviour as the home page) -->
-<script defer src="/assets/js/nav-scroll.js?v=8d2d93b7"></script>
+<script defer src="/assets/js/nav-scroll.js?v=18a6319e"></script>
+<script defer src="/assets/js/products.js?v=f19acb33"></script>
 </body>
 </html>

@@ -84,3 +84,8 @@ Pending: Lima and Chiclayo city pages. They are not created because there is no 
 ## 7. What to measure and when
 
 Review Search Console (Pages, Performance, Core Web Vitals) every 2–4 weeks after submission. Indexing takes days to weeks and is not guaranteed; no ranking or timeline is promised.
+
+
+## 2026 visual refresh
+
+Product photos, posts and videos were replaced (see README, "Product blocks"). `assets/img/og-image.jpg` was rebuilt with the new product photos. New lavavajillas (Limon) added to the product list and the ItemList of `/linea-hogar/`.
