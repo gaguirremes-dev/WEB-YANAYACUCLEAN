@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Cache busting: appends ?v=<8-char content hash> to local css/js references
- * (assets/css, assets/js, assets/vendor) so the long Expires TTLs set in .htaccess are safe.
+ * (assets/css, assets/js, assets/vendor) and to the hero splash photos so the long Expires TTLs set in .htaccess are safe.
  *
  * Library: stamp(html) -> html   (used by build-pages.js for generated pages)
  * CLI:     node scripts/asset-version.js   stamps every page (hand-written + generated) in place.
@@ -14,6 +14,9 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
 const REF = /((?:href|src)=")(\/?assets\/(?:css|js|vendor)\/[^"?#]+\.(?:css|js))(?:\?v=[0-9a-f]+)?(")/g;
 
+// Hero splash photos keep their file names when regenerated; version them too (long image TTL in .htaccess).
+const IMG = /(\/?assets\/img\/hero\/splash-[a-z0-9-]+\.webp)(?:\?v=[0-9a-f]+)?/g;
+
 function hashOf(rel) {
   const file = path.join(ROOT, rel.replace(/^\//, ''));
   if (!fs.existsSync(file)) return null;
@@ -21,10 +24,15 @@ function hashOf(rel) {
 }
 
 function stamp(html) {
-  return html.replace(REF, (m, pre, rel, post) => {
-    const h = hashOf(rel);
-    return h ? `${pre}${rel}?v=${h}${post}` : m;
-  });
+  return html
+    .replace(REF, (m, pre, rel, post) => {
+      const h = hashOf(rel);
+      return h ? `${pre}${rel}?v=${h}${post}` : m;
+    })
+    .replace(IMG, (m, rel) => {
+      const h = hashOf(rel);
+      return h ? `${rel}?v=${h}` : m;
+    });
 }
 
 function pages() {

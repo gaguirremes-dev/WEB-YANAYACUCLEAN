@@ -96,6 +96,11 @@
   }
   </script>
 
+  <!-- LCP: hero background (pink = first slide), one file per breakpoint -->
+  <link rel="preload" as="image" media="(max-width: 599px)" href="/assets/img/hero/splash-pink-m-1170.webp?v=b494c3c1" imagesrcset="/assets/img/hero/splash-pink-m-640.webp?v=3100a240 640w, /assets/img/hero/splash-pink-m-1170.webp?v=b494c3c1 1170w" imagesizes="100vw" fetchpriority="high" />
+  <link rel="preload" as="image" media="(min-width: 600px) and (max-width: 899px)" href="/assets/img/hero/splash-pink-t-1536.webp?v=5332a0b3" imagesrcset="/assets/img/hero/splash-pink-t-1024.webp?v=14a3c4ef 1024w, /assets/img/hero/splash-pink-t-1536.webp?v=5332a0b3 1536w" imagesizes="100vw" fetchpriority="high" />
+  <link rel="preload" as="image" media="(min-width: 900px)" href="/assets/img/hero/splash-pink-1920.webp?v=80e00e5a" imagesrcset="/assets/img/hero/splash-pink-1100.webp?v=f34941fd 1100w, /assets/img/hero/splash-pink-1920.webp?v=80e00e5a 1920w" imagesizes="100vw" fetchpriority="high" />
+
   <!-- LCP: hero product image -->
   <link rel="preload" as="image" href="/assets/img/productos/desinfectante-floral-1l.webp" fetchpriority="high" />
 
@@ -113,7 +118,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/nav.css?v=d9e93f54" />
-  <link rel="stylesheet" href="assets/css/custom.css?v=e2ccc894" />
+  <link rel="stylesheet" href="assets/css/custom.css?v=ba01a789" />
   <link rel="stylesheet" href="assets/css/sections.css?v=c760b4b9" />
 
   <!-- Swiper CSS: only the testimonials slider (below the fold) uses it, so it must not block rendering.
@@ -289,16 +294,44 @@
 ===================================================== -->
 <section id="inicio" class="yx-hero" aria-labelledby="yx-title">
 
-  <!-- Fondo: salpicadura de agua (decorativo). La versión se elige con srcset. -->
+  <!-- Fondo: salpicadura de agua (decorativa). Una capa por tono (rosa, morado, verde manzana, índigo, agua, lima, azul original);
+       solo la de la primera diapositiva (rosa) carga en el primer pintado, las demás las pide hero.js poco antes de usarlas
+       (data-src / data-srcset). La versión por dispositivo se elige con srcset + media. Variantes: scripts/tint-splash.py. -->
   <div class="yx-hero__bg" aria-hidden="true">
     <picture>
-      <source media="(max-width: 599px)"
-              srcset="assets/img/hero/splash-m-640.webp 640w, assets/img/hero/splash-m-1170.webp 1170w" sizes="100vw" />
-      <source media="(max-width: 899px)"
-              srcset="assets/img/hero/splash-t-1024.webp 1024w, assets/img/hero/splash-t-1536.webp 1536w" sizes="100vw" />
-      <img src="assets/img/hero/splash-1920.webp"
-           srcset="assets/img/hero/splash-1100.webp 1100w, assets/img/hero/splash-1920.webp 1920w"
-           sizes="100vw" width="1920" height="819" alt="" fetchpriority="high" />
+      <source media="(max-width: 599px)" srcset="assets/img/hero/splash-pink-m-640.webp?v=3100a240 640w, assets/img/hero/splash-pink-m-1170.webp?v=b494c3c1 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" srcset="assets/img/hero/splash-pink-t-1024.webp?v=14a3c4ef 1024w, assets/img/hero/splash-pink-t-1536.webp?v=5332a0b3 1536w" sizes="100vw" />
+      <img class="yx-bg is-active" data-tone="pink" src="assets/img/hero/splash-pink-1920.webp?v=80e00e5a" srcset="assets/img/hero/splash-pink-1100.webp?v=f34941fd 1100w, assets/img/hero/splash-pink-1920.webp?v=80e00e5a 1920w" sizes="100vw" width="1920" height="819" alt="" fetchpriority="high" />
+    </picture>
+    <picture>
+      <source media="(max-width: 599px)" data-srcset="assets/img/hero/splash-purple-m-640.webp?v=0e308642 640w, assets/img/hero/splash-purple-m-1170.webp?v=aadc722a 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" data-srcset="assets/img/hero/splash-purple-t-1024.webp?v=eedf6e27 1024w, assets/img/hero/splash-purple-t-1536.webp?v=8b8b6f33 1536w" sizes="100vw" />
+      <img class="yx-bg" data-tone="purple" data-src="assets/img/hero/splash-purple-1920.webp?v=c9b583ff" data-srcset="assets/img/hero/splash-purple-1100.webp?v=71284825 1100w, assets/img/hero/splash-purple-1920.webp?v=c9b583ff 1920w" sizes="100vw" width="1920" height="819" alt="" decoding="async" />
+    </picture>
+    <picture>
+      <source media="(max-width: 599px)" data-srcset="assets/img/hero/splash-apple-m-640.webp?v=5bbd4a35 640w, assets/img/hero/splash-apple-m-1170.webp?v=c0c949ef 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" data-srcset="assets/img/hero/splash-apple-t-1024.webp?v=90337056 1024w, assets/img/hero/splash-apple-t-1536.webp?v=0b169af6 1536w" sizes="100vw" />
+      <img class="yx-bg" data-tone="apple" data-src="assets/img/hero/splash-apple-1920.webp?v=b5d975a7" data-srcset="assets/img/hero/splash-apple-1100.webp?v=22c2d7ef 1100w, assets/img/hero/splash-apple-1920.webp?v=b5d975a7 1920w" sizes="100vw" width="1920" height="819" alt="" decoding="async" />
+    </picture>
+    <picture>
+      <source media="(max-width: 599px)" data-srcset="assets/img/hero/splash-indigo-m-640.webp?v=0e0eb27c 640w, assets/img/hero/splash-indigo-m-1170.webp?v=ed4ad57b 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" data-srcset="assets/img/hero/splash-indigo-t-1024.webp?v=f593f6c1 1024w, assets/img/hero/splash-indigo-t-1536.webp?v=385c93f4 1536w" sizes="100vw" />
+      <img class="yx-bg" data-tone="indigo" data-src="assets/img/hero/splash-indigo-1920.webp?v=5a9f44da" data-srcset="assets/img/hero/splash-indigo-1100.webp?v=064ac350 1100w, assets/img/hero/splash-indigo-1920.webp?v=5a9f44da 1920w" sizes="100vw" width="1920" height="819" alt="" decoding="async" />
+    </picture>
+    <picture>
+      <source media="(max-width: 599px)" data-srcset="assets/img/hero/splash-aqua-m-640.webp?v=dd45946b 640w, assets/img/hero/splash-aqua-m-1170.webp?v=14b2c1c1 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" data-srcset="assets/img/hero/splash-aqua-t-1024.webp?v=73b8d436 1024w, assets/img/hero/splash-aqua-t-1536.webp?v=37078731 1536w" sizes="100vw" />
+      <img class="yx-bg" data-tone="aqua" data-src="assets/img/hero/splash-aqua-1920.webp?v=0677311c" data-srcset="assets/img/hero/splash-aqua-1100.webp?v=a875c10b 1100w, assets/img/hero/splash-aqua-1920.webp?v=0677311c 1920w" sizes="100vw" width="1920" height="819" alt="" decoding="async" />
+    </picture>
+    <picture>
+      <source media="(max-width: 599px)" data-srcset="assets/img/hero/splash-lime-m-640.webp?v=e28aaba8 640w, assets/img/hero/splash-lime-m-1170.webp?v=5415093e 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" data-srcset="assets/img/hero/splash-lime-t-1024.webp?v=44314d94 1024w, assets/img/hero/splash-lime-t-1536.webp?v=e96a5f07 1536w" sizes="100vw" />
+      <img class="yx-bg" data-tone="lime" data-src="assets/img/hero/splash-lime-1920.webp?v=86bd27d6" data-srcset="assets/img/hero/splash-lime-1100.webp?v=fa1ba2fa 1100w, assets/img/hero/splash-lime-1920.webp?v=86bd27d6 1920w" sizes="100vw" width="1920" height="819" alt="" decoding="async" />
+    </picture>
+    <picture>
+      <source media="(max-width: 599px)" data-srcset="assets/img/hero/splash-m-640.webp?v=2a8c0339 640w, assets/img/hero/splash-m-1170.webp?v=b0446b17 1170w" sizes="100vw" />
+      <source media="(max-width: 899px)" data-srcset="assets/img/hero/splash-t-1024.webp?v=c948f80d 1024w, assets/img/hero/splash-t-1536.webp?v=d86d0658 1536w" sizes="100vw" />
+      <img class="yx-bg" data-tone="blue" data-src="assets/img/hero/splash-1920.webp?v=d533818f" data-srcset="assets/img/hero/splash-1100.webp?v=3786bd32 1100w, assets/img/hero/splash-1920.webp?v=d533818f 1920w" sizes="100vw" width="1920" height="819" alt="" decoding="async" />
     </picture>
   </div>
   <div class="yx-hero__wash" aria-hidden="true"></div>
@@ -339,16 +372,16 @@
       <div class="yx-stage" id="yxStage">
         <span class="yx-stage__shadow" aria-hidden="true"></span>
         <div class="yx-stage__float">
-          <img class="yx-slide is-active" src="assets/img/productos/desinfectante-floral-1l.webp" width="267" height="900" alt="Desinfectante Floral 1 Lt. YanaYacu Clean" fetchpriority="high" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-lavanda-1l.webp" width="268" height="900" alt="Desinfectante Lavanda 1 Lt. YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-manzana-1l.webp" width="260" height="900" alt="Desinfectante Manzana 1 Lt. YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/detergente-floral.webp" width="465" height="900" alt="Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/detergente-bebe.webp" width="464" height="900" alt="Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/lavavajillas-limon.webp" width="377" height="900" alt="Lavavajillas Limón YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/suavizante-bebe.webp" width="524" height="900" alt="Suavizante Bebé 1 Gln. YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-floral-galon.webp" width="417" height="900" alt="Desinfectante Floral Galón YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-lavanda-galon.webp" width="417" height="900" alt="Desinfectante Lavanda Galón YanaYacu Clean" loading="lazy" decoding="async" />
-          <img class="yx-slide" aria-hidden="true" src="assets/img/productos/desinfectante-manzana-galon.webp" width="430" height="900" alt="Desinfectante Manzana Galón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide is-active" data-tone="pink" src="assets/img/productos/desinfectante-floral-1l.webp" width="267" height="900" alt="Desinfectante Floral 1 Lt. YanaYacu Clean" fetchpriority="high" decoding="async" />
+          <img class="yx-slide" data-tone="purple" aria-hidden="true" src="assets/img/productos/desinfectante-lavanda-1l.webp" width="268" height="900" alt="Desinfectante Lavanda 1 Lt. YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="apple" aria-hidden="true" src="assets/img/productos/desinfectante-manzana-1l.webp" width="260" height="900" alt="Desinfectante Manzana 1 Lt. YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="indigo" aria-hidden="true" src="assets/img/productos/detergente-floral.webp" width="465" height="900" alt="Detergente Líquido Floral YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="aqua" aria-hidden="true" src="assets/img/productos/detergente-bebe.webp" width="464" height="900" alt="Detergente Líquido Bebé YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="lime" aria-hidden="true" src="assets/img/productos/lavavajillas-limon.webp" width="377" height="900" alt="Lavavajillas Limón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="blue" aria-hidden="true" src="assets/img/productos/suavizante-bebe.webp" width="524" height="900" alt="Suavizante Bebé 1 Gln. YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="pink" aria-hidden="true" src="assets/img/productos/desinfectante-floral-galon.webp" width="417" height="900" alt="Desinfectante Floral Galón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="purple" aria-hidden="true" src="assets/img/productos/desinfectante-lavanda-galon.webp" width="417" height="900" alt="Desinfectante Lavanda Galón YanaYacu Clean" loading="lazy" decoding="async" />
+          <img class="yx-slide" data-tone="apple" aria-hidden="true" src="assets/img/productos/desinfectante-manzana-galon.webp" width="430" height="900" alt="Desinfectante Manzana Galón YanaYacu Clean" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -1333,7 +1366,7 @@
 ===================================================== -->
 <!-- Hero: Motion (framer-motion vanilla build) + hero.js run first so the hero starts early -->
 <script defer src="assets/vendor/motion.min.js?v=190bf210"></script>
-<script defer src="assets/js/hero.js?v=69fcf0a0"></script>
+<script defer src="assets/js/hero.js?v=071bf1b7"></script>
 
 <!-- Alpine.js -->
 <script defer src="assets/js/alpine-components.js?v=bf65f257"></script>

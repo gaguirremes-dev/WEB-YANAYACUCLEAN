@@ -61,6 +61,48 @@
 
   if (canAnimate) stage.classList.add('yx-motion');
 
+  /* Background splash: one stacked layer per tone (see .yx-bg in index.html). Only the first (pink)
+     is in the markup with a src; the others are fetched shortly before the slide that needs them
+     (data-src / data-srcset), so each device downloads only its own size and only the tones it shows. */
+  var bgBox = hero.querySelector('.yx-hero__bg');
+  var bgs = {};
+  if (bgBox) {
+    Array.prototype.forEach.call(bgBox.querySelectorAll('img.yx-bg'), function (img) { bgs[img.getAttribute('data-tone')] = img; });
+    if (canAnimate) bgBox.classList.add('yx-motion');
+  }
+
+  function toneOf(i) { return slides[i] && slides[i].getAttribute('data-tone'); }
+
+  function loadBg(tone) {
+    var img = bgs[tone];
+    if (!img || !img.hasAttribute('data-src') || img.getAttribute('src')) return;
+    var pic = img.parentNode;
+    if (pic && pic.querySelectorAll) {
+      Array.prototype.forEach.call(pic.querySelectorAll('source[data-srcset]'), function (s) {
+        s.setAttribute('srcset', s.getAttribute('data-srcset'));
+      });
+    }
+    if (img.hasAttribute('data-srcset')) img.setAttribute('srcset', img.getAttribute('data-srcset'));
+    img.setAttribute('src', img.getAttribute('data-src'));
+  }
+
+  function bgReady(tone) {
+    var img = bgs[tone];
+    return !img || ready(img);
+  }
+
+  function crossfadeBg(fromTone, toTone) {
+    var from = bgs[fromTone];
+    var to = bgs[toTone];
+    if (!to || !from || to === from) return;
+    to.classList.add('is-active');
+    from.classList.remove('is-active');
+    from.classList.add('is-leaving');
+    var done = function () { from.classList.remove('is-leaving'); from.style.opacity = ''; };
+    if (!canAnimate) { setTimeout(done, 950); return; }
+    animate(to, { opacity: [0, 1] }, { duration: 0.9, ease: 'easeInOut' }).finished.then(done, done);
+  }
+
   function ready(img) { return img.complete && img.naturalWidth > 0; }
 
   function show(index) {
@@ -68,6 +110,8 @@
     var next = slides[index];
     if (!next || next === prev) return;
     current = index;
+    crossfadeBg(prev.getAttribute('data-tone'), next.getAttribute('data-tone'));
+    loadBg(toneOf((index + 1) % slides.length));
 
     next.classList.add('is-active');
     next.removeAttribute('aria-hidden');
@@ -90,9 +134,13 @@
     if (hidden || busy) { schedule(600); return; }
     var target = (current + 1) % slides.length;
     var img = slides[target];
-    if (!ready(img)) { img.loading = 'eager'; schedule(500); return; }
+    var tone = toneOf(target);
+    loadBg(tone);
+    if (!ready(img) || !bgReady(tone)) { img.loading = 'eager'; schedule(500); return; }
     var go = function () { show(target); schedule(INTERVAL); };
-    if (img.decode) img.decode().then(go, go); else go();
+    var bg = bgs[tone];
+    var decodes = [img.decode ? img.decode() : null, bg && bg.decode ? bg.decode() : null];
+    Promise.all(decodes.map(function (p) { return p && p.catch ? p.catch(function () {}) : p; })).then(go, go);
   }
 
   // Pause only while the tab is hidden (never on hover).
@@ -101,6 +149,10 @@
   function startSlideshow() {
     if (slides.length < 2 || reduce) return;
     schedule(INTERVAL);
+    // Ask for the next tone's background early (first idle after load), the rest follow one slide ahead.
+    var fetchBg = function () { loadBg(toneOf(1)); };
+    if (document.readyState === 'complete') fetchBg();
+    else window.addEventListener('load', fetchBg, { once: true });
     // Fetch the remaining (lazy) slides once the page has loaded.
     var fetchRest = function () { slides.forEach(function (s) { s.loading = 'eager'; }); };
     if (document.readyState === 'complete') fetchRest();

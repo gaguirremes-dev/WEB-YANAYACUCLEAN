@@ -1160,22 +1160,33 @@ body {
    the bottom, and fade into the sky-blue hero gradient at the top; nothing is cropped at the sides. */
 .yx-hero__bg {
   position: absolute;
-  inset: 0;
+  inset: auto 0 0 0;          /* as tall as the photo, anchored to the bottom of the hero */
   z-index: -2;
   pointer-events: none;
-  will-change: transform;
+  /* The top fade is applied ONCE to the whole stack of tone layers. If every layer carried its own
+     mask, two stacked layers would add up their alpha during a crossfade and the top (leaves, sky)
+     would look different mid-fade and whiten when the fade ends. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 26%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 26%);
 }
+.yx-hero__bg picture:first-child { display: block; }
 .yx-hero__bg img {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   display: block;
   width: 100%;
   max-width: none;
   height: auto;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 26%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 26%);
 }
+/* First layer gives the box its height; the others overlay it exactly (same aspect ratio). */
+.yx-hero__bg picture:first-child img { position: relative; }
+.yx-hero__bg picture:not(:first-child) img { position: absolute; left: 0; top: 0; height: 100%; object-fit: fill; }
+
+/* One layer per tone, stacked; only opacity changes (no movement). The pink layer is visible by
+   default, so without JS the hero shows it statically. hero.js fades the next layer in on top of the
+   current one (which stays opaque underneath until the fade ends, so there is no dip). */
+.yx-hero__bg .yx-bg { opacity: 0; z-index: 0; }
+.yx-hero__bg .yx-bg.is-leaving { opacity: 1; z-index: 1; }
+.yx-hero__bg .yx-bg.is-active { opacity: 1; z-index: 2; }
+.yx-hero__bg:not(.yx-motion) .yx-bg { transition: opacity 0.9s ease-in-out; }
 
 /* Very light veil only on the copy side: keeps the photo visible (soft sky blue, not white) */
 .yx-hero__wash {
@@ -1478,18 +1489,18 @@ body {
      visible) and anchored to the bottom. On taller heroes the sky-blue hero gradient fills the top
      and the photo fades into it. */
   .yx-hero__bg {
-    inset: 0;
+    inset: auto 0 0 0;
     height: auto;
-    -webkit-mask-image: none;
-            mask-image: none;
+    /* Short fade: the photo's own sky is almost the hero sky, and a long fade made the leaves near the
+       top semi-transparent (pale) over the light hero gradient. */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 11%);
+            mask-image: linear-gradient(to bottom, transparent 0, #000 11%);
   }
   .yx-hero__bg img {
     left: 0;
     width: 100%;
     min-height: 0;
     object-fit: fill;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 30%);
-            mask-image: linear-gradient(to bottom, transparent 0, #000 30%);
   }
   .yx-hero__wash { background: linear-gradient(90deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 52%); }
   .yx-hero__inner { grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
